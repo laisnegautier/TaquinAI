@@ -11,8 +11,8 @@ namespace TaquinIA
         static void Main(string[] args)
         {
             Board board = new Board(3);
-            board.InitSafe();
-            //board.Init();
+            //board.InitSafe();
+            board.Init();
             Solver solver = new Solver(board);
             solver.Solve();
             
