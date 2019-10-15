@@ -31,35 +31,19 @@ namespace TaquinIA
                 _currentBoard = _start;
                 while (OpenSet.Count != 0)
                 {
-                    // Récupérer le noeud courant
-                    Console.WriteLine("Selected Best Board");
-                    Console.WriteLine(_currentBoard);
-                    // pop la tête
-                    ClosedSet.Add(_currentBoard);
-                    OpenSet.Remove(_currentBoard);
-                    // Ajouter les Board créer par tous les mouvement possible 
-                    List<Moves> currentPossibleMoves = FindPossibleMoves();
-                    foreach (Moves move in currentPossibleMoves)
+                    _currentBoard = OpenSet[0]; // Select best board
+                    OpenSet.Remove(_currentBoard); // REmove it from non evaluated nodes
+
+                    if (_currentBoard.IsDone())
                     {
-                        Console.Write(move + " ");
-                        OpenSet.Add(CreateBoard(move, _currentBoard));
+                        Console.WriteLine("Solving Over - Optimal solution found");
+                        Console.WriteLine(_currentBoard);
+                        break;
                     }
-                    Thread.Sleep(2000);
-                    // Evaluer les mouvements faits
-                    foreach (Board board in OpenSet) board.Evaluate();
-                    // Ordonner la liste
 
-                    OpenSet = OpenSet.OrderBy(b => b.Score).ToList();
-
-
-                    _currentBoard = OpenSet[0];
-                    if (_currentBoard.Score == 0) break;
-
-                    Console.WriteLine(_currentBoard.Score);
-
-                    // Recommencer avec le meilleur noued
+                    // Trouver les voisins et les ajouter à la liste
+                        
                 }
-
             }
             else Console.WriteLine("Ce Taquin n'est pas soluble - On ne peut pas le mélanger dans l'eau");
             Console.WriteLine("Solving Over");

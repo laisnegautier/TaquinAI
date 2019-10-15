@@ -159,7 +159,13 @@ namespace TaquinIA
             return (Math.Abs(x1-x2) + Math.Abs(y1-y2));            
         }
         
-        public void Evaluate()
+        public bool IsDone()
+        {
+            if (Evaluate() == 0) return true;
+            else return false;
+        }
+
+        public int Evaluate()
         {
             int opti, optj;
             int currenti, currentj;
@@ -170,12 +176,7 @@ namespace TaquinIA
                 FindValue(out currenti, out currentj, _);
                 totalValue += Manhattan(opti, optj, currenti, currentj);
             }
-            if (totalValue > 0)
-            {
-                if (Previous != null) Score = Previous.Score + totalValue;
-                else Score = totalValue;
-            }
-            else Score = 0;
+            return totalValue;
         }
         #endregion
     }
