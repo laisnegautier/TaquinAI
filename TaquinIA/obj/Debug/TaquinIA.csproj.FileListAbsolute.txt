@@ -1,0 +1,7 @@
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\bin\Debug\TaquinIA.exe.config
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\bin\Debug\TaquinIA.exe
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\bin\Debug\TaquinIA.pdb
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\obj\Debug\TaquinIA.csprojAssemblyReference.cache
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\obj\Debug\TaquinIA.csproj.CoreCompileInputs.cache
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\obj\Debug\TaquinIA.exe
+C:\Users\simon\Desktop\TaquinIA\TaquinIA\obj\Debug\TaquinIA.pdb
