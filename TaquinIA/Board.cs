@@ -17,7 +17,8 @@ namespace TaquinIA
         #region Properties
         public int Size { get { return _size; } }
         public int Cost { get; set; }
-        public int Heuristic { get; set; }
+        public int HeuristicCost { get; set; }
+        public int TotalCost { get; set; }
         public Board Previous { get; set; }
         public char[][] Structure
         {
@@ -57,9 +58,12 @@ namespace TaquinIA
 
         public void InitSafe()
         {
-            char[] l1 = { '0', '1', '2' };
+            /*char[] l1 = { '0', '1', '2' };
             char[] l2 = { '3', '-', '4' };
-            char[] l3 = { '6', '7', '5' };
+            char[] l3 = { '6', '7', '5' };*/
+            char[] l1 = { '4', '5', '7' };
+            char[] l2 = { '0', '3', '2' };
+            char[] l3 = { '1', '6', '-' };
             structure[0] = l1;
             structure[1] = l2;
             structure[2] = l3;
@@ -161,11 +165,12 @@ namespace TaquinIA
         
         public bool IsDone()
         {
-            if (Evaluate() == 0) return true;
+            if (Heuristic() == 0) return true;
             else return false;
         }
 
-        public int Evaluate()
+        // Méthode de calcul du cout total sur le board ( Heuristique en |L1| )
+        public int Heuristic()
         {
             int opti, optj;
             int currenti, currentj;
@@ -177,6 +182,39 @@ namespace TaquinIA
                 totalValue += Manhattan(opti, optj, currenti, currentj);
             }
             return totalValue;
+        }
+
+        public void Evaluate()
+        {
+            HeuristicCost = Heuristic();
+        }
+
+        public void SetTotalCost()
+        {
+            TotalCost = Cost + HeuristicCost;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool equal = true;
+            Board target = (Board)obj;
+            for (int i = 0; i < _size; i++)
+                for (int j = 0; j < _size; j++)
+                    if (Structure[i][j] != target.Structure[i][j]) equal = false;
+            
+            return equal;
+        }
+
+        public static bool operator == (Board obj1, Board obj2)
+        {
+            if (obj2 is null || obj1 is null) return false;
+            return (obj1.Equals(obj2));
+        }
+
+        public static bool operator != (Board obj1, Board obj2)
+        {
+            if (obj1 is null || obj2 is null) return true;
+            return (obj1.Equals(obj2));
         }
         #endregion
     }

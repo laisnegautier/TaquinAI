@@ -23,37 +23,111 @@ namespace TaquinIA
 
         public void Solve()
         {
+            DateTime start = DateTime.Now;
             OpenSet.Add(_start); // On push le départ dans la liste à évaluer
             if (_start.IsSolvable())
             {
+                Console.WriteLine(_start);
                 Console.WriteLine("Ca part sur une résolution Mdr");
+                /*DateTime current = DateTime.Now;
+                TimeSpan spend = current - start;
+                Console.WriteLine("\r" + spend);*/
                 // Tant que l'on à des noeuds à évaluer
                 _currentBoard = _start;
+                _currentBoard.TotalCost = 0;
                 while (OpenSet.Count != 0)
                 {
                     _currentBoard = OpenSet[0]; // Select best board
-                    OpenSet.Remove(_currentBoard); // REmove it from non evaluated nodes
-
+                    OpenSet.Remove(_currentBoard); // Remove it from non evaluated nodes
+                    ClosedSet.Add(_currentBoard);
+                    List<Board> CurrentBoards = new List<Board>();
                     if (_currentBoard.IsDone())
                     {
                         Console.WriteLine("Solving Over - Optimal solution found");
-                        Console.WriteLine(_currentBoard);
+                        //Console.WriteLine(_currentBoard);
+                        // Dépiler les solutions grace au previous
+                        Unpile(_currentBoard);
                         break;
                     }
-
                     // Trouver les voisins et les ajouter à la liste
-                        
+                    List<Moves> currentPossibleMoves = FindPossibleMoves();
+                    foreach (Moves move in currentPossibleMoves)
+                    {
+                        //Console.Write(move + " ");
+                        CurrentBoards.Add(CreateBoard(move));
+                    }
+
+                    foreach(Board board in CurrentBoards)
+                    {
+                        if (!FindOld(board)) // Ou si il est dans open avec un ct inférieur
+                        {
+                            board.Cost = board.Previous.Cost + 1;
+                            board.Evaluate();
+                            board.SetTotalCost();
+                            if( !FindBest(board) ) OpenSet.Add(board);
+                        }
+                        else
+                        {
+                            Console.Write("");
+                        }
+                    }
+                    OpenSet = OpenSet.OrderBy(b => b.TotalCost).ToList();
                 }
+                if (OpenSet.Count == 0) Console.Write("Taquin non résoluble");
             }
             else Console.WriteLine("Ce Taquin n'est pas soluble - On ne peut pas le mélanger dans l'eau");
             Console.WriteLine("Solving Over");
         }
 
-        Board CreateBoard(Moves move, Board previous)
+        bool FindOld(Board board)
+        {
+            bool find = false;
+            foreach (Board b in ClosedSet)
+            {
+                if (b == board)
+                {
+                    find = true;
+                    break;
+                }
+            }
+            return find;
+        }
+
+        bool FindBest(Board board)
+        {
+            bool find = false;
+            foreach(Board b in OpenSet)
+            {
+                if (b == board && b.TotalCost < board.TotalCost)
+                {
+                    find = true;
+                    break;
+                }
+            }
+            return find;
+        }
+
+        public void Unpile(Board board)
+        {
+            int moveCount = 0;
+            while(!(board.Previous is null))
+            {
+                Console.WriteLine(board);
+                Console.WriteLine("=====");
+                moveCount++;
+                board = board.Previous;
+
+            }
+            Console.WriteLine(board);
+            Console.WriteLine("This Taquin was solvable in {0} moves", moveCount);
+        }
+
+        Board CreateBoard(Moves move)
         {
             int i, j;
             _currentBoard.FindEmpty(out i, out j);
             Board newBoard = new Board(_currentBoard.Size);
+            newBoard.Previous = _currentBoard;
             for(int _=0; _< _currentBoard.Structure.Length; _++)
                 Array.Copy(_currentBoard.Structure[_], newBoard.Structure[_], _currentBoard.Structure[_].Length);
 
@@ -76,7 +150,6 @@ namespace TaquinIA
                     newBoard.Structure[i][j-1] = '-';
                     break;
             }
-            newBoard.Previous = previous;
             return newBoard;
         }
 

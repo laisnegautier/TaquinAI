@@ -15,6 +15,13 @@ namespace TaquinIA
             //board.Init();
             Solver solver = new Solver(board);
             solver.Solve();
+            
+
+            /*Board b1 = new Board(3);
+            Board b2 = new Board(3);
+
+            b1.InitSafe(); b2.InitSafe();
+            Console.WriteLine(b1 == b2);*/
 
             Console.Read();
         }
