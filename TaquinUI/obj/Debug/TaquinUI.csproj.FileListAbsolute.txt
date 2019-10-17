@@ -1,0 +1,10 @@
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\bin\Debug\TaquinUI.exe.config
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\bin\Debug\TaquinUI.exe
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\bin\Debug\TaquinUI.pdb
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.csprojAssemblyReference.cache
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.Properties.Resources.resources
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.ResultForm.resources
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.csproj.GenerateResource.cache
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.csproj.CoreCompileInputs.cache
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.exe
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.pdb
