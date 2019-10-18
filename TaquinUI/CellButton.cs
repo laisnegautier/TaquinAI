@@ -18,7 +18,7 @@ namespace TaquinUI
         #endregion
 
         #region Construct
-        CellButton(Cell cell, int size)
+        public CellButton(Cell cell, int size)
         {
             Cell = cell;
             Height = size;
@@ -26,7 +26,6 @@ namespace TaquinUI
             Text = Cell.Value;
         }
         #endregion
-
-
+        
     }
 }

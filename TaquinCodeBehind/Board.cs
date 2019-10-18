@@ -11,7 +11,6 @@ namespace TaquinCodeBehind
         public enum Neighbours { Up, Down, Left, Right }
         #region Attributes
         private int _size;
-        private Neighbours _neighbours = new Neighbours();
         #endregion
 
         #region Properties
@@ -28,6 +27,19 @@ namespace TaquinCodeBehind
         {
             Structure = board;
             _size = Structure.Length;
+        }
+        public Board(Cell[] cells)
+        {
+            if (cells.Length % 3 == 0) _size = 3;
+            if (cells.Length % 5 == 0) _size = 5;
+            Structure = new Cell[_size, _size];
+            int line = -1; // Modulo Hack
+            for(int i = 0; i < _size*_size; i++)
+            {
+                if (i % _size == 0)
+                    line++;
+                Structure[line, i % _size] = cells[i];
+            }
         }
         #endregion
 
@@ -99,6 +111,20 @@ namespace TaquinCodeBehind
             if (j > 0) if (Structure[i, j - 1].Value == "-") neighbours.Add(Neighbours.Left);
             if (j < _size - 1) if (Structure[i, j + 1].Value == "-") neighbours.Add(Neighbours.Right);
             return neighbours;
+        }
+
+        public override string ToString()
+        {
+            string result = "";
+            for(int i =0; i < _size; i++)
+            {
+                for (int j = 0; j < _size; j++)
+                {
+                    result += (Structure[i, j].ToString() + " ");
+                }
+                result += "\n";
+            }
+            return result;
         }
         #endregion
     }

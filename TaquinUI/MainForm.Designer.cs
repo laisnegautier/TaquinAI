@@ -132,7 +132,7 @@
             // 
             // boardPanel
             // 
-            this.boardPanel.Location = new System.Drawing.Point(218, 67);
+            this.boardPanel.Location = new System.Drawing.Point(208, 67);
             this.boardPanel.Name = "boardPanel";
             this.boardPanel.Size = new System.Drawing.Size(489, 489);
             this.boardPanel.TabIndex = 4;
@@ -170,6 +170,7 @@
             this.Controls.Add(this.headerBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Taquin Alpha";
             this.headerBar.ResumeLayout(false);
             this.headerBar.PerformLayout();
