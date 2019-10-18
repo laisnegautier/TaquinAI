@@ -40,7 +40,7 @@
             this.HeaderBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.HeaderBar.Location = new System.Drawing.Point(0, 0);
             this.HeaderBar.Name = "HeaderBar";
-            this.HeaderBar.Size = new System.Drawing.Size(367, 29);
+            this.HeaderBar.Size = new System.Drawing.Size(474, 29);
             this.HeaderBar.TabIndex = 0;
             // 
             // button1
@@ -49,7 +49,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.button1.Location = new System.Drawing.Point(338, 2);
+            this.button1.Location = new System.Drawing.Point(446, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(25, 24);
             this.button1.TabIndex = 0;
@@ -61,7 +61,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(367, 450);
+            this.ClientSize = new System.Drawing.Size(474, 589);
             this.Controls.Add(this.HeaderBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ResultForm";

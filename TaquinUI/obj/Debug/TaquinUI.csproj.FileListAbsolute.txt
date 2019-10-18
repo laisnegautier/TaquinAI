@@ -8,3 +8,4 @@ C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.csproj.GenerateResou
 C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.csproj.CoreCompileInputs.cache
 C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.exe
 C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.pdb
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.MainForm.resources
