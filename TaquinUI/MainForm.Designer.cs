@@ -33,8 +33,8 @@
             this.NameLabel = new System.Windows.Forms.Label();
             this.SizeLabel = new System.Windows.Forms.Label();
             this.SizeButtonPanel = new System.Windows.Forms.Panel();
-            this.SizeButton3 = new System.Windows.Forms.Button();
             this.SizeButton5 = new System.Windows.Forms.Button();
+            this.SizeButton3 = new System.Windows.Forms.Button();
             this.HeaderBar.SuspendLayout();
             this.SizeButtonPanel.SuspendLayout();
             this.SuspendLayout();
@@ -96,19 +96,6 @@
             this.SizeButtonPanel.Size = new System.Drawing.Size(155, 75);
             this.SizeButtonPanel.TabIndex = 3;
             // 
-            // SizeButton3
-            // 
-            this.SizeButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
-            this.SizeButton3.FlatAppearance.BorderSize = 0;
-            this.SizeButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SizeButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.SizeButton3.Location = new System.Drawing.Point(4, 3);
-            this.SizeButton3.Name = "SizeButton3";
-            this.SizeButton3.Size = new System.Drawing.Size(70, 69);
-            this.SizeButton3.TabIndex = 0;
-            this.SizeButton3.Text = "3 X 3";
-            this.SizeButton3.UseVisualStyleBackColor = false;
-            // 
             // SizeButton5
             // 
             this.SizeButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
@@ -121,6 +108,24 @@
             this.SizeButton5.TabIndex = 1;
             this.SizeButton5.Text = "5 X 5";
             this.SizeButton5.UseVisualStyleBackColor = false;
+            this.SizeButton5.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.SizeButton5.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // SizeButton3
+            // 
+            this.SizeButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.SizeButton3.FlatAppearance.BorderSize = 0;
+            this.SizeButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SizeButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.SizeButton3.Location = new System.Drawing.Point(4, 3);
+            this.SizeButton3.Name = "SizeButton3";
+            this.SizeButton3.Size = new System.Drawing.Size(70, 69);
+            this.SizeButton3.TabIndex = 0;
+            this.SizeButton3.Text = "3 X 3";
+            this.SizeButton3.UseVisualStyleBackColor = false;
+            this.SizeButton3.Click += new System.EventHandler(this.SizeButton3_Click);
+            this.SizeButton3.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.SizeButton3.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // MainForm
             // 
