@@ -38,8 +38,12 @@
             this.boardPanel = new System.Windows.Forms.Panel();
             this.heuristicLabel = new System.Windows.Forms.Label();
             this.heuristicPanel = new System.Windows.Forms.Panel();
+            this.heuristicOneButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
+            this.heuristicPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -104,6 +108,7 @@
             this.sizeButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
             this.sizeButton5.FlatAppearance.BorderSize = 0;
             this.sizeButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sizeButton5.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sizeButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
             this.sizeButton5.Location = new System.Drawing.Point(80, 3);
             this.sizeButton5.Name = "sizeButton5";
@@ -111,6 +116,7 @@
             this.sizeButton5.TabIndex = 1;
             this.sizeButton5.Text = "5 X 5";
             this.sizeButton5.UseVisualStyleBackColor = false;
+            this.sizeButton5.Click += new System.EventHandler(this.sizeButton5_Click);
             this.sizeButton5.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.sizeButton5.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -119,6 +125,7 @@
             this.sizeButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
             this.sizeButton3.FlatAppearance.BorderSize = 0;
             this.sizeButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sizeButton3.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sizeButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
             this.sizeButton3.Location = new System.Drawing.Point(4, 3);
             this.sizeButton3.Name = "sizeButton3";
@@ -151,17 +158,68 @@
             // 
             // heuristicPanel
             // 
+            this.heuristicPanel.Controls.Add(this.button2);
+            this.heuristicPanel.Controls.Add(this.button1);
+            this.heuristicPanel.Controls.Add(this.heuristicOneButton);
             this.heuristicPanel.Location = new System.Drawing.Point(16, 194);
             this.heuristicPanel.Name = "heuristicPanel";
             this.heuristicPanel.Size = new System.Drawing.Size(151, 165);
             this.heuristicPanel.TabIndex = 6;
+            // 
+            // heuristicOneButton
+            // 
+            this.heuristicOneButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.heuristicOneButton.FlatAppearance.BorderSize = 0;
+            this.heuristicOneButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.heuristicOneButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heuristicOneButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.heuristicOneButton.Location = new System.Drawing.Point(3, 3);
+            this.heuristicOneButton.Name = "heuristicOneButton";
+            this.heuristicOneButton.Size = new System.Drawing.Size(145, 50);
+            this.heuristicOneButton.TabIndex = 2;
+            this.heuristicOneButton.Text = "Cases Bien Placées";
+            this.heuristicOneButton.UseVisualStyleBackColor = false;
+            this.heuristicOneButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.heuristicOneButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.button1.Location = new System.Drawing.Point(3, 57);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(145, 50);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Cases Mal Placées";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.button1.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.button2.Location = new System.Drawing.Point(3, 112);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(145, 50);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Distance De Manhattan";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.button2.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(736, 610);
+            this.ClientSize = new System.Drawing.Size(736, 624);
             this.Controls.Add(this.heuristicPanel);
             this.Controls.Add(this.heuristicLabel);
             this.Controls.Add(this.boardPanel);
@@ -175,6 +233,7 @@
             this.headerBar.ResumeLayout(false);
             this.headerBar.PerformLayout();
             this.sizeButtonPanel.ResumeLayout(false);
+            this.heuristicPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,6 +251,9 @@
         private System.Windows.Forms.Panel boardPanel;
         private System.Windows.Forms.Label heuristicLabel;
         private System.Windows.Forms.Panel heuristicPanel;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button heuristicOneButton;
     }
 }
 

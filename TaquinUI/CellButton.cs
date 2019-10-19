@@ -26,13 +26,17 @@ namespace TaquinUI
             Height = size;
             Width = size;
             Text = Cell.Value;
-            BackColor = Color.FromArgb(231,217,218);
-            FlatStyle = FlatStyle.Flat;
-            FlatAppearance.BorderSize = 0;
-            Font = new Font("AR BONNIE", 50f, FontStyle.Regular);
-            ForeColor = Color.FromArgb(66,94,41);
+            SetStyle();
         }
         
+        public void SetStyle()
+        {
+            BackColor = Color.FromArgb(231, 217, 218);
+            FlatStyle = FlatStyle.Flat;
+            FlatAppearance.BorderSize = 0;
+            Font = new Font("AR BONNIE", 40f, FontStyle.Regular);
+            ForeColor = Color.FromArgb(66, 94, 41);
+        }
         #endregion
         
     }

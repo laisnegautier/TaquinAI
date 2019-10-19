@@ -31,6 +31,7 @@ namespace TaquinUI
             _solverThread = new Thread(new ThreadStart(Solve)); // Le resolution Thread launches 
             _resultForm = new ResultForm();
             _selectedSize = 3;
+            ButtonSetFocus(sizeButton3);
             taquin = new Taquin(_selectedSize);
             Debug.WriteLine(taquin);
             SetBoard();
@@ -43,6 +44,7 @@ namespace TaquinUI
         {
             int line = -1;
             int column = 0;
+            boardPanel.Controls.Clear();
             //Debug.WriteLine(boardPanel.Left + " - " + boardPanel.Top);
             foreach (Cell cell in taquin)
             {
@@ -59,6 +61,14 @@ namespace TaquinUI
                 column++;
             }
         }
+
+        private void UpdateBoard()
+        {
+            foreach(CellButton cellBtn in boardPanel.Controls)
+            {
+                // Mettre à jour les val d'une Cell lors d'un mvt !
+            }
+        }
         //==========================BUTTON===CLOSE=================================
         private void CloseButton_Click(object sender, EventArgs e)
         {
@@ -69,21 +79,52 @@ namespace TaquinUI
         //=============================SIZE===3X3===================================
         private void SizeButton3_Click(object sender, EventArgs e)
         {
-
+            if(_selectedSize != 3)
+            {
+                ButtonSetFocus(sizeButton3);
+                _selectedSize = 3;
+                taquin = new Taquin(3);
+                SetBoard();
+                ButtonUnsetFocus(sizeButton5);
+            }
         }
-        
+
+
+        private void sizeButton5_Click(object sender, EventArgs e)
+        {
+            if (_selectedSize != 5)
+            {
+                ButtonSetFocus(sizeButton5);
+                _selectedSize = 5;
+                taquin = new Taquin(5);
+                SetBoard();
+                ButtonUnsetFocus(sizeButton3);
+            }
+        }
+
         private void Button_MouseEnter(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            button.BackColor = Color.FromArgb(255,143,143);
-            button.ForeColor = Color.FromArgb(252,252,250);
+            ButtonSetFocus(button);
         }
 
         private void Button_MouseLeave(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            button.BackColor = Color.FromArgb(231,217,218);
-            button.ForeColor = Color.FromArgb(66,94,41);
+            if ((button == sizeButton3 && _selectedSize == 3) || (button == sizeButton5 && _selectedSize == 5)) ;
+            else ButtonUnsetFocus(button);
+        }
+
+        private void ButtonSetFocus(Button button)
+        {
+            button.BackColor = Color.FromArgb(255, 143, 143);
+            button.ForeColor = Color.FromArgb(252, 252, 250);
+        }
+
+        private void ButtonUnsetFocus(Button button)
+        {
+            button.BackColor = Color.FromArgb(231, 217, 218);
+            button.ForeColor = Color.FromArgb(66, 94, 41);
         }
         #endregion
 
@@ -94,5 +135,6 @@ namespace TaquinUI
         public void Solve()
         {
         }
+
     }
 }

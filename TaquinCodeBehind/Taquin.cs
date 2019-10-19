@@ -60,7 +60,7 @@ namespace TaquinCodeBehind
             int line = -1;
             for(int i = 0; i < _size*_size; i++)
             {
-                if (i % 3 == 0) line++;
+                if (i % _size == 0) line++;
                 yield return _board.Structure[line,i % _size];
             }
         }
