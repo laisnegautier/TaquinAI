@@ -43,16 +43,18 @@ namespace TaquinUI
         {
             int line = -1;
             int column = 0;
-            Console.WriteLine(boardPanel.Left + " - " + boardPanel.Top);
+            //Debug.WriteLine(boardPanel.Left + " - " + boardPanel.Top);
             foreach (Cell cell in taquin)
             {
                 if (column % _selectedSize == 0) line++;
                 int size = boardPanel.Width / _selectedSize;
                 CellButton currentCellButton = new CellButton(cell,size);
-                currentCellButton.Left = boardPanel.Left + ((column % _selectedSize) * size);
-                Console.Write(currentCellButton.Left + " - ");
-                currentCellButton.Top = boardPanel.Top + (line * size);
-                Console.WriteLine(currentCellButton.Top);
+                currentCellButton.MouseEnter += (s, e) => Button_MouseEnter(s, e);
+                currentCellButton.MouseLeave += (s, e) => Button_MouseLeave(s, e);
+                currentCellButton.Left = ((column % _selectedSize) * size);
+                //Console.Write(currentCellButton.Left + " - ");
+                currentCellButton.Top = (line * size);
+                //Console.WriteLine(currentCellButton.Top);
                 boardPanel.Controls.Add(currentCellButton);
                 column++;
             }
@@ -69,17 +71,7 @@ namespace TaquinUI
         {
 
         }
-
-
-        /// <summary>
-        /// Fonction used to Solve the Taquin board using the selected Heuristic
-        /// </summary>
-        public void Solve()
-        {
-        }
-
-        #endregion
-
+        
         private void Button_MouseEnter(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -92,6 +84,15 @@ namespace TaquinUI
             Button button = (Button)sender;
             button.BackColor = Color.FromArgb(231,217,218);
             button.ForeColor = Color.FromArgb(66,94,41);
+        }
+        #endregion
+
+        
+        /// <summary>
+        /// Fonction used to Solve the Taquin board using the selected Heuristic
+        /// </summary>
+        public void Solve()
+        {
         }
     }
 }
