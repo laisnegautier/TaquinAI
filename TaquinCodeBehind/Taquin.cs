@@ -44,7 +44,43 @@ namespace TaquinCodeBehind
         {
             if(_board != null)
             {
-
+                _board.CalculatePossibleMoves();
+            }
+        }
+        
+        public void Move(Cell cell)
+        {
+            if (cell.IsMovable())
+            {
+                Cell.Moves move = cell.AvailableMoves[0];
+                Cell holder;
+                int i, j;
+                _board.FindCellByValue(out i, out j, cell.Value);
+                switch (move)
+                {
+                    case Cell.Moves.Up:
+                        holder = _board.Structure[i - 1, j];
+                        _board.Structure[i - 1, j] = cell;
+                        _board.Structure[i, j] = holder;
+                        break;
+                    case Cell.Moves.Down:
+                        holder = _board.Structure[i + 1, j];
+                        _board.Structure[i + 1, j] = cell;
+                        _board.Structure[i, j] = holder;
+                        break;
+                    case Cell.Moves.Left:
+                        holder = _board.Structure[i , j - 1];
+                        _board.Structure[i, j - 1] = cell;
+                        _board.Structure[i, j] = holder;
+                        break;
+                    case Cell.Moves.Right:
+                        holder = _board.Structure[i,j + 1];
+                        _board.Structure[i, j + 1] = cell;
+                        _board.Structure[i, j] = holder;
+                        break;
+                }
+                _board.ClearBoardStatus();
+                _board.CalculatePossibleMoves();
             }
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    class Board
+    public class Board
     {
         public enum Neighbours { Up, Down, Left, Right }
         #region Attributes

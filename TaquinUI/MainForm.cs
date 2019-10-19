@@ -17,10 +17,14 @@ namespace TaquinUI
     {
         #region Attributes
         private int _selectedSize;
-        // private IHeuristique _selectedHeuristic
+        private IHeuristic _selectedHeuristic;
         private Thread _solverThread;
         private ResultForm _resultForm;
         private Taquin taquin;
+        #endregion
+
+        #region Properties
+        
         #endregion
 
         #region Construct
@@ -51,8 +55,11 @@ namespace TaquinUI
                 if (column % _selectedSize == 0) line++;
                 int size = boardPanel.Width / _selectedSize;
                 CellButton currentCellButton = new CellButton(cell,size);
+
                 currentCellButton.MouseEnter += (s, e) => Button_MouseEnter(s, e);
                 currentCellButton.MouseLeave += (s, e) => Button_MouseLeave(s, e);
+                currentCellButton.Click += (s, e) => CellButton_Click(s, e);
+
                 currentCellButton.Left = ((column % _selectedSize) * size);
                 //Console.Write(currentCellButton.Left + " - ");
                 currentCellButton.Top = (line * size);
@@ -67,6 +74,9 @@ namespace TaquinUI
             foreach(CellButton cellBtn in boardPanel.Controls)
             {
                 // Mettre à jour les val d'une Cell lors d'un mvt !
+                int id = cellBtn.TabIndex;
+                int i, j;
+
             }
         }
         //==========================BUTTON===CLOSE=================================
@@ -88,9 +98,8 @@ namespace TaquinUI
                 ButtonUnsetFocus(sizeButton5);
             }
         }
-
-
-        private void sizeButton5_Click(object sender, EventArgs e)
+        //=============================SIZE===5X5===================================
+        private void SizeButton5_Click(object sender, EventArgs e)
         {
             if (_selectedSize != 5)
             {
@@ -100,6 +109,19 @@ namespace TaquinUI
                 SetBoard();
                 ButtonUnsetFocus(sizeButton3);
             }
+        }
+        //=============================HEURISTICS===================================
+        private void HeuristicButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CellButton_Click(object sender, EventArgs e)
+        {
+            CellButton cellButton = (CellButton)sender;
+            Cell cell = cellButton.Cell;
+            if (cell.IsMovable()) taquin.Move(cell);
+            UpdateBoard();
         }
 
         private void Button_MouseEnter(object sender, EventArgs e)

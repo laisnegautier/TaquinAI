@@ -116,7 +116,7 @@
             this.sizeButton5.TabIndex = 1;
             this.sizeButton5.Text = "5 X 5";
             this.sizeButton5.UseVisualStyleBackColor = false;
-            this.sizeButton5.Click += new System.EventHandler(this.sizeButton5_Click);
+            this.sizeButton5.Click += new System.EventHandler(this.SizeButton5_Click);
             this.sizeButton5.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.sizeButton5.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
