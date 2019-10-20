@@ -76,8 +76,21 @@ namespace TaquinUI
                 // Mettre à jour les val d'une Cell lors d'un mvt !
                 int id = cellBtn.TabIndex;
                 int i, j;
-
+                pos2coord(out i, out j, id);
+                cellBtn.Cell = taquin.GetCell(i, j);
+                cellBtn.Text = cellBtn.Cell.Value; // Add event on Cell changed
             }
+        }
+
+        public int coord2pos(int i, int j)
+        {
+            return (j * _selectedSize + i);
+        }
+
+        public void pos2coord(out int i, out int j, int rank)
+        {
+            j = rank % _selectedSize;
+            i = rank / _selectedSize;
         }
         //==========================BUTTON===CLOSE=================================
         private void CloseButton_Click(object sender, EventArgs e)
@@ -157,6 +170,6 @@ namespace TaquinUI
         public void Solve()
         {
         }
-
+        
     }
 }

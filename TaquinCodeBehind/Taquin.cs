@@ -47,7 +47,12 @@ namespace TaquinCodeBehind
                 _board.CalculatePossibleMoves();
             }
         }
-        
+
+        public Cell GetCell(int i, int j)
+        {
+            return _board.Structure[i, j];
+        }
+
         public void Move(Cell cell)
         {
             if (cell.IsMovable())

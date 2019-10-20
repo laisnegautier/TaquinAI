@@ -38,12 +38,17 @@
             this.boardPanel = new System.Windows.Forms.Panel();
             this.heuristicLabel = new System.Windows.Forms.Label();
             this.heuristicPanel = new System.Windows.Forms.Panel();
-            this.heuristicOneButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.heuristicOneButton = new System.Windows.Forms.Button();
+            this.loadButton = new System.Windows.Forms.Button();
+            this.actionButtonsPanel = new System.Windows.Forms.Panel();
+            this.shuffleButton = new System.Windows.Forms.Button();
+            this.solveButton = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
             this.heuristicPanel.SuspendLayout();
+            this.actionButtonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -166,21 +171,21 @@
             this.heuristicPanel.Size = new System.Drawing.Size(151, 165);
             this.heuristicPanel.TabIndex = 6;
             // 
-            // heuristicOneButton
+            // button2
             // 
-            this.heuristicOneButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
-            this.heuristicOneButton.FlatAppearance.BorderSize = 0;
-            this.heuristicOneButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.heuristicOneButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.heuristicOneButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.heuristicOneButton.Location = new System.Drawing.Point(3, 3);
-            this.heuristicOneButton.Name = "heuristicOneButton";
-            this.heuristicOneButton.Size = new System.Drawing.Size(145, 50);
-            this.heuristicOneButton.TabIndex = 2;
-            this.heuristicOneButton.Text = "Cases Bien Placées";
-            this.heuristicOneButton.UseVisualStyleBackColor = false;
-            this.heuristicOneButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.heuristicOneButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.button2.Location = new System.Drawing.Point(3, 112);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(145, 50);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Distance De Manhattan";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.button2.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // button1
             // 
@@ -198,28 +203,87 @@
             this.button1.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.button1.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
-            // button2
+            // heuristicOneButton
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.button2.Location = new System.Drawing.Point(3, 112);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 50);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Distance De Manhattan";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.button2.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            this.heuristicOneButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.heuristicOneButton.FlatAppearance.BorderSize = 0;
+            this.heuristicOneButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.heuristicOneButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heuristicOneButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.heuristicOneButton.Location = new System.Drawing.Point(3, 3);
+            this.heuristicOneButton.Name = "heuristicOneButton";
+            this.heuristicOneButton.Size = new System.Drawing.Size(145, 50);
+            this.heuristicOneButton.TabIndex = 2;
+            this.heuristicOneButton.Text = "Cases Bien Placées";
+            this.heuristicOneButton.UseVisualStyleBackColor = false;
+            this.heuristicOneButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.heuristicOneButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // loadButton
+            // 
+            this.loadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.loadButton.FlatAppearance.BorderSize = 0;
+            this.loadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.loadButton.Location = new System.Drawing.Point(341, 3);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(145, 50);
+            this.loadButton.TabIndex = 5;
+            this.loadButton.Text = "L O A D";
+            this.loadButton.UseVisualStyleBackColor = false;
+            this.loadButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.loadButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // actionButtonsPanel
+            // 
+            this.actionButtonsPanel.Controls.Add(this.shuffleButton);
+            this.actionButtonsPanel.Controls.Add(this.solveButton);
+            this.actionButtonsPanel.Controls.Add(this.loadButton);
+            this.actionButtonsPanel.Location = new System.Drawing.Point(208, 562);
+            this.actionButtonsPanel.Name = "actionButtonsPanel";
+            this.actionButtonsPanel.Size = new System.Drawing.Size(489, 59);
+            this.actionButtonsPanel.TabIndex = 7;
+            // 
+            // shuffleButton
+            // 
+            this.shuffleButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.shuffleButton.FlatAppearance.BorderSize = 0;
+            this.shuffleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.shuffleButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shuffleButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.shuffleButton.Location = new System.Drawing.Point(3, 3);
+            this.shuffleButton.Name = "shuffleButton";
+            this.shuffleButton.Size = new System.Drawing.Size(145, 50);
+            this.shuffleButton.TabIndex = 7;
+            this.shuffleButton.Text = "S H U F F L E";
+            this.shuffleButton.UseVisualStyleBackColor = false;
+            this.shuffleButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.shuffleButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // solveButton
+            // 
+            this.solveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.solveButton.FlatAppearance.BorderSize = 0;
+            this.solveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.solveButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.solveButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.solveButton.Location = new System.Drawing.Point(172, 3);
+            this.solveButton.Name = "solveButton";
+            this.solveButton.Size = new System.Drawing.Size(145, 50);
+            this.solveButton.TabIndex = 6;
+            this.solveButton.Text = "S O L V E";
+            this.solveButton.UseVisualStyleBackColor = false;
+            this.solveButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.solveButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(736, 624);
+            this.ClientSize = new System.Drawing.Size(736, 633);
+            this.Controls.Add(this.actionButtonsPanel);
             this.Controls.Add(this.heuristicPanel);
             this.Controls.Add(this.heuristicLabel);
             this.Controls.Add(this.boardPanel);
@@ -234,6 +298,7 @@
             this.headerBar.PerformLayout();
             this.sizeButtonPanel.ResumeLayout(false);
             this.heuristicPanel.ResumeLayout(false);
+            this.actionButtonsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,6 +319,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button heuristicOneButton;
+        private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.Panel actionButtonsPanel;
+        private System.Windows.Forms.Button solveButton;
+        private System.Windows.Forms.Button shuffleButton;
     }
 }
 
