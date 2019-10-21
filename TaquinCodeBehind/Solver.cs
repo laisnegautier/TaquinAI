@@ -9,6 +9,9 @@ namespace TaquinCodeBehind
     public abstract class Solver
     {
         public IHeuristic Heuristic { get; set; }
+
         protected abstract int TotalScore(Board board);
+
+        public abstract List<Board> Solve(Board board);
     }
 }
