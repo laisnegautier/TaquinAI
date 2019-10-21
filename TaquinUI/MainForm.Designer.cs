@@ -45,10 +45,16 @@
             this.actionButtonsPanel = new System.Windows.Forms.Panel();
             this.shuffleButton = new System.Windows.Forms.Button();
             this.solveButton = new System.Windows.Forms.Button();
+            this.solverLabel = new System.Windows.Forms.Label();
+            this.solverPanel = new System.Windows.Forms.Panel();
+            this.AstarBiButton = new System.Windows.Forms.Button();
+            this.AstarUniButton = new System.Windows.Forms.Button();
+            this.dijkstraButton = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
             this.heuristicPanel.SuspendLayout();
             this.actionButtonsPanel.SuspendLayout();
+            this.solverPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -262,6 +268,7 @@
             this.shuffleButton.TabIndex = 7;
             this.shuffleButton.Text = "S H U F F L E";
             this.shuffleButton.UseVisualStyleBackColor = false;
+            this.shuffleButton.Click += new System.EventHandler(this.ShuffleButton_Click);
             this.shuffleButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.shuffleButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -278,8 +285,82 @@
             this.solveButton.TabIndex = 6;
             this.solveButton.Text = "S O L V E";
             this.solveButton.UseVisualStyleBackColor = false;
+            this.solveButton.Click += new System.EventHandler(this.SolveButton_Click);
             this.solveButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.solveButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // solverLabel
+            // 
+            this.solverLabel.AutoSize = true;
+            this.solverLabel.BackColor = System.Drawing.Color.Transparent;
+            this.solverLabel.Font = new System.Drawing.Font("AR BONNIE", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.solverLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.solverLabel.Location = new System.Drawing.Point(32, 377);
+            this.solverLabel.Name = "solverLabel";
+            this.solverLabel.Size = new System.Drawing.Size(70, 21);
+            this.solverLabel.TabIndex = 8;
+            this.solverLabel.Text = "S O L V E R";
+            // 
+            // solverPanel
+            // 
+            this.solverPanel.Controls.Add(this.AstarBiButton);
+            this.solverPanel.Controls.Add(this.AstarUniButton);
+            this.solverPanel.Controls.Add(this.dijkstraButton);
+            this.solverPanel.Location = new System.Drawing.Point(16, 414);
+            this.solverPanel.Name = "solverPanel";
+            this.solverPanel.Size = new System.Drawing.Size(151, 165);
+            this.solverPanel.TabIndex = 7;
+            // 
+            // AstarBiButton
+            // 
+            this.AstarBiButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.AstarBiButton.FlatAppearance.BorderSize = 0;
+            this.AstarBiButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AstarBiButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AstarBiButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.AstarBiButton.Location = new System.Drawing.Point(3, 112);
+            this.AstarBiButton.Name = "AstarBiButton";
+            this.AstarBiButton.Size = new System.Drawing.Size(145, 50);
+            this.AstarBiButton.TabIndex = 4;
+            this.AstarBiButton.Text = "A * -  Bi";
+            this.AstarBiButton.UseVisualStyleBackColor = false;
+            this.AstarBiButton.Click += new System.EventHandler(this.SolverButton_CLick);
+            this.AstarBiButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.AstarBiButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // AstarUniButton
+            // 
+            this.AstarUniButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.AstarUniButton.FlatAppearance.BorderSize = 0;
+            this.AstarUniButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AstarUniButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AstarUniButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.AstarUniButton.Location = new System.Drawing.Point(3, 57);
+            this.AstarUniButton.Name = "AstarUniButton";
+            this.AstarUniButton.Size = new System.Drawing.Size(145, 50);
+            this.AstarUniButton.TabIndex = 3;
+            this.AstarUniButton.Text = "A * - Uni";
+            this.AstarUniButton.UseVisualStyleBackColor = false;
+            this.AstarUniButton.Click += new System.EventHandler(this.SolverButton_CLick);
+            this.AstarUniButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.AstarUniButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
+            // dijkstraButton
+            // 
+            this.dijkstraButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.dijkstraButton.FlatAppearance.BorderSize = 0;
+            this.dijkstraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dijkstraButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dijkstraButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.dijkstraButton.Location = new System.Drawing.Point(3, 3);
+            this.dijkstraButton.Name = "dijkstraButton";
+            this.dijkstraButton.Size = new System.Drawing.Size(145, 50);
+            this.dijkstraButton.TabIndex = 2;
+            this.dijkstraButton.Text = "Dijkstra";
+            this.dijkstraButton.UseVisualStyleBackColor = false;
+            this.dijkstraButton.Click += new System.EventHandler(this.SolverButton_CLick);
+            this.dijkstraButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.dijkstraButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // MainForm
             // 
@@ -287,6 +368,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(736, 633);
+            this.Controls.Add(this.solverPanel);
+            this.Controls.Add(this.solverLabel);
             this.Controls.Add(this.actionButtonsPanel);
             this.Controls.Add(this.heuristicPanel);
             this.Controls.Add(this.heuristicLabel);
@@ -303,6 +386,7 @@
             this.sizeButtonPanel.ResumeLayout(false);
             this.heuristicPanel.ResumeLayout(false);
             this.actionButtonsPanel.ResumeLayout(false);
+            this.solverPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,6 +411,11 @@
         private System.Windows.Forms.Panel actionButtonsPanel;
         private System.Windows.Forms.Button solveButton;
         private System.Windows.Forms.Button shuffleButton;
+        private System.Windows.Forms.Label solverLabel;
+        private System.Windows.Forms.Panel solverPanel;
+        private System.Windows.Forms.Button AstarBiButton;
+        private System.Windows.Forms.Button AstarUniButton;
+        private System.Windows.Forms.Button dijkstraButton;
     }
 }
 

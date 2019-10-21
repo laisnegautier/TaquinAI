@@ -13,12 +13,12 @@ namespace TaquinCodeBehind
 
         }
 
-        public override List<Board> Solve(Board board)
+        public override List<Board> Solve(EvaluableBoard board)
         {
             throw new NotImplementedException();
         }
 
-        protected override int TotalScore(Board board)
+        protected override int TotalScore(EvaluableBoard board)
         {
             throw new NotImplementedException();
         }

@@ -15,13 +15,14 @@ namespace TaquinUI
 {
     public partial class MainForm : Form
     {
+        Random r = new Random();
         #region Attributes
         // Taquin
         private int _selectedSize;
         private Taquin taquin;
         // Solver
         private IHeuristic _selectedHeuristic;
-        private Solver solver;
+        private Solver _solver;
         private Thread _solverThread;
         // Child Forms
         private ResultForm _resultForm;
@@ -38,15 +39,20 @@ namespace TaquinUI
         {
             InitializeComponent();
             // Initialisation des paramètres internes du Form
-            _solverThread = new Thread(new ThreadStart(Solve)); // Le resolution Thread launches 
+            // Le resolution Thread launches 
             _resultForm = new ResultForm();
             _fileName = "";
             _loadForm = new LoadForm();
             _loadForm.FormClosing += (s, e) => LoadForm_Close(s, e);
+            // Define Size
             _selectedSize = 3;
             ButtonSetFocus(sizeButton3);
+            // Define Heuristic
             _selectedHeuristic = new Manhattan();
             ButtonSetFocus(heuristicThreeButton);
+            // Define Solver
+            _solver = new AstarUni();
+            ButtonSetFocus(AstarUniButton);
             taquin = new Taquin(_selectedSize);
             Debug.WriteLine(taquin);
             SetBoard();
@@ -95,7 +101,7 @@ namespace TaquinUI
         //==========================BUTTON===CLOSE=================================
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            if (_solverThread.IsAlive) _solverThread.Interrupt();
+            if (_solverThread != null && _solverThread.IsAlive) _solverThread.Interrupt();
             if (_loadForm.IsAccessible) _loadForm.Close();
             if (_resultForm.IsAccessible) _resultForm.Close();
             Close();
@@ -127,9 +133,11 @@ namespace TaquinUI
         //=============================HEURISTICS===================================
         private void HeuristicButton_Click(object sender, EventArgs e)
         {
+            // Unset last selected button focus
             if (_selectedHeuristic.GetType() == typeof(Manhattan)) ButtonUnsetFocus(heuristicThreeButton);
             else if (_selectedHeuristic.GetType() == typeof(WrightSpot)) ButtonUnsetFocus(heuristicOneButton);
             else ButtonUnsetFocus(heuristicTwoButton);
+            // Action & Focus
             Button button = (Button)sender;
             if (button == heuristicOneButton) _selectedHeuristic = new WrightSpot();
             else if (button == heuristicTwoButton) _selectedHeuristic = new WrongSpot();
@@ -137,6 +145,20 @@ namespace TaquinUI
             ButtonSetFocus(button);
         }
         
+        private void SolverButton_CLick(object sender, EventArgs e)
+        {
+            // Unset last selected button focus
+            if (_solver.GetType() == typeof(Dijkstra)) ButtonUnsetFocus(dijkstraButton);
+            else if (_solver.GetType() == typeof(AstarUni)) ButtonUnsetFocus(AstarUniButton);
+            else ButtonUnsetFocus(AstarBiButton);
+            // Action & Focus
+            Button button = (Button)sender;
+            if (button == dijkstraButton) _solver = new Dijkstra();
+            else if (button == AstarUniButton) _solver = new AstarUni();
+            else _solver = new AstarBi();
+            ButtonSetFocus(button);
+        }
+
         private void CellButton_Click(object sender, EventArgs e)
         {
             CellButton cellButton = (CellButton)sender;
@@ -156,8 +178,11 @@ namespace TaquinUI
             Button button = (Button)sender;
             if ((button == sizeButton3 && _selectedSize == 3) || (button == sizeButton5 && _selectedSize == 5)) ; // Test Size Selected
             else if ((button == heuristicOneButton && _selectedHeuristic.GetType() == typeof(WrightSpot))
-                   ||(button == heuristicTwoButton && _selectedHeuristic.GetType() == typeof(WrongSpot))
-                   ||(button == heuristicThreeButton && _selectedHeuristic.GetType() == typeof(Manhattan))) ; // Test Heuristic Selected
+                   || (button == heuristicTwoButton && _selectedHeuristic.GetType() == typeof(WrongSpot))
+                   || (button == heuristicThreeButton && _selectedHeuristic.GetType() == typeof(Manhattan))) ; // Test Heuristic Selected
+            else if ((button == AstarUniButton && _solver.GetType() == typeof(AstarUni))
+                  || (button == AstarBiButton && _solver.GetType() == typeof(AstarBi))
+                  || (button == dijkstraButton && _solver.GetType() == typeof(Dijkstra))) ; // Test Solver Selected
             else ButtonUnsetFocus(button);
         }
 
@@ -173,13 +198,40 @@ namespace TaquinUI
             button.ForeColor = Color.FromArgb(66, 94, 41);
         }
         #endregion
-
-        
-        /// <summary>
-        /// Fonction used to Solve the Taquin board using the selected Heuristic
-        /// </summary>
-        public void Solve()
+        public void SolveButton_Click(object sender, EventArgs e)
         {
+            List<Board> solutionBoards = new List<Board>();
+            _solverThread = new Thread(()=> {
+                EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
+                 solutionBoards = _solver.Solve(evalBoard);
+            });
+            _solverThread.Start();
+            // A tester
+            if (!_solverThread.IsAlive)
+            {
+                //resultForm = new ResutForm(solutionBoards);
+            }
+            
+            // Might be something to test out !
+
+            /*Action onCompleted = () => 
+            {  
+                //On complete action
+            };
+
+            var thread = new Thread(
+              () =>
+              {
+                try
+                {
+                  // Do your work
+                }
+                finally
+                {
+                  onCompleted();
+                }
+              });
+            thread.Start();*/
         }
 
         private void LoadButton_Click(object sender, EventArgs e)
@@ -197,6 +249,23 @@ namespace TaquinUI
             SetBoard();
             if (_selectedSize == 3) { ButtonSetFocus(sizeButton3); ButtonUnsetFocus(sizeButton5); }
             else if (_selectedSize == 5) { ButtonSetFocus(sizeButton5); ButtonUnsetFocus(sizeButton3); }
+        }
+
+        private void ShuffleButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= 1000; i++)
+            {
+                foreach (Cell cell in taquin)
+                {
+                    if (cell.IsMovable())
+                    {
+                        if(r.Next(2) == 1) taquin.Move(cell);
+                    };
+                }
+                taquin.Board.ClearBoardStatus();
+                taquin.Board.CalculatePossibleMoves();
+            }
+            UpdateBoard();
         }
     }
 }

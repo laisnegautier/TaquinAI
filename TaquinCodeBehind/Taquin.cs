@@ -16,7 +16,7 @@ namespace TaquinCodeBehind
         #endregion
 
         public int Size { get { return _size; } }
-
+        public Board Board { get { return _board; } }
         #region Construct
         public Taquin(int size)
         {

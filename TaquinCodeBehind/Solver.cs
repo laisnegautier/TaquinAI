@@ -10,8 +10,8 @@ namespace TaquinCodeBehind
     {
         public IHeuristic Heuristic { get; set; }
 
-        protected abstract int TotalScore(Board board);
+        protected abstract int TotalScore(EvaluableBoard board);
 
-        public abstract List<Board> Solve(Board board);
+        public abstract List<Board> Solve(EvaluableBoard board);
     }
 }
