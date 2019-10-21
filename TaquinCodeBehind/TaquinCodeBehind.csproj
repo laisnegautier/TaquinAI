@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AstarBi.cs" />
+    <Compile Include="AstarUni.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="Dijkstra.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="IHeuristic.cs" />
     <Compile Include="Manhattan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solver.cs" />
     <Compile Include="Taquin.cs" />
     <Compile Include="WrightSpot.cs" />
     <Compile Include="WrongSpot.cs" />

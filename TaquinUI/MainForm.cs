@@ -45,6 +45,8 @@ namespace TaquinUI
             _loadForm.FormClosing += (s, e) => LoadForm_Close(s, e);
             _selectedSize = 3;
             ButtonSetFocus(sizeButton3);
+            _selectedHeuristic = new Manhattan();
+            ButtonSetFocus(heuristicThreeButton);
             taquin = new Taquin(_selectedSize);
             Debug.WriteLine(taquin);
             SetBoard();
@@ -125,9 +127,16 @@ namespace TaquinUI
         //=============================HEURISTICS===================================
         private void HeuristicButton_Click(object sender, EventArgs e)
         {
-
+            if (_selectedHeuristic.GetType() == typeof(Manhattan)) ButtonUnsetFocus(heuristicThreeButton);
+            else if (_selectedHeuristic.GetType() == typeof(WrightSpot)) ButtonUnsetFocus(heuristicOneButton);
+            else ButtonUnsetFocus(heuristicTwoButton);
+            Button button = (Button)sender;
+            if (button == heuristicOneButton) _selectedHeuristic = new WrightSpot();
+            else if (button == heuristicTwoButton) _selectedHeuristic = new WrongSpot();
+            else _selectedHeuristic = new Manhattan();
+            ButtonSetFocus(button);
         }
-
+        
         private void CellButton_Click(object sender, EventArgs e)
         {
             CellButton cellButton = (CellButton)sender;
@@ -145,7 +154,10 @@ namespace TaquinUI
         private void Button_MouseLeave(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            if ((button == sizeButton3 && _selectedSize == 3) || (button == sizeButton5 && _selectedSize == 5)) ;
+            if ((button == sizeButton3 && _selectedSize == 3) || (button == sizeButton5 && _selectedSize == 5)) ; // Test Size Selected
+            else if ((button == heuristicOneButton && _selectedHeuristic.GetType() == typeof(WrightSpot))
+                   ||(button == heuristicTwoButton && _selectedHeuristic.GetType() == typeof(WrongSpot))
+                   ||(button == heuristicThreeButton && _selectedHeuristic.GetType() == typeof(Manhattan))) ; // Test Heuristic Selected
             else ButtonUnsetFocus(button);
         }
 
