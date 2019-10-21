@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    class WrongSpot : IHeuristic
+    public class WrongSpot : IHeuristic
     {
         public int EvaluateBoard(Board board)
         {

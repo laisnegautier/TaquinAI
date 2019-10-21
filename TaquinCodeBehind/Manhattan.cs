@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    class Manhattan : IHeuristic
+    public class Manhattan : IHeuristic
     {
         public int EvaluateBoard(Board board)
         {
