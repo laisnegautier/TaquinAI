@@ -13,3 +13,4 @@ C:\Users\simon\Desktop\TaquinIA\TaquinUI\bin\Debug\TaquinCodeBehind.dll
 C:\Users\simon\Desktop\TaquinIA\TaquinUI\bin\Debug\TaquinCodeBehind.pdb
 C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.csproj.CopyComplete
 C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.CellButton.resources
+C:\Users\simon\Desktop\TaquinIA\TaquinUI\obj\Debug\TaquinUI.LoadForm.resources

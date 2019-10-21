@@ -83,9 +83,9 @@
             this.nameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
             this.nameLabel.Location = new System.Drawing.Point(12, 4);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(128, 21);
+            this.nameLabel.Size = new System.Drawing.Size(180, 21);
             this.nameLabel.TabIndex = 1;
-            this.nameLabel.Text = "TAQUIN - Alpha 0.0.1";
+            this.nameLabel.Text = "TAQUIN - Homo Sapiens 0.3.2";
             // 
             // sizeLabel
             // 
@@ -232,6 +232,7 @@
             this.loadButton.TabIndex = 5;
             this.loadButton.Text = "L O A D";
             this.loadButton.UseVisualStyleBackColor = false;
+            this.loadButton.Click += new System.EventHandler(this.LoadButton_Click);
             this.loadButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.loadButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 

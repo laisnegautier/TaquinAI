@@ -16,11 +16,17 @@ namespace TaquinUI
     public partial class MainForm : Form
     {
         #region Attributes
+        // Taquin
         private int _selectedSize;
-        private IHeuristic _selectedHeuristic;
-        private Thread _solverThread;
-        private ResultForm _resultForm;
         private Taquin taquin;
+        // Solver
+        private IHeuristic _selectedHeuristic;
+        private Solver solver;
+        private Thread _solverThread;
+        // Child Forms
+        private ResultForm _resultForm;
+        private LoadForm _loadForm;
+        private string _fileName;
         #endregion
 
         #region Properties
@@ -34,6 +40,9 @@ namespace TaquinUI
             // Initialisation des paramètres internes du Form
             _solverThread = new Thread(new ThreadStart(Solve)); // Le resolution Thread launches 
             _resultForm = new ResultForm();
+            _fileName = "";
+            _loadForm = new LoadForm();
+            _loadForm.FormClosing += (s, e) => LoadForm_Close(s, e);
             _selectedSize = 3;
             ButtonSetFocus(sizeButton3);
             taquin = new Taquin(_selectedSize);
@@ -76,26 +85,16 @@ namespace TaquinUI
                 // Mettre à jour les val d'une Cell lors d'un mvt !
                 int id = cellBtn.TabIndex;
                 int i, j;
-                pos2coord(out i, out j, id);
+                Functions.pos2coord(out i, out j, id, _selectedSize);
                 cellBtn.Cell = taquin.GetCell(i, j);
                 cellBtn.Text = cellBtn.Cell.Value; // Add event on Cell changed
             }
-        }
-
-        public int coord2pos(int i, int j)
-        {
-            return (j * _selectedSize + i);
-        }
-
-        public void pos2coord(out int i, out int j, int rank)
-        {
-            j = rank % _selectedSize;
-            i = rank / _selectedSize;
         }
         //==========================BUTTON===CLOSE=================================
         private void CloseButton_Click(object sender, EventArgs e)
         {
             if (_solverThread.IsAlive) _solverThread.Interrupt();
+            if (_loadForm.IsAccessible) _loadForm.Close();
             if (_resultForm.IsAccessible) _resultForm.Close();
             Close();
         }
@@ -170,6 +169,22 @@ namespace TaquinUI
         public void Solve()
         {
         }
-        
+
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+            _loadForm.Show();
+        }
+
+        private void LoadForm_Close(object sender, EventArgs e)
+        {
+            _fileName = _loadForm.SelectedFile;
+            _loadForm = new LoadForm();
+            _loadForm.FormClosing += (s, evt) => LoadForm_Close(s, evt);
+            taquin = new Taquin(_fileName);
+            _selectedSize = taquin.Size;
+            SetBoard();
+            if (_selectedSize == 3) { ButtonSetFocus(sizeButton3); ButtonUnsetFocus(sizeButton5); }
+            else if (_selectedSize == 5) { ButtonSetFocus(sizeButton5); ButtonUnsetFocus(sizeButton3); }
+        }
     }
 }

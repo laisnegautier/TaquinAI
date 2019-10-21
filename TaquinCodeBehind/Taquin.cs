@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace TaquinCodeBehind
         private readonly int _size;
         #endregion
 
-
+        public int Size { get { return _size; } }
 
         #region Construct
         public Taquin(int size)
@@ -22,6 +23,29 @@ namespace TaquinCodeBehind
             _size = size;
             Populate(size);
             Shuffle();
+        }
+
+        public Taquin(string fileName)
+        {
+            
+            string[] lines = File.ReadAllLines(fileName);
+            _size = lines[0].Length < 6 ? 3 : 5;
+            Cell[,] finalBoard = new Cell[_size, _size];
+            int currentLineCount = 0;
+            foreach(string l in lines)
+            {
+                int currentColumn = 0;
+                string[] values = l.Split(',');
+                foreach(string value in values)
+                {
+                    Cell cell = new Cell(values[currentColumn]);
+                    finalBoard[currentLineCount, currentColumn % _size] = cell;
+                    currentColumn++;
+                }
+                currentLineCount++;
+            }
+            _board = new Board(finalBoard);
+            _board.CalculatePossibleMoves();
         }
         #endregion
 

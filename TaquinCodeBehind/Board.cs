@@ -26,7 +26,7 @@ namespace TaquinCodeBehind
         public Board(Cell[,] board)
         {
             Structure = board;
-            _size = Structure.Length;
+            _size = Structure.GetLength(0);
         }
         public Board(Cell[] cells)
         {
