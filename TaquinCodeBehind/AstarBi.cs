@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    class AstarBi : Solver
+    public class AstarBi : Solver
     {
         public AstarBi()
         {

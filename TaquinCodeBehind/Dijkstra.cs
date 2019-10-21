@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    class Dijkstra : Solver
+    public class Dijkstra : Solver
     {
         public Dijkstra()
         {

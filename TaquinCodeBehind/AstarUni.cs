@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    class AstarUni : Solver
+    public class AstarUni : Solver
     {
         public AstarUni()
         {
