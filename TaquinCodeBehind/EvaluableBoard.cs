@@ -9,15 +9,20 @@ namespace TaquinCodeBehind
     public class EvaluableBoard
     {
         #region Properties
-        public Board board { get; set; }
+        public Board Board { get; set; }
         public int Score { get; set; }
         #endregion
 
         #region Construct
         public EvaluableBoard(Board board)
         {
-            this.board = board;
+            Board = board;
             Score = 0;
+        }
+
+        public EvaluableBoard(int score)
+        {
+            Score = score;
         }
         #endregion
     }
