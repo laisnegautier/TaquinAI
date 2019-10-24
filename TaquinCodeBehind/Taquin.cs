@@ -79,7 +79,8 @@ namespace TaquinCodeBehind
 
         public void Move(Cell cell)
         {
-            _board.Move(cell);
+            if(cell.IsMovable())
+            _board.Move(cell, cell.AvailableMoves[0]);
         }
 
         public override string ToString()

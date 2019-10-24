@@ -11,6 +11,7 @@ namespace TaquinCodeBehind
         #region Properties
         public Board Board { get; set; }
         public int Score { get; set; }
+        // Ajouter le parent
         #endregion
 
         #region Construct

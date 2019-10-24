@@ -23,11 +23,13 @@ namespace TaquinCodeBehind
             _size = size;
             Structure = new Cell[_size, _size];
         }
+
         public Board(Cell[,] board)
         {
             Structure = board;
             _size = Structure.GetLength(0);
         }
+
         public Board(Cell[] cells)
         {
             if (cells.Length % 3 == 0) _size = 3;
@@ -113,11 +115,10 @@ namespace TaquinCodeBehind
             return neighbours;
         }
 
-        public void Move(Cell cell)
+        public void Move(Cell cell, Cell.Moves move )
         {
             if (cell.IsMovable())
             {
-                Cell.Moves move = cell.AvailableMoves[0];
                 Cell holder;
                 int i, j;
                 FindCellByValue(out i, out j, cell.Value);
