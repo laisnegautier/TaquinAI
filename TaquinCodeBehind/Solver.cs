@@ -26,9 +26,10 @@ namespace TaquinCodeBehind
         public EvaluableBoard CopyBoard(EvaluableBoard board)
         {
             EvaluableBoard result = new EvaluableBoard(board.Score);
-            /* Créer un nouveau board et copier 
-               les valeur de l'ancien dedans pour
-               rompre la référence */
+            foreach(Cell cell in board)
+            {
+
+            }
             return result;
         }
 

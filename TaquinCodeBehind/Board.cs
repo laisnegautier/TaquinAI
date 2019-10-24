@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    public class Board
+    public class Board : IEnumerable<Cell>
     {
         public enum Neighbours { Up, Down, Left, Right }
         #region Attributes
@@ -162,6 +163,23 @@ namespace TaquinCodeBehind
                 result += "\n";
             }
             return result;
+        }
+        #endregion
+
+        #region IEnumerable
+        public IEnumerator<Cell> GetEnumerator()
+        {
+            int line = -1;
+            for (int i = 0; i < _size * _size; i++)
+            {
+                if (i % _size == 0) line++;
+                yield return Structure[line, i % _size];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
         #endregion
     }
