@@ -28,6 +28,23 @@ namespace TaquinCodeBehind
         {
             Score = score;
         }
+
+        public override bool Equals(object obj)
+        {
+            bool equal = true;
+            if (obj != null)
+            {
+                EvaluableBoard board = (EvaluableBoard)obj;
+                foreach (Cell cell in board)
+                {
+                    int posI, posJ;
+                    board.Board.FindCellByValue(out posI, out posJ, cell.Value);
+                    if (Board.Structure[posI, posJ].Value != cell.Value)  equal = false;
+                }
+            }
+            else equal = false;
+            return equal;
+        }
         #endregion
 
         #region IEnumerable

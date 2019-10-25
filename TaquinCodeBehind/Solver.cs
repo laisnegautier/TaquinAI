@@ -26,36 +26,51 @@ namespace TaquinCodeBehind
         public EvaluableBoard CopyBoard(EvaluableBoard board)
         {
             EvaluableBoard result = new EvaluableBoard(board.Score);
+            Cell[,] structure = new Cell[board.Size,board.Size];
             foreach(Cell cell in board)
             {
-
+                Cell newCell = new Cell(cell.Value);
+                int posI, posJ;
+                board.Board.FindCellByValue(out posI,out posJ, cell.Value);
+                structure[posI, posJ] = newCell;
             }
+            result.Board = new Board(structure);
             return result;
         }
 
-        public List<EvaluableBoard> CreateChild(EvaluableBoard board)
+        public List<EvaluableBoard> CreateChild(EvaluableBoard board, int cost)
         {
             List<EvaluableBoard> neighbours = new List<EvaluableBoard>();
-            /* Pour chaque Cell trouver 
-             tous les mouvement possible. Créer
-             un nouveau Board ou le move est réalisé
-             et l'ajouter à la liste des voisins
-             */
-
+            
+            foreach(Cell cell in board)
+            {
+                if (cell.IsMovable())
+                {
+                    foreach(Cell.Moves move in cell.AvailableMoves)
+                    {
+                        EvaluableBoard neighbour = CopyBoard(board);
+                        neighbour.Score += cost;
+                        neighbour.Board.Move(cell, move);
+                        neighbours.Add(neighbour);
+                    }
+                }
+            }
             return neighbours;
         }
 
         public bool FindPast(EvaluableBoard board)
         {
             bool result = false;
-
+            foreach(EvaluableBoard oldBoard in _closedSet)
+                if (oldBoard.Equals(board)) result = true; ;
             return result;
         }
 
         public bool FindBest(EvaluableBoard board)
         {
             bool result = false;
-
+            foreach (EvaluableBoard currentBoard in _openSet)
+                if (currentBoard.Equals(board) && currentBoard.Score < board.Score) result = true;
             return result;
         }
         #endregion
