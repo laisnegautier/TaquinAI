@@ -13,12 +13,13 @@ namespace TaquinCodeBehind
         public int Size { get; set; }
         public Board Board { get; set; }
         public int Score { get; set; }
-        // Ajouter le parent
+        public EvaluableBoard Previous { get; set; }
         #endregion
 
         #region Construct
         public EvaluableBoard(Board board)
         {
+            Previous = null;
             Board = board;
             Size = board.Structure.GetLength(0);
             Score = 0;
@@ -26,6 +27,7 @@ namespace TaquinCodeBehind
 
         public EvaluableBoard(int score)
         {
+            Previous = null;
             Score = score;
         }
 
@@ -39,7 +41,8 @@ namespace TaquinCodeBehind
                 {
                     int posI, posJ;
                     board.Board.FindCellByValue(out posI, out posJ, cell.Value);
-                    if (Board.Structure[posI, posJ].Value != cell.Value)  equal = false;
+                    if (Board.Structure[posI, posJ].Value != cell.Value)
+                        equal = false;
                 }
             }
             else equal = false;

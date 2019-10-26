@@ -51,7 +51,7 @@ namespace TaquinUI
             _selectedHeuristic = new Manhattan();
             ButtonSetFocus(heuristicThreeButton);
             // Define Solver
-            _solver = new AstarUni();
+            _solver = new AstarUni(_selectedHeuristic);
             ButtonSetFocus(AstarUniButton);
             taquin = new Taquin(_selectedSize);
             Debug.WriteLine(taquin);
@@ -154,7 +154,7 @@ namespace TaquinUI
             // Action & Focus
             Button button = (Button)sender;
             if (button == dijkstraButton) _solver = new Dijkstra();
-            else if (button == AstarUniButton) _solver = new AstarUni();
+            else if (button == AstarUniButton) _solver = new AstarUni(_selectedHeuristic);
             else _solver = new AstarBi();
             ButtonSetFocus(button);
         }

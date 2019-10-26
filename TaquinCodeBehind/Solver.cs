@@ -9,8 +9,8 @@ namespace TaquinCodeBehind
     public abstract class Solver
     {
         #region Attributes
-        protected List<EvaluableBoard> _openSet;
-        protected List<EvaluableBoard> _closedSet;
+        protected List<EvaluableBoard> _openSet = new List<EvaluableBoard>();
+        protected List<EvaluableBoard> _closedSet = new List<EvaluableBoard>();
         #endregion
 
         #region Properties
@@ -23,7 +23,7 @@ namespace TaquinCodeBehind
         #endregion
 
         #region Methods
-        public EvaluableBoard CopyBoard(EvaluableBoard board)
+        public static EvaluableBoard CopyBoard(EvaluableBoard board)
         {
             EvaluableBoard result = new EvaluableBoard(board.Score);
             Cell[,] structure = new Cell[board.Size,board.Size];
@@ -34,11 +34,21 @@ namespace TaquinCodeBehind
                 board.Board.FindCellByValue(out posI,out posJ, cell.Value);
                 structure[posI, posJ] = newCell;
             }
+            // Might me proper
+            Cell emptyOne = new Cell("-");
+            Cell emptyTwo = new Cell("-");
+            int e1i, e1j, e2i, e2j;
+            board.Board.FindEmptyOne(out e1i, out e1j);
+            board.Board.FindEmptyTwo(out e2i, out e2j);
+            structure[e1i, e1j] = emptyOne;
+            structure[e2i, e2j] = emptyTwo;
+            // Till there is not really needed
             result.Board = new Board(structure);
             return result;
         }
 
-        public List<EvaluableBoard> CreateChild(EvaluableBoard board, int cost)
+        // Might be transform as static
+        public static List<EvaluableBoard> CreateChild(EvaluableBoard board, int cost)
         {
             List<EvaluableBoard> neighbours = new List<EvaluableBoard>();
             
@@ -51,6 +61,7 @@ namespace TaquinCodeBehind
                         EvaluableBoard neighbour = CopyBoard(board);
                         neighbour.Score += cost;
                         neighbour.Board.Move(cell, move);
+                        neighbour.Previous = board;
                         neighbours.Add(neighbour);
                     }
                 }
@@ -62,7 +73,7 @@ namespace TaquinCodeBehind
         {
             bool result = false;
             foreach(EvaluableBoard oldBoard in _closedSet)
-                if (oldBoard.Equals(board)) result = true; ;
+                if (oldBoard.Equals(board)) result = true;
             return result;
         }
 
@@ -70,7 +81,7 @@ namespace TaquinCodeBehind
         {
             bool result = false;
             foreach (EvaluableBoard currentBoard in _openSet)
-                if (currentBoard.Equals(board) && currentBoard.Score < board.Score) result = true;
+                if (board.Equals(currentBoard) && currentBoard.Score < board.Score) result = true;
             return result;
         }
         #endregion

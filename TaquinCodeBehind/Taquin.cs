@@ -45,6 +45,7 @@ namespace TaquinCodeBehind
                 currentLineCount++;
             }
             _board = new Board(finalBoard);
+            Console.WriteLine(_board);
             _board.CalculatePossibleMoves();
         }
         #endregion

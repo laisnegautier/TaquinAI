@@ -8,7 +8,7 @@ namespace TaquinCodeBehind
 {
     public class WrightSpot : IHeuristic
     {
-        public int EvaluateBoard(Board board)
+        public int EvaluateBoard(Board currBoard, Board destBoard)
         {
             throw new NotImplementedException();
         }

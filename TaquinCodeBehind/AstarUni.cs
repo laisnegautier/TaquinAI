@@ -8,32 +8,70 @@ namespace TaquinCodeBehind
 {
     public class AstarUni : Solver
     {
-        public AstarUni()
-        {
+        EvaluableBoard _currentBoard;
+        EvaluableBoard _destination;
 
+        public AstarUni(IHeuristic heuristic)
+        {
+            Heuristic = heuristic;
+        }
+
+        public void CreateTarget(int size)
+        {
+            Cell[] list = new Cell[size * size];
+            for (int i = 0; i < size * size - 2; i++)
+            {
+                Cell cell = new Cell(i);
+                list[i] = cell;
+            }
+            for(int j = 0; j < 2; j++)
+            {
+                Cell cell = new Cell("-");
+                list[list.Length - 1 - j] = cell;
+            }
+            Board board = new Board(list);
+            _destination = new EvaluableBoard(board);
+        }
+
+        public List<Board> Unpile(EvaluableBoard board)
+        {
+            throw new NotImplementedException();
         }
 
         public override List<Board> Solve(EvaluableBoard board)
         {
-            throw new NotImplementedException();
-            /* 
-            On ajoute le départ dans l'OpenSet
-            
-            Tant que l'openSet n'est pas vide
-                currentBoard = meilleur de l'OpenSet
-                
-                si le currentBoard = fin => On stop et 
-                                    on return le chemin
-
-                Pour le current on trouve tous les voisins
-
-                Pour chaque voisins, si il n'est pas dans le closeSet
-                    On l'évalue
-                    si on ne trouve pas le même dans l'OpenSet
-                        on l'ajoute
-
-                On ordonne l'OpenSet avec le meilleur en premier
-             */
+            int size = board.Size;
+            CreateTarget(size);
+            _openSet.Add(board);
+            List<Board> result = new List<Board>();
+            while (_openSet.Count > 0)
+            {
+                _currentBoard = _openSet[0];
+                // Si on est arrivé, on arrête
+                if (_currentBoard.Equals(_destination))
+                {
+                    result = Unpile(_currentBoard);
+                    return result;
+                }
+                //Sinon on créer les voisins
+                List<EvaluableBoard> holder = CreateChild(_currentBoard, 1);
+                foreach(EvaluableBoard testBoard in holder)
+                {
+                    if (!FindPast(testBoard))
+                    {
+                        testBoard.Score += Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
+                        if (!FindBest(testBoard))
+                        {
+                            _openSet.Add(testBoard);
+                        }
+                    }
+                }
+                _closedSet.Add(_currentBoard);
+                _openSet.Remove(_currentBoard);
+                _openSet = _openSet.OrderBy(b => b.Score).ToList();
+                //foreach (EvaluableBoard b in _openSet) Console.Write(b.Board + " ");
+            }
+            return result;
         }
 
         protected override int TotalScore(EvaluableBoard board)

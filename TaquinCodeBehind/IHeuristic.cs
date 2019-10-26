@@ -8,6 +8,6 @@ namespace TaquinCodeBehind
 {
     public interface IHeuristic
     {
-        int EvaluateBoard(Board board); 
+        int EvaluateBoard(Board currBoard, Board destBoard); 
     }
 }
