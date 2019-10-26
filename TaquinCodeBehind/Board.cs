@@ -100,9 +100,9 @@ namespace TaquinCodeBehind
                             case Neighbours.Left: cell.SetMoves(Cell.Moves.Left); break;
                             case Neighbours.Right: cell.SetMoves(Cell.Moves.Right); break;
                         }
-                    string moves = "";
-                    foreach (Cell.Moves move in cell.AvailableMoves) moves += move + " - ";
-                    Console.WriteLine(cell.Value + " moves: " + moves);
+                    //string moves = "";
+                    //foreach (Cell.Moves move in cell.AvailableMoves) moves += move + " - ";
+                    //Console.WriteLine(cell.Value + " moves: " + moves);
                 }
             }
         }

@@ -47,6 +47,7 @@ namespace TaquinCodeBehind
             while (_openSet.Count > 0)
             {
                 _currentBoard = _openSet[0];
+                Console.WriteLine(_currentBoard.Board + "\n");
                 // Si on est arrivé, on arrête
                 if (_currentBoard.Equals(_destination))
                 {

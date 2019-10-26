@@ -44,6 +44,7 @@ namespace TaquinCodeBehind
             structure[e2i, e2j] = emptyTwo;
             // Till there is not really needed
             result.Board = new Board(structure);
+            result.Size = result.Board.Structure.GetLength(0);
             return result;
         }
 
