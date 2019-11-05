@@ -55,13 +55,15 @@ namespace TaquinCodeBehind
             
             foreach(Cell cell in board)
             {
+                int i, j;
+                board.Board.FindCellByValue(out i, out j, cell.Value);
                 if (cell.IsMovable())
                 {
                     foreach(Cell.Moves move in cell.AvailableMoves)
                     {
                         EvaluableBoard neighbour = CopyBoard(board);
                         neighbour.Score += cost;
-                        neighbour.Board.Move(cell, move);
+                        neighbour.Board.Move(neighbour.Board.Structure[i,j], move);
                         neighbour.Previous = board;
                         neighbours.Add(neighbour);
                     }

@@ -150,7 +150,7 @@
             // 
             // boardPanel
             // 
-            this.boardPanel.Location = new System.Drawing.Point(208, 67);
+            this.boardPanel.Location = new System.Drawing.Point(209, 67);
             this.boardPanel.Name = "boardPanel";
             this.boardPanel.Size = new System.Drawing.Size(489, 489);
             this.boardPanel.TabIndex = 4;

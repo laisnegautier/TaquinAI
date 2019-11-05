@@ -35,11 +35,19 @@ namespace TaquinCodeBehind
 
         public List<Board> Unpile(EvaluableBoard board)
         {
-            throw new NotImplementedException();
+            List<Board> result = new List<Board>();
+            while(board != null)
+            {
+                result.Add(board.Board);
+                //Console.WriteLine(board.Board);
+                board = board.Previous;
+            }
+            return result;
         }
 
         public override List<Board> Solve(EvaluableBoard board)
         {
+            _openSet = new List<EvaluableBoard>();
             int size = board.Size;
             CreateTarget(size);
             _openSet.Add(board);
@@ -47,7 +55,7 @@ namespace TaquinCodeBehind
             while (_openSet.Count > 0)
             {
                 _currentBoard = _openSet[0];
-                Console.WriteLine(_currentBoard.Board + "\n");
+                //Console.WriteLine(_currentBoard.Board + "\n");
                 // Si on est arrivé, on arrête
                 if (_currentBoard.Equals(_destination))
                 {

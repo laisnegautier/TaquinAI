@@ -54,7 +54,7 @@ namespace TaquinUI
             _solver = new AstarUni(_selectedHeuristic);
             ButtonSetFocus(AstarUniButton);
             taquin = new Taquin(_selectedSize);
-            Debug.WriteLine(taquin);
+            //Debug.WriteLine(taquin);
             SetBoard();
         }
         #endregion
@@ -201,17 +201,30 @@ namespace TaquinUI
         public void SolveButton_Click(object sender, EventArgs e)
         {
             List<Board> solutionBoards = new List<Board>();
-            _solverThread = new Thread(()=> {
-                EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
-                 solutionBoards = _solver.Solve(evalBoard);
-            });
-            _solverThread.Start();
-            // A tester
-            if (!_solverThread.IsAlive)
-            {
-                //resultForm = new ResutForm(solutionBoards);
-            }
-            
+
+            solveButton.Click -= SolveButton_Click;
+            solveButton.MouseLeave -= Button_MouseLeave;
+            solveButton.MouseEnter -= Button_MouseEnter;
+            solveButton.BackColor = Color.FromArgb(241,227,228);
+
+            //UI DeadLock to solve...
+
+            EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
+            solutionBoards = _solver.Solve(evalBoard);
+
+            // Reactivating solver button when solving is finish
+            solveButton.Click += (s, evt) => SolveButton_Click(s, evt);
+            solveButton.BackColor = Color.FromArgb(231, 217, 218);
+            solveButton.MouseLeave += Button_MouseLeave;
+            solveButton.MouseEnter += Button_MouseEnter;
+            // Showing the resultForm
+            _resultForm = new ResultForm(solutionBoards);
+            //_resultForm.States = solutionBoards;
+            //_resultForm.SetBoard();
+              
+            _resultForm.Show();
+            _resultForm.BringToFront();
+            #region test
             // Might be something to test out !
 
             /*Action onCompleted = () => 
@@ -232,6 +245,7 @@ namespace TaquinUI
                 }
               });
             thread.Start();*/
+            #endregion
         }
 
         private void LoadButton_Click(object sender, EventArgs e)

@@ -121,37 +121,34 @@ namespace TaquinCodeBehind
 
         public void Move(Cell cell, Cell.Moves move )
         {
-            if (cell.IsMovable())
+            Cell holder;
+            int i, j;
+            FindCellByValue(out i, out j, cell.Value);
+            switch (move)
             {
-                Cell holder;
-                int i, j;
-                FindCellByValue(out i, out j, cell.Value);
-                switch (move)
-                {
-                    case Cell.Moves.Up:
-                        holder = Structure[i - 1, j];
-                        Structure[i - 1, j] = cell;
-                        Structure[i, j] = holder;
-                        break;
-                    case Cell.Moves.Down:
-                        holder = Structure[i + 1, j];
-                        Structure[i + 1, j] = cell;
-                        Structure[i, j] = holder;
-                        break;
-                    case Cell.Moves.Left:
-                        holder = Structure[i, j - 1];
-                        Structure[i, j - 1] = cell;
-                        Structure[i, j] = holder;
-                        break;
-                    case Cell.Moves.Right:
-                        holder = Structure[i, j + 1];
-                        Structure[i, j + 1] = cell;
-                        Structure[i, j] = holder;
-                        break;
-                }
-                ClearBoardStatus();
-                CalculatePossibleMoves();
+                case Cell.Moves.Up:
+                    holder = Structure[i - 1, j];
+                    Structure[i - 1, j] = cell;
+                    Structure[i, j] = holder;
+                    break;
+                case Cell.Moves.Down:
+                    holder = Structure[i + 1, j];
+                    Structure[i + 1, j] = cell;
+                    Structure[i, j] = holder;
+                    break;
+                case Cell.Moves.Left:
+                    holder = Structure[i, j - 1];
+                    Structure[i, j - 1] = cell;
+                    Structure[i, j] = holder;
+                    break;
+                case Cell.Moves.Right:
+                    holder = Structure[i, j + 1];
+                    Structure[i, j + 1] = cell;
+                    Structure[i, j] = holder;
+                    break;
             }
+            ClearBoardStatus();
+            CalculatePossibleMoves();
         }
 
         public override string ToString()
