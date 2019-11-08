@@ -267,7 +267,7 @@ namespace TaquinUI
 
         private void ShuffleButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 1000; i++)
+            for (int i = 0; i <= 100; i++)
             {
                 foreach (Cell cell in taquin)
                 {

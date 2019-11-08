@@ -13,6 +13,7 @@ namespace TaquinCodeBehind
         public int Size { get; set; }
         public Board Board { get; set; }
         public int Score { get; set; }
+        public int Cost { get; set; }
         public EvaluableBoard Previous { get; set; }
         #endregion
 

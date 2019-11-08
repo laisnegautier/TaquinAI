@@ -49,7 +49,7 @@ namespace TaquinCodeBehind
         }
 
         // Might be transform as static
-        public static List<EvaluableBoard> CreateChild(EvaluableBoard board, int cost)
+        public static List<EvaluableBoard> CreateChild(EvaluableBoard board)
         {
             List<EvaluableBoard> neighbours = new List<EvaluableBoard>();
             
@@ -62,7 +62,7 @@ namespace TaquinCodeBehind
                     foreach(Cell.Moves move in cell.AvailableMoves)
                     {
                         EvaluableBoard neighbour = CopyBoard(board);
-                        neighbour.Score += cost;
+                        neighbour.Cost = board.Cost;
                         neighbour.Board.Move(neighbour.Board.Structure[i,j], move);
                         neighbour.Previous = board;
                         neighbours.Add(neighbour);
@@ -84,7 +84,7 @@ namespace TaquinCodeBehind
         {
             bool result = false;
             foreach (EvaluableBoard currentBoard in _openSet)
-                if (board.Equals(currentBoard) && currentBoard.Score < board.Score) result = true;
+                if (board.Equals(currentBoard) && currentBoard.Cost <= board.Cost) result = true;
             return result;
         }
         #endregion

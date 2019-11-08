@@ -59,25 +59,30 @@ namespace TaquinCodeBehind
                 // Si on est arrivé, on arrête
                 if (_currentBoard.Equals(_destination))
                 {
+                    Console.WriteLine("Ouvert:");
+                    Console.WriteLine(_openSet.Count);
+                    Console.WriteLine("Fermes:");
+                    Console.WriteLine(_closedSet.Count);
                     result = Unpile(_currentBoard);
                     return result;
                 }
                 //Sinon on créer les voisins
-                List<EvaluableBoard> holder = CreateChild(_currentBoard, 1);
+                List<EvaluableBoard> holder = CreateChild(_currentBoard);
                 foreach(EvaluableBoard testBoard in holder)
                 {
-                    if (!FindPast(testBoard))
+                    if (FindPast(testBoard) || FindBest(testBoard)){}
+                    else
                     {
-                        testBoard.Score += Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
-                        if (!FindBest(testBoard))
-                        {
-                            _openSet.Add(testBoard);
-                        }
+                        testBoard.Cost += 1;
+                        testBoard.Score = testBoard.Cost + Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
+                        _openSet.Add(testBoard);
                     }
                 }
                 _closedSet.Add(_currentBoard);
                 _openSet.Remove(_currentBoard);
                 _openSet = _openSet.OrderBy(b => b.Score).ToList();
+                //_openSet = _openSet.OrderBy(b => b.Cost).ToList();
+                //_openSet = _openSet.OrderBy(b => (b.Score - b.Cost)).ToList();
                 //foreach (EvaluableBoard b in _openSet) Console.Write(b.Board + " ");
             }
             return result;
