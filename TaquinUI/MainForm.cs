@@ -281,5 +281,14 @@ namespace TaquinUI
             }
             UpdateBoard();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
+            Solver test =  new Segments();
+            List<Board> solutionBoards;
+            solutionBoards = test.Solve(evalBoard);
+            _resultForm = new ResultForm(solutionBoards);
+        }
     }
 }

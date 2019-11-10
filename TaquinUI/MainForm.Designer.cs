@@ -50,6 +50,7 @@
             this.AstarBiButton = new System.Windows.Forms.Button();
             this.AstarUniButton = new System.Windows.Forms.Button();
             this.dijkstraButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
             this.heuristicPanel.SuspendLayout();
@@ -79,7 +80,7 @@
             this.headerBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.headerBar.Location = new System.Drawing.Point(0, 0);
             this.headerBar.Name = "headerBar";
-            this.headerBar.Size = new System.Drawing.Size(736, 29);
+            this.headerBar.Size = new System.Drawing.Size(787, 29);
             this.headerBar.TabIndex = 1;
             // 
             // nameLabel
@@ -362,12 +363,23 @@
             this.dijkstraButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.dijkstraButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(686, 119);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(736, 633);
+            this.ClientSize = new System.Drawing.Size(787, 633);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.solverPanel);
             this.Controls.Add(this.solverLabel);
             this.Controls.Add(this.actionButtonsPanel);
@@ -416,6 +428,7 @@
         private System.Windows.Forms.Button AstarBiButton;
         private System.Windows.Forms.Button AstarUniButton;
         private System.Windows.Forms.Button dijkstraButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -32,19 +32,7 @@ namespace TaquinCodeBehind
             Board board = new Board(list);
             _destination = new EvaluableBoard(board);
         }
-
-        public List<Board> Unpile(EvaluableBoard board)
-        {
-            List<Board> result = new List<Board>();
-            while(board != null)
-            {
-                result.Add(board.Board);
-                //Console.WriteLine(board.Board);
-                board = board.Previous;
-            }
-            return result;
-        }
-
+        
         public override List<Board> Solve(EvaluableBoard board)
         {
             _openSet = new List<EvaluableBoard>();
@@ -86,11 +74,6 @@ namespace TaquinCodeBehind
                 //foreach (EvaluableBoard b in _openSet) Console.Write(b.Board + " ");
             }
             return result;
-        }
-
-        protected override int TotalScore(EvaluableBoard board)
-        {
-            throw new NotImplementedException();
         }
     }
 }

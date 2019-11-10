@@ -51,6 +51,8 @@
     <Compile Include="IHeuristic.cs" />
     <Compile Include="Manhattan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Segments.cs" />
+    <Compile Include="SizeBlock.cs" />
     <Compile Include="Solver.cs" />
     <Compile Include="Taquin.cs" />
     <Compile Include="WrightSpot.cs" />

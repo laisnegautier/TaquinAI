@@ -18,11 +18,22 @@ namespace TaquinCodeBehind
         #endregion
 
         #region AbstractsToOverride
-        protected abstract int TotalScore(EvaluableBoard board);
         public abstract List<Board> Solve(EvaluableBoard board);
         #endregion
 
         #region Methods
+        public List<Board> Unpile(EvaluableBoard board)
+        {
+            List<Board> result = new List<Board>();
+            while (board != null)
+            {
+                result.Add(board.Board);
+                //Console.WriteLine(board.Board);
+                board = board.Previous;
+            }
+            return result;
+        }
+
         public static EvaluableBoard CopyBoard(EvaluableBoard board)
         {
             EvaluableBoard result = new EvaluableBoard(board.Score);
@@ -84,7 +95,10 @@ namespace TaquinCodeBehind
         {
             bool result = false;
             foreach (EvaluableBoard currentBoard in _openSet)
+            {
                 if (board.Equals(currentBoard) && currentBoard.Cost <= board.Cost) result = true;
+                else if(board.Equals(currentBoard) && currentBoard.Cost > board.Cost) { currentBoard.Cost = board.Cost; }
+            }
             return result;
         }
         #endregion

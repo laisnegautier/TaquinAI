@@ -17,10 +17,5 @@ namespace TaquinCodeBehind
         {
             throw new NotImplementedException();
         }
-
-        protected override int TotalScore(EvaluableBoard board)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
