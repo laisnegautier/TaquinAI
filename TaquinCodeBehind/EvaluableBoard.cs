@@ -42,8 +42,9 @@ namespace TaquinCodeBehind
                 {
                     int posI, posJ;
                     board.Board.FindCellByValue(out posI, out posJ, cell.Value);
-                    if (Board.Structure[posI, posJ].Value != cell.Value)
-                        equal = false;
+                    if(Board.Structure[posI,posJ].Value != "-1" && board.Board.Structure[posI,posJ].Value != "-1")
+                        if (Board.Structure[posI, posJ].Value != cell.Value)
+                            equal = false;
                 }
             }
             else equal = false;

@@ -289,6 +289,7 @@ namespace TaquinUI
             List<Board> solutionBoards;
             solutionBoards = test.Solve(evalBoard);
             _resultForm = new ResultForm(solutionBoards);
+            _resultForm.Show();
         }
     }
 }

@@ -8,8 +8,8 @@ namespace TaquinCodeBehind
 {
     public class AstarUni : Solver
     {
-        EvaluableBoard _currentBoard;
-        EvaluableBoard _destination;
+        protected EvaluableBoard _currentBoard;
+        protected EvaluableBoard _destination;
 
         public AstarUni(IHeuristic heuristic)
         {
