@@ -284,12 +284,42 @@ namespace TaquinUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _selectedHeuristic = new SizeBlock();
             EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
-            Solver test =  new Segments();
+            List<Board> targets = CreateTargets(evalBoard.Board.Structure.GetLength(0));
+            Solver test =  new Segments(_selectedHeuristic, targets);
             List<Board> solutionBoards;
             solutionBoards = test.Solve(evalBoard);
             _resultForm = new ResultForm(solutionBoards);
             _resultForm.Show();
+        }
+
+        private List<Board> CreateTargets(int size)
+        {
+            List<Board> targets = new List<Board>();
+            List<Cell> structure = new List<Cell>();
+            for (int i = 0; i < size * size - 2; i++)
+            {
+                Cell cell = new Cell(i);
+                structure.Add(cell);
+            }
+            for (int step = 0; step < size - 2; step++)
+            {
+                List<Cell> cells = structure.GetRange(0, (size * (step + 1)));
+                for(int i = 0; i < (size * size - 2) - (size * (step + 1)); i++)
+                {
+                    Cell empty = new Cell(-1);
+                    cells.Add(empty);
+                }
+                for(int i = 0; i < 2; i++)
+                {
+                    Cell hole = new Cell("-");
+                    cells.Add(hole);
+                }
+                Board board = new Board(cells.ToArray());
+                targets.Add(board);
+            }
+            return targets;
         }
     }
 }
