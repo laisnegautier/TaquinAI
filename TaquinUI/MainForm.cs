@@ -286,12 +286,21 @@ namespace TaquinUI
         {
             _selectedHeuristic = new SizeBlock();
             EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
+            Solver test = new IDAstar(_selectedHeuristic);
+            List<Board> solutionBoards;
+            solutionBoards = test.Solve(evalBoard);
+            _resultForm = new ResultForm(solutionBoards);
+            _resultForm.Show();
+
+            /*_selectedHeuristic = new SizeBlock();
+            EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
             List<Board> targets = CreateTargets(evalBoard.Board.Structure.GetLength(0));
             Solver test =  new Segments(_selectedHeuristic, targets);
             List<Board> solutionBoards;
             solutionBoards = test.Solve(evalBoard);
             _resultForm = new ResultForm(solutionBoards);
             _resultForm.Show();
+            */
         }
 
         private List<Board> CreateTargets(int size)

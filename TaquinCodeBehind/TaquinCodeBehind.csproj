@@ -48,6 +48,7 @@
     <Compile Include="Dijkstra.cs" />
     <Compile Include="EvaluableBoard.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="IDAstar.cs" />
     <Compile Include="IHeuristic.cs" />
     <Compile Include="Manhattan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
