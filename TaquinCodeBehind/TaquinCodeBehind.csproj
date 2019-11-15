@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="AstarBi.cs" />
     <Compile Include="AstarUni.cs" />
+    <Compile Include="BestHeuristic.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="LinearConflict.cs" />
     <Compile Include="Dijkstra.cs" />
     <Compile Include="EvaluableBoard.cs" />
     <Compile Include="Functions.cs" />

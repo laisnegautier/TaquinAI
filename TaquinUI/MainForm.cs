@@ -284,7 +284,7 @@ namespace TaquinUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _selectedHeuristic = new SizeBlock();
+            _selectedHeuristic = new BestHeuristic();
             EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
             Solver test = new IDAstar(_selectedHeuristic);
             List<Board> solutionBoards;

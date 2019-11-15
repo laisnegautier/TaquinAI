@@ -51,6 +51,11 @@ namespace TaquinCodeBehind
             List<EvaluableBoard> holder = CreateChild(currEval);
             foreach(EvaluableBoard child in holder)
             {
+                child.Score = cost + Heuristic.EvaluateBoard(child.Board, _destination.Board);
+            }
+            holder = holder.OrderBy(b => b.Score).ToList();
+            foreach(EvaluableBoard child in holder)
+            {
                 EvaluableBoard temp = Search(child, cost + 1, threshold);
                 int tempScore = temp.Score;
                 if (temp.Equals(_destination))
