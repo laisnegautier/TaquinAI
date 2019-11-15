@@ -198,6 +198,7 @@ namespace TaquinUI
             button.ForeColor = Color.FromArgb(66, 94, 41);
         }
         #endregion
+
         public void SolveButton_Click(object sender, EventArgs e)
         {
             List<Board> solutionBoards = new List<Board>();
@@ -208,9 +209,15 @@ namespace TaquinUI
             solveButton.BackColor = Color.FromArgb(241,227,228);
 
             //UI DeadLock to solve...
-
+            // ==========================CODE_A_DEPORTER=====================
             EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
+            var watch = Stopwatch.StartNew();
             solutionBoards = _solver.Solve(evalBoard);
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine("résolu en {0} milisecondes", elapsedMs);
+            //===============================================================
+
 
             // Reactivating solver button when solving is finish
             solveButton.Click += (s, evt) => SolveButton_Click(s, evt);

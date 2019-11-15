@@ -51,6 +51,7 @@
             this.AstarUniButton = new System.Windows.Forms.Button();
             this.dijkstraButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
             this.heuristicPanel.SuspendLayout();
@@ -162,7 +163,7 @@
             this.heuristicLabel.BackColor = System.Drawing.Color.Transparent;
             this.heuristicLabel.Font = new System.Drawing.Font("AR BONNIE", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.heuristicLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.heuristicLabel.Location = new System.Drawing.Point(32, 158);
+            this.heuristicLabel.Location = new System.Drawing.Point(16, 157);
             this.heuristicLabel.Name = "heuristicLabel";
             this.heuristicLabel.Size = new System.Drawing.Size(87, 21);
             this.heuristicLabel.TabIndex = 5;
@@ -173,9 +174,9 @@
             this.heuristicPanel.Controls.Add(this.heuristicThreeButton);
             this.heuristicPanel.Controls.Add(this.heuristicTwoButton);
             this.heuristicPanel.Controls.Add(this.heuristicOneButton);
-            this.heuristicPanel.Location = new System.Drawing.Point(16, 194);
+            this.heuristicPanel.Location = new System.Drawing.Point(13, 181);
             this.heuristicPanel.Name = "heuristicPanel";
-            this.heuristicPanel.Size = new System.Drawing.Size(151, 165);
+            this.heuristicPanel.Size = new System.Drawing.Size(154, 165);
             this.heuristicPanel.TabIndex = 6;
             // 
             // heuristicThreeButton
@@ -187,7 +188,7 @@
             this.heuristicThreeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
             this.heuristicThreeButton.Location = new System.Drawing.Point(3, 112);
             this.heuristicThreeButton.Name = "heuristicThreeButton";
-            this.heuristicThreeButton.Size = new System.Drawing.Size(145, 50);
+            this.heuristicThreeButton.Size = new System.Drawing.Size(148, 50);
             this.heuristicThreeButton.TabIndex = 4;
             this.heuristicThreeButton.Text = "Distance De Manhattan";
             this.heuristicThreeButton.UseVisualStyleBackColor = false;
@@ -204,9 +205,9 @@
             this.heuristicTwoButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
             this.heuristicTwoButton.Location = new System.Drawing.Point(3, 57);
             this.heuristicTwoButton.Name = "heuristicTwoButton";
-            this.heuristicTwoButton.Size = new System.Drawing.Size(145, 50);
+            this.heuristicTwoButton.Size = new System.Drawing.Size(148, 50);
             this.heuristicTwoButton.TabIndex = 3;
-            this.heuristicTwoButton.Text = "Cases Mal Placées";
+            this.heuristicTwoButton.Text = "P + LC + C";
             this.heuristicTwoButton.UseVisualStyleBackColor = false;
             this.heuristicTwoButton.Click += new System.EventHandler(this.HeuristicButton_Click);
             this.heuristicTwoButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
@@ -221,9 +222,9 @@
             this.heuristicOneButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
             this.heuristicOneButton.Location = new System.Drawing.Point(3, 3);
             this.heuristicOneButton.Name = "heuristicOneButton";
-            this.heuristicOneButton.Size = new System.Drawing.Size(145, 50);
+            this.heuristicOneButton.Size = new System.Drawing.Size(148, 50);
             this.heuristicOneButton.TabIndex = 2;
-            this.heuristicOneButton.Text = "Cases Bien Placées";
+            this.heuristicOneButton.Text = "P + LC";
             this.heuristicOneButton.UseVisualStyleBackColor = false;
             this.heuristicOneButton.Click += new System.EventHandler(this.HeuristicButton_Click);
             this.heuristicOneButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
@@ -296,7 +297,7 @@
             this.solverLabel.BackColor = System.Drawing.Color.Transparent;
             this.solverLabel.Font = new System.Drawing.Font("AR BONNIE", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.solverLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.solverLabel.Location = new System.Drawing.Point(32, 377);
+            this.solverLabel.Location = new System.Drawing.Point(16, 370);
             this.solverLabel.Name = "solverLabel";
             this.solverLabel.Size = new System.Drawing.Size(70, 21);
             this.solverLabel.TabIndex = 8;
@@ -304,12 +305,13 @@
             // 
             // solverPanel
             // 
+            this.solverPanel.Controls.Add(this.button2);
             this.solverPanel.Controls.Add(this.AstarBiButton);
             this.solverPanel.Controls.Add(this.AstarUniButton);
             this.solverPanel.Controls.Add(this.dijkstraButton);
-            this.solverPanel.Location = new System.Drawing.Point(16, 414);
+            this.solverPanel.Location = new System.Drawing.Point(13, 391);
             this.solverPanel.Name = "solverPanel";
-            this.solverPanel.Size = new System.Drawing.Size(151, 165);
+            this.solverPanel.Size = new System.Drawing.Size(154, 224);
             this.solverPanel.TabIndex = 7;
             // 
             // AstarBiButton
@@ -319,9 +321,9 @@
             this.AstarBiButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AstarBiButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AstarBiButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.AstarBiButton.Location = new System.Drawing.Point(3, 112);
+            this.AstarBiButton.Location = new System.Drawing.Point(3, 59);
             this.AstarBiButton.Name = "AstarBiButton";
-            this.AstarBiButton.Size = new System.Drawing.Size(145, 50);
+            this.AstarBiButton.Size = new System.Drawing.Size(148, 50);
             this.AstarBiButton.TabIndex = 4;
             this.AstarBiButton.Text = "A * -  Bi";
             this.AstarBiButton.UseVisualStyleBackColor = false;
@@ -336,9 +338,9 @@
             this.AstarUniButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AstarUniButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AstarUniButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.AstarUniButton.Location = new System.Drawing.Point(3, 57);
+            this.AstarUniButton.Location = new System.Drawing.Point(3, 3);
             this.AstarUniButton.Name = "AstarUniButton";
-            this.AstarUniButton.Size = new System.Drawing.Size(145, 50);
+            this.AstarUniButton.Size = new System.Drawing.Size(148, 50);
             this.AstarUniButton.TabIndex = 3;
             this.AstarUniButton.Text = "A * - Uni";
             this.AstarUniButton.UseVisualStyleBackColor = false;
@@ -353,11 +355,11 @@
             this.dijkstraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dijkstraButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dijkstraButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.dijkstraButton.Location = new System.Drawing.Point(3, 3);
+            this.dijkstraButton.Location = new System.Drawing.Point(3, 115);
             this.dijkstraButton.Name = "dijkstraButton";
-            this.dijkstraButton.Size = new System.Drawing.Size(145, 50);
+            this.dijkstraButton.Size = new System.Drawing.Size(148, 50);
             this.dijkstraButton.TabIndex = 2;
-            this.dijkstraButton.Text = "Dijkstra";
+            this.dijkstraButton.Text = "Methode par Segments";
             this.dijkstraButton.UseVisualStyleBackColor = false;
             this.dijkstraButton.Click += new System.EventHandler(this.SolverButton_CLick);
             this.dijkstraButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
@@ -372,6 +374,20 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.button2.Location = new System.Drawing.Point(3, 170);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(148, 50);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "IDA*";
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 
@@ -429,6 +445,7 @@
         private System.Windows.Forms.Button AstarUniButton;
         private System.Windows.Forms.Button dijkstraButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
