@@ -135,12 +135,12 @@ namespace TaquinUI
         {
             // Unset last selected button focus
             if (_selectedHeuristic.GetType() == typeof(Manhattan)) ButtonUnsetFocus(heuristicThreeButton);
-            else if (_selectedHeuristic.GetType() == typeof(WrightSpot)) ButtonUnsetFocus(heuristicOneButton);
+            else if (_selectedHeuristic.GetType() == typeof(PLC)) ButtonUnsetFocus(heuristicOneButton);
             else ButtonUnsetFocus(heuristicTwoButton);
             // Action & Focus
             Button button = (Button)sender;
-            if (button == heuristicOneButton) _selectedHeuristic = new WrightSpot();
-            else if (button == heuristicTwoButton) _selectedHeuristic = new WrongSpot();
+            if (button == heuristicOneButton) _selectedHeuristic = new PLC();
+            else if (button == heuristicTwoButton) _selectedHeuristic = new PLCC();
             else _selectedHeuristic = new Manhattan();
             ButtonSetFocus(button);
         }
@@ -148,13 +148,15 @@ namespace TaquinUI
         private void SolverButton_CLick(object sender, EventArgs e)
         {
             // Unset last selected button focus
-            if (_solver.GetType() == typeof(Dijkstra)) ButtonUnsetFocus(dijkstraButton);
+            if (_solver.GetType() == typeof(Segments)) ButtonUnsetFocus(segmentButton);
             else if (_solver.GetType() == typeof(AstarUni)) ButtonUnsetFocus(AstarUniButton);
+            else if (_solver.GetType() == typeof(IDAstar)) ButtonUnsetFocus(IDAStarButton);
             else ButtonUnsetFocus(AstarBiButton);
             // Action & Focus
             Button button = (Button)sender;
-            if (button == dijkstraButton) _solver = new Dijkstra();
+            if (button == segmentButton) _solver = new Segments(_selectedHeuristic);
             else if (button == AstarUniButton) _solver = new AstarUni(_selectedHeuristic);
+            else if (button == IDAStarButton) _solver = new IDAstar(_selectedHeuristic);
             else _solver = new AstarBi();
             ButtonSetFocus(button);
         }
@@ -177,12 +179,13 @@ namespace TaquinUI
         {
             Button button = (Button)sender;
             if ((button == sizeButton3 && _selectedSize == 3) || (button == sizeButton5 && _selectedSize == 5)) ; // Test Size Selected
-            else if ((button == heuristicOneButton && _selectedHeuristic.GetType() == typeof(WrightSpot))
-                   || (button == heuristicTwoButton && _selectedHeuristic.GetType() == typeof(WrongSpot))
+            else if ((button == heuristicOneButton && _selectedHeuristic.GetType() == typeof(PLC))
+                   || (button == heuristicTwoButton && _selectedHeuristic.GetType() == typeof(PLCC))
                    || (button == heuristicThreeButton && _selectedHeuristic.GetType() == typeof(Manhattan))) ; // Test Heuristic Selected
             else if ((button == AstarUniButton && _solver.GetType() == typeof(AstarUni))
                   || (button == AstarBiButton && _solver.GetType() == typeof(AstarBi))
-                  || (button == dijkstraButton && _solver.GetType() == typeof(Dijkstra))) ; // Test Solver Selected
+                  || (button == segmentButton && _solver.GetType() == typeof(Segments))
+                  || (button == IDAStarButton && _solver.GetType() == typeof(IDAstar))) ; // Test Solver Selected
             else ButtonUnsetFocus(button);
         }
 
@@ -201,60 +204,11 @@ namespace TaquinUI
 
         public void SolveButton_Click(object sender, EventArgs e)
         {
-            List<Board> solutionBoards = new List<Board>();
-
-            solveButton.Click -= SolveButton_Click;
-            solveButton.MouseLeave -= Button_MouseLeave;
-            solveButton.MouseEnter -= Button_MouseEnter;
-            solveButton.BackColor = Color.FromArgb(241,227,228);
-
-            //UI DeadLock to solve...
-            // ==========================CODE_A_DEPORTER=====================
-            EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
-            var watch = Stopwatch.StartNew();
-            solutionBoards = _solver.Solve(evalBoard);
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine("résolu en {0} milisecondes", elapsedMs);
-            //===============================================================
-
-
-            // Reactivating solver button when solving is finish
-            solveButton.Click += (s, evt) => SolveButton_Click(s, evt);
-            solveButton.BackColor = Color.FromArgb(231, 217, 218);
-            solveButton.MouseLeave += Button_MouseLeave;
-            solveButton.MouseEnter += Button_MouseEnter;
-            // Showing the resultForm
-            _resultForm = new ResultForm(solutionBoards);
-            //_resultForm.States = solutionBoards;
-            //_resultForm.SetBoard();
-              
+            EvaluableBoard board = new EvaluableBoard(taquin.Board);
+            _resultForm = new ResultForm(_solver, board);
             _resultForm.Show();
-            _resultForm.BringToFront();
-            #region test
-            // Might be something to test out !
-
-            /*Action onCompleted = () => 
-            {  
-                //On complete action
-            };
-
-            var thread = new Thread(
-              () =>
-              {
-                try
-                {
-                  // Do your work
-                }
-                finally
-                {
-                  onCompleted();
-                }
-              });
-            thread.Start();*/
-            #endregion
         }
-
+        
         private void LoadButton_Click(object sender, EventArgs e)
         {
             _loadForm.Show();
@@ -289,53 +243,9 @@ namespace TaquinUI
             UpdateBoard();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void MinimizeButton_Click(object sender, EventArgs e)
         {
-            _selectedHeuristic = new BestHeuristic();
-            EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
-            Solver test = new IDAstar(_selectedHeuristic);
-            List<Board> solutionBoards;
-            solutionBoards = test.Solve(evalBoard);
-            _resultForm = new ResultForm(solutionBoards);
-            _resultForm.Show();
-
-            /*_selectedHeuristic = new SizeBlock();
-            EvaluableBoard evalBoard = new EvaluableBoard(taquin.Board);
-            List<Board> targets = CreateTargets(evalBoard.Board.Structure.GetLength(0));
-            Solver test =  new Segments(_selectedHeuristic, targets);
-            List<Board> solutionBoards;
-            solutionBoards = test.Solve(evalBoard);
-            _resultForm = new ResultForm(solutionBoards);
-            _resultForm.Show();
-            */
-        }
-
-        private List<Board> CreateTargets(int size)
-        {
-            List<Board> targets = new List<Board>();
-            List<Cell> structure = new List<Cell>();
-            for (int i = 0; i < size * size - 2; i++)
-            {
-                Cell cell = new Cell(i);
-                structure.Add(cell);
-            }
-            for (int step = 0; step < size - 2; step++)
-            {
-                List<Cell> cells = structure.GetRange(0, (size * (step + 1)));
-                for(int i = 0; i < (size * size - 2) - (size * (step + 1)); i++)
-                {
-                    Cell empty = new Cell(-1);
-                    cells.Add(empty);
-                }
-                for(int i = 0; i < 2; i++)
-                {
-                    Cell hole = new Cell("-");
-                    cells.Add(hole);
-                }
-                Board board = new Board(cells.ToArray());
-                targets.Add(board);
-            }
-            return targets;
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

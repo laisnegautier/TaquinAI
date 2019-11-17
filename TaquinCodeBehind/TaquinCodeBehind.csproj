@@ -43,11 +43,12 @@
   <ItemGroup>
     <Compile Include="AstarBi.cs" />
     <Compile Include="AstarUni.cs" />
-    <Compile Include="BestHeuristic.cs" />
+    <Compile Include="CornerConflict.cs" />
+    <Compile Include="PLCC.cs" />
+    <Compile Include="PLC.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="LinearConflict.cs" />
-    <Compile Include="Dijkstra.cs" />
     <Compile Include="EvaluableBoard.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="IDAstar.cs" />
@@ -58,8 +59,6 @@
     <Compile Include="SizeBlock.cs" />
     <Compile Include="Solver.cs" />
     <Compile Include="Taquin.cs" />
-    <Compile Include="WrightSpot.cs" />
-    <Compile Include="WrongSpot.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -47,11 +47,11 @@
             this.solveButton = new System.Windows.Forms.Button();
             this.solverLabel = new System.Windows.Forms.Label();
             this.solverPanel = new System.Windows.Forms.Panel();
+            this.IDAStarButton = new System.Windows.Forms.Button();
             this.AstarBiButton = new System.Windows.Forms.Button();
             this.AstarUniButton = new System.Windows.Forms.Button();
-            this.dijkstraButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.segmentButton = new System.Windows.Forms.Button();
+            this.minimizeButton = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
             this.heuristicPanel.SuspendLayout();
@@ -65,7 +65,7 @@
             this.closeButton.FlatAppearance.BorderSize = 0;
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.closeButton.Location = new System.Drawing.Point(707, 3);
+            this.closeButton.Location = new System.Drawing.Point(759, 2);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(25, 24);
             this.closeButton.TabIndex = 0;
@@ -76,6 +76,7 @@
             // headerBar
             // 
             this.headerBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(148)))), ((int)(((byte)(79)))));
+            this.headerBar.Controls.Add(this.minimizeButton);
             this.headerBar.Controls.Add(this.nameLabel);
             this.headerBar.Controls.Add(this.closeButton);
             this.headerBar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -305,14 +306,29 @@
             // 
             // solverPanel
             // 
-            this.solverPanel.Controls.Add(this.button2);
+            this.solverPanel.Controls.Add(this.IDAStarButton);
             this.solverPanel.Controls.Add(this.AstarBiButton);
             this.solverPanel.Controls.Add(this.AstarUniButton);
-            this.solverPanel.Controls.Add(this.dijkstraButton);
+            this.solverPanel.Controls.Add(this.segmentButton);
             this.solverPanel.Location = new System.Drawing.Point(13, 391);
             this.solverPanel.Name = "solverPanel";
             this.solverPanel.Size = new System.Drawing.Size(154, 224);
             this.solverPanel.TabIndex = 7;
+            // 
+            // IDAStarButton
+            // 
+            this.IDAStarButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.IDAStarButton.FlatAppearance.BorderSize = 0;
+            this.IDAStarButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IDAStarButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IDAStarButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.IDAStarButton.Location = new System.Drawing.Point(3, 170);
+            this.IDAStarButton.Name = "IDAStarButton";
+            this.IDAStarButton.Size = new System.Drawing.Size(148, 50);
+            this.IDAStarButton.TabIndex = 5;
+            this.IDAStarButton.Text = "IDA*";
+            this.IDAStarButton.UseVisualStyleBackColor = false;
+            this.IDAStarButton.Click += new System.EventHandler(this.SolverButton_CLick);
             // 
             // AstarBiButton
             // 
@@ -348,46 +364,36 @@
             this.AstarUniButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.AstarUniButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
-            // dijkstraButton
+            // segmentButton
             // 
-            this.dijkstraButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
-            this.dijkstraButton.FlatAppearance.BorderSize = 0;
-            this.dijkstraButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dijkstraButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dijkstraButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.dijkstraButton.Location = new System.Drawing.Point(3, 115);
-            this.dijkstraButton.Name = "dijkstraButton";
-            this.dijkstraButton.Size = new System.Drawing.Size(148, 50);
-            this.dijkstraButton.TabIndex = 2;
-            this.dijkstraButton.Text = "Methode par Segments";
-            this.dijkstraButton.UseVisualStyleBackColor = false;
-            this.dijkstraButton.Click += new System.EventHandler(this.SolverButton_CLick);
-            this.dijkstraButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.dijkstraButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            this.segmentButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
+            this.segmentButton.FlatAppearance.BorderSize = 0;
+            this.segmentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.segmentButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.segmentButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.segmentButton.Location = new System.Drawing.Point(3, 115);
+            this.segmentButton.Name = "segmentButton";
+            this.segmentButton.Size = new System.Drawing.Size(148, 50);
+            this.segmentButton.TabIndex = 2;
+            this.segmentButton.Text = "Methode par Segments";
+            this.segmentButton.UseVisualStyleBackColor = false;
+            this.segmentButton.Click += new System.EventHandler(this.SolverButton_CLick);
+            this.segmentButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.segmentButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
-            // button1
+            // minimizeButton
             // 
-            this.button1.Location = new System.Drawing.Point(686, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.button2.Location = new System.Drawing.Point(3, 170);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(148, 50);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "IDA*";
-            this.button2.UseVisualStyleBackColor = false;
+            this.minimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.minimizeButton.FlatAppearance.BorderSize = 0;
+            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
+            this.minimizeButton.Location = new System.Drawing.Point(727, 2);
+            this.minimizeButton.Name = "minimizeButton";
+            this.minimizeButton.Size = new System.Drawing.Size(25, 24);
+            this.minimizeButton.TabIndex = 4;
+            this.minimizeButton.Text = "_";
+            this.minimizeButton.UseVisualStyleBackColor = false;
+            this.minimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
             // 
             // MainForm
             // 
@@ -395,7 +401,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(787, 633);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.solverPanel);
             this.Controls.Add(this.solverLabel);
             this.Controls.Add(this.actionButtonsPanel);
@@ -443,9 +448,9 @@
         private System.Windows.Forms.Panel solverPanel;
         private System.Windows.Forms.Button AstarBiButton;
         private System.Windows.Forms.Button AstarUniButton;
-        private System.Windows.Forms.Button dijkstraButton;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button segmentButton;
+        private System.Windows.Forms.Button IDAStarButton;
+        private System.Windows.Forms.Button minimizeButton;
     }
 }
 

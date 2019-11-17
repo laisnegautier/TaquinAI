@@ -8,12 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaquinCodeBehind;
+using System.Diagnostics;
 
 namespace TaquinUI
 {
     public partial class ResultForm : Form
     {
-        public List<Board> States { get; set; }
+        private List<Board> States { get; set; }
+        private Solver Solver { get; }
+        private EvaluableBoard _board;
+        BackgroundWorker _solverThread;
+
         int _index = 0;
         int _size;
 
@@ -22,11 +27,50 @@ namespace TaquinUI
             InitializeComponent();
         }
 
-        public ResultForm(List<Board> boards)
+        /*public ResultForm(List<Board> boards)
         {
             InitializeComponent();
             States = boards;
             nbMovesLabel.Text += " " + (boards.Count - 1) + " coups.";
+            SetBoard();
+        }*/
+
+        public ResultForm(Solver solver, EvaluableBoard board)
+        {
+            InitializeComponent();
+            Solver = solver;
+            _board = board;
+            _solverThread = new BackgroundWorker();
+            // Assigning the DoWork Method
+            _solverThread.DoWork += new DoWorkEventHandler(SolverThreadDoWork);
+            _solverThread.RunWorkerCompleted += new RunWorkerCompletedEventHandler(SolverThreadWorkDone);
+
+            _solverThread.RunWorkerAsync();
+
+            _solverThread.WorkerReportsProgress = true;
+            _solverThread.WorkerSupportsCancellation = true;
+        }
+
+        private void SolverThreadDoWork(object sender, DoWorkEventArgs e)
+        {
+            States = Solver.Solve(_board);
+        }
+
+        private void SolverThreadWorkDone(object sender, RunWorkerCompletedEventArgs e)
+        {
+            States.Reverse();
+            string solverName = "";
+            string heuriName = "";
+            // Finding Solver Name
+            if (typeof(AstarUni) == Solver.GetType()) solverName = "A* Unidirectionel";
+            else if (Solver.GetType() == typeof(AstarBi)) solverName = "A* Bidirectionel";
+            else if (Solver.GetType() == typeof(Segments)) solverName = "la méthode humaine";
+            else solverName = "IDA*";
+            // Finding Heuristic Used
+            if (Solver.Heuristic.GetType() == typeof(PLC)) heuriName = "P&LC";
+            else if (Solver.Heuristic.GetType() == typeof(PLCC)) heuriName = "P&Lc&C";
+            else heuriName = "de Manhattan";
+            nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName;
             SetBoard();
         }
 
@@ -72,6 +116,11 @@ namespace TaquinUI
         private void button1_Click(object sender, EventArgs e)
         {
             Hide();
+        }
+
+        private void minimizeButton_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

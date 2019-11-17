@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    public class WrightSpot : IHeuristic
+    public class CornerConflict : IHeuristic
     {
         public int EvaluateBoard(Board currBoard, Board destBoard)
         {
-            throw new NotImplementedException();
+            int size = currBoard.Structure.GetLength(0);
+            int cost = 0;
+            // Evaluating Corners Conflicts
+            
+
+            return cost;
         }
     }
 }

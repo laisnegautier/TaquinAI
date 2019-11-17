@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
-    public class BestHeuristic : IHeuristic
+    public class PLC : IHeuristic
     {
         IHeuristic _h1;
         IHeuristic _h2;
 
-        public BestHeuristic()
+        public PLC()
         {
             _h1 = new Manhattan();
             _h2 = new LinearConflict();
