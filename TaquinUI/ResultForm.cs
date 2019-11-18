@@ -18,6 +18,7 @@ namespace TaquinUI
         private Solver Solver { get; }
         private EvaluableBoard _board;
         BackgroundWorker _solverThread;
+        Stopwatch _watch;
 
         int _index = 0;
         int _size;
@@ -38,6 +39,11 @@ namespace TaquinUI
         public ResultForm(Solver solver, EvaluableBoard board)
         {
             InitializeComponent();
+            // Hiding stuff
+            leftButton.Hide();
+            rightButton.Hide();
+            nbMovesLabel.Hide();
+
             Solver = solver;
             _board = board;
             _solverThread = new BackgroundWorker();
@@ -53,24 +59,32 @@ namespace TaquinUI
 
         private void SolverThreadDoWork(object sender, DoWorkEventArgs e)
         {
+            _watch = Stopwatch.StartNew();
             States = Solver.Solve(_board);
         }
 
         private void SolverThreadWorkDone(object sender, RunWorkerCompletedEventArgs e)
         {
+            _watch.Stop();
             States.Reverse();
+            // Showing stuff back
+            leftButton.Show();
+            rightButton.Show();
+            nbMovesLabel.Show();
+            statusLabel.Hide();
             string solverName = "";
             string heuriName = "";
             // Finding Solver Name
             if (typeof(AstarUni) == Solver.GetType()) solverName = "A* Unidirectionel";
-            else if (Solver.GetType() == typeof(AstarBi)) solverName = "A* Bidirectionel";
             else if (Solver.GetType() == typeof(Segments)) solverName = "la méthode humaine";
             else solverName = "IDA*";
             // Finding Heuristic Used
             if (Solver.Heuristic.GetType() == typeof(PLC)) heuriName = "P&LC";
-            else if (Solver.Heuristic.GetType() == typeof(PLCC)) heuriName = "P&Lc&C";
+            else if (Solver.Heuristic.GetType() == typeof(PLCC)) heuriName = "P&LC&C";
             else heuriName = "de Manhattan";
-            nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName;
+            // Finding out time
+            var elapsedMs = _watch.ElapsedMilliseconds;
+            nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName + " en " + elapsedMs + " Ms";
             SetBoard();
         }
 

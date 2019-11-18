@@ -37,6 +37,7 @@
             this.leftButton = new System.Windows.Forms.Button();
             this.rightButton = new System.Windows.Forms.Button();
             this.nbMovesLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.HeaderBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,12 +139,24 @@
             this.nbMovesLabel.Text = "Ce Taquin à été résolu en ";
             this.nbMovesLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // statusLabel
+            // 
+            this.statusLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.statusLabel.Location = new System.Drawing.Point(102, 160);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(382, 113);
+            this.statusLabel.TabIndex = 9;
+            this.statusLabel.Text = "Votre Taquin est en cours de résolution";
+            this.statusLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(586, 699);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.nbMovesLabel);
             this.Controls.Add(this.rightButton);
             this.Controls.Add(this.leftButton);
@@ -168,5 +181,6 @@
         private System.Windows.Forms.Button rightButton;
         private System.Windows.Forms.Label nbMovesLabel;
         private System.Windows.Forms.Button minimizeButton;
+        private System.Windows.Forms.Label statusLabel;
     }
 }

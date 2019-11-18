@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AstarBi.cs" />
     <Compile Include="AstarUni.cs" />
     <Compile Include="CornerConflict.cs" />
     <Compile Include="PLCC.cs" />

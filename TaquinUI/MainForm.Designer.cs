@@ -30,6 +30,7 @@
         {
             this.closeButton = new System.Windows.Forms.Button();
             this.headerBar = new System.Windows.Forms.Panel();
+            this.minimizeButton = new System.Windows.Forms.Button();
             this.nameLabel = new System.Windows.Forms.Label();
             this.sizeLabel = new System.Windows.Forms.Label();
             this.sizeButtonPanel = new System.Windows.Forms.Panel();
@@ -48,10 +49,8 @@
             this.solverLabel = new System.Windows.Forms.Label();
             this.solverPanel = new System.Windows.Forms.Panel();
             this.IDAStarButton = new System.Windows.Forms.Button();
-            this.AstarBiButton = new System.Windows.Forms.Button();
             this.AstarUniButton = new System.Windows.Forms.Button();
             this.segmentButton = new System.Windows.Forms.Button();
-            this.minimizeButton = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.sizeButtonPanel.SuspendLayout();
             this.heuristicPanel.SuspendLayout();
@@ -85,6 +84,20 @@
             this.headerBar.Size = new System.Drawing.Size(787, 29);
             this.headerBar.TabIndex = 1;
             // 
+            // minimizeButton
+            // 
+            this.minimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.minimizeButton.FlatAppearance.BorderSize = 0;
+            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
+            this.minimizeButton.Location = new System.Drawing.Point(727, 2);
+            this.minimizeButton.Name = "minimizeButton";
+            this.minimizeButton.Size = new System.Drawing.Size(25, 24);
+            this.minimizeButton.TabIndex = 4;
+            this.minimizeButton.Text = "_";
+            this.minimizeButton.UseVisualStyleBackColor = false;
+            this.minimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
+            // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
@@ -102,7 +115,7 @@
             this.sizeLabel.BackColor = System.Drawing.Color.Transparent;
             this.sizeLabel.Font = new System.Drawing.Font("AR BONNIE", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sizeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.sizeLabel.Location = new System.Drawing.Point(32, 43);
+            this.sizeLabel.Location = new System.Drawing.Point(21, 70);
             this.sizeLabel.Name = "sizeLabel";
             this.sizeLabel.Size = new System.Drawing.Size(39, 21);
             this.sizeLabel.TabIndex = 2;
@@ -112,7 +125,7 @@
             // 
             this.sizeButtonPanel.Controls.Add(this.sizeButton5);
             this.sizeButtonPanel.Controls.Add(this.sizeButton3);
-            this.sizeButtonPanel.Location = new System.Drawing.Point(12, 67);
+            this.sizeButtonPanel.Location = new System.Drawing.Point(17, 94);
             this.sizeButtonPanel.Name = "sizeButtonPanel";
             this.sizeButtonPanel.Size = new System.Drawing.Size(155, 75);
             this.sizeButtonPanel.TabIndex = 3;
@@ -164,7 +177,7 @@
             this.heuristicLabel.BackColor = System.Drawing.Color.Transparent;
             this.heuristicLabel.Font = new System.Drawing.Font("AR BONNIE", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.heuristicLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.heuristicLabel.Location = new System.Drawing.Point(16, 157);
+            this.heuristicLabel.Location = new System.Drawing.Point(21, 184);
             this.heuristicLabel.Name = "heuristicLabel";
             this.heuristicLabel.Size = new System.Drawing.Size(87, 21);
             this.heuristicLabel.TabIndex = 5;
@@ -175,7 +188,7 @@
             this.heuristicPanel.Controls.Add(this.heuristicThreeButton);
             this.heuristicPanel.Controls.Add(this.heuristicTwoButton);
             this.heuristicPanel.Controls.Add(this.heuristicOneButton);
-            this.heuristicPanel.Location = new System.Drawing.Point(13, 181);
+            this.heuristicPanel.Location = new System.Drawing.Point(18, 208);
             this.heuristicPanel.Name = "heuristicPanel";
             this.heuristicPanel.Size = new System.Drawing.Size(154, 165);
             this.heuristicPanel.TabIndex = 6;
@@ -298,7 +311,7 @@
             this.solverLabel.BackColor = System.Drawing.Color.Transparent;
             this.solverLabel.Font = new System.Drawing.Font("AR BONNIE", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.solverLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.solverLabel.Location = new System.Drawing.Point(16, 370);
+            this.solverLabel.Location = new System.Drawing.Point(21, 397);
             this.solverLabel.Name = "solverLabel";
             this.solverLabel.Size = new System.Drawing.Size(70, 21);
             this.solverLabel.TabIndex = 8;
@@ -307,12 +320,11 @@
             // solverPanel
             // 
             this.solverPanel.Controls.Add(this.IDAStarButton);
-            this.solverPanel.Controls.Add(this.AstarBiButton);
             this.solverPanel.Controls.Add(this.AstarUniButton);
             this.solverPanel.Controls.Add(this.segmentButton);
-            this.solverPanel.Location = new System.Drawing.Point(13, 391);
+            this.solverPanel.Location = new System.Drawing.Point(18, 418);
             this.solverPanel.Name = "solverPanel";
-            this.solverPanel.Size = new System.Drawing.Size(154, 224);
+            this.solverPanel.Size = new System.Drawing.Size(154, 165);
             this.solverPanel.TabIndex = 7;
             // 
             // IDAStarButton
@@ -322,30 +334,13 @@
             this.IDAStarButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IDAStarButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IDAStarButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.IDAStarButton.Location = new System.Drawing.Point(3, 170);
+            this.IDAStarButton.Location = new System.Drawing.Point(3, 112);
             this.IDAStarButton.Name = "IDAStarButton";
             this.IDAStarButton.Size = new System.Drawing.Size(148, 50);
             this.IDAStarButton.TabIndex = 5;
             this.IDAStarButton.Text = "IDA*";
             this.IDAStarButton.UseVisualStyleBackColor = false;
             this.IDAStarButton.Click += new System.EventHandler(this.SolverButton_CLick);
-            // 
-            // AstarBiButton
-            // 
-            this.AstarBiButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(217)))), ((int)(((byte)(218)))));
-            this.AstarBiButton.FlatAppearance.BorderSize = 0;
-            this.AstarBiButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AstarBiButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AstarBiButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.AstarBiButton.Location = new System.Drawing.Point(3, 59);
-            this.AstarBiButton.Name = "AstarBiButton";
-            this.AstarBiButton.Size = new System.Drawing.Size(148, 50);
-            this.AstarBiButton.TabIndex = 4;
-            this.AstarBiButton.Text = "A * -  Bi";
-            this.AstarBiButton.UseVisualStyleBackColor = false;
-            this.AstarBiButton.Click += new System.EventHandler(this.SolverButton_CLick);
-            this.AstarBiButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.AstarBiButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // AstarUniButton
             // 
@@ -371,7 +366,7 @@
             this.segmentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.segmentButton.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.segmentButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.segmentButton.Location = new System.Drawing.Point(3, 115);
+            this.segmentButton.Location = new System.Drawing.Point(3, 57);
             this.segmentButton.Name = "segmentButton";
             this.segmentButton.Size = new System.Drawing.Size(148, 50);
             this.segmentButton.TabIndex = 2;
@@ -380,20 +375,6 @@
             this.segmentButton.Click += new System.EventHandler(this.SolverButton_CLick);
             this.segmentButton.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.segmentButton.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
-            // 
-            // minimizeButton
-            // 
-            this.minimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
-            this.minimizeButton.FlatAppearance.BorderSize = 0;
-            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.minimizeButton.Location = new System.Drawing.Point(727, 2);
-            this.minimizeButton.Name = "minimizeButton";
-            this.minimizeButton.Size = new System.Drawing.Size(25, 24);
-            this.minimizeButton.TabIndex = 4;
-            this.minimizeButton.Text = "_";
-            this.minimizeButton.UseVisualStyleBackColor = false;
-            this.minimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
             // 
             // MainForm
             // 
@@ -446,7 +427,6 @@
         private System.Windows.Forms.Button shuffleButton;
         private System.Windows.Forms.Label solverLabel;
         private System.Windows.Forms.Panel solverPanel;
-        private System.Windows.Forms.Button AstarBiButton;
         private System.Windows.Forms.Button AstarUniButton;
         private System.Windows.Forms.Button segmentButton;
         private System.Windows.Forms.Button IDAStarButton;
