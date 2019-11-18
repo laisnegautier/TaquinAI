@@ -18,6 +18,7 @@ namespace TaquinUI
         private Solver Solver { get; }
         private EvaluableBoard _board;
         BackgroundWorker _solverThread;
+        Stopwatch _watch = new Stopwatch();
 
         int _index = 0;
         int _size;
@@ -38,39 +39,61 @@ namespace TaquinUI
         public ResultForm(Solver solver, EvaluableBoard board)
         {
             InitializeComponent();
+            // Hiding stuff
+            leftButton.Hide();
+            rightButton.Hide();
+            nbMovesLabel.Hide();
+
             Solver = solver;
             _board = board;
             _solverThread = new BackgroundWorker();
             // Assigning the DoWork Method
             _solverThread.DoWork += new DoWorkEventHandler(SolverThreadDoWork);
             _solverThread.RunWorkerCompleted += new RunWorkerCompletedEventHandler(SolverThreadWorkDone);
+            
+            _solverThread.WorkerSupportsCancellation = true;
 
             _solverThread.RunWorkerAsync();
-
-            _solverThread.WorkerReportsProgress = true;
-            _solverThread.WorkerSupportsCancellation = true;
         }
 
         private void SolverThreadDoWork(object sender, DoWorkEventArgs e)
         {
+            _watch = Stopwatch.StartNew();
+            if (_solverThread.CancellationPending)
+            {
+                e.Cancel = true;
+                return;
+            }
             States = Solver.Solve(_board);
         }
 
         private void SolverThreadWorkDone(object sender, RunWorkerCompletedEventArgs e)
         {
+            _watch.Stop();
+            // Vérification de l'arrêt du Thread
+            if (e.Cancelled)
+            {
+                timeLabel.Text = "Ce solver à été imterrompu ! L'opération à éxcedé la minute.";
+            }
+            // Letting stuff show
+            leftButton.Show();
+            rightButton.Show();
+            nbMovesLabel.Show();
+            // Reversing solution
             States.Reverse();
             string solverName = "";
             string heuriName = "";
             // Finding Solver Name
             if (typeof(AstarUni) == Solver.GetType()) solverName = "A* Unidirectionel";
-            else if (Solver.GetType() == typeof(AstarBi)) solverName = "A* Bidirectionel";
             else if (Solver.GetType() == typeof(Segments)) solverName = "la méthode humaine";
             else solverName = "IDA*";
             // Finding Heuristic Used
             if (Solver.Heuristic.GetType() == typeof(PLC)) heuriName = "P&LC";
             else if (Solver.Heuristic.GetType() == typeof(PLCC)) heuriName = "P&Lc&C";
             else heuriName = "de Manhattan";
-            nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName;
+            // Finding computeTime
+            var elapsedMs = _watch.ElapsedMilliseconds;
+            nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName + " en " + elapsedMs + " Ms";
             SetBoard();
         }
 
@@ -115,7 +138,11 @@ namespace TaquinUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Hide();
+            if (_solverThread.IsBusy)
+            {
+                _solverThread.CancelAsync();
+            }
+            Close();
         }
 
         private void minimizeButton_Click(object sender, EventArgs e)
