@@ -16,7 +16,6 @@ namespace TaquinCodeBehind
         {
             _h1 = new Manhattan();
             _h2 = new LinearConflict();
-            _h3 = new CornerConflict();
         }
 
         public int EvaluateBoard(Board currBoard, Board destBoard)
@@ -24,7 +23,6 @@ namespace TaquinCodeBehind
             int cost = 0;
             cost += _h1.EvaluateBoard(currBoard, destBoard);
             cost += _h2.EvaluateBoard(currBoard, destBoard);
-            cost += _h3.EvaluateBoard(currBoard, destBoard);
             return cost;
         }
     }

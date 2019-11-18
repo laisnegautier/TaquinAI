@@ -34,12 +34,10 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.boardPanel = new System.Windows.Forms.Panel();
-            this.timeLabel = new System.Windows.Forms.Label();
             this.leftButton = new System.Windows.Forms.Button();
             this.rightButton = new System.Windows.Forms.Button();
             this.nbMovesLabel = new System.Windows.Forms.Label();
             this.HeaderBar.SuspendLayout();
-            this.boardPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // HeaderBar
@@ -96,22 +94,10 @@
             // boardPanel
             // 
             this.boardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.boardPanel.Controls.Add(this.timeLabel);
             this.boardPanel.Location = new System.Drawing.Point(49, 35);
             this.boardPanel.Name = "boardPanel";
             this.boardPanel.Size = new System.Drawing.Size(489, 489);
             this.boardPanel.TabIndex = 5;
-            // 
-            // timeLabel
-            // 
-            this.timeLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.timeLabel.Location = new System.Drawing.Point(55, 135);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(382, 81);
-            this.timeLabel.TabIndex = 9;
-            this.timeLabel.Text = "Votre Taquin est en cours de résolution...";
-            this.timeLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // leftButton
             // 
@@ -168,7 +154,6 @@
             this.Text = "ResultForm";
             this.HeaderBar.ResumeLayout(false);
             this.HeaderBar.PerformLayout();
-            this.boardPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -183,6 +168,5 @@
         private System.Windows.Forms.Button rightButton;
         private System.Windows.Forms.Label nbMovesLabel;
         private System.Windows.Forms.Button minimizeButton;
-        private System.Windows.Forms.Label timeLabel;
     }
 }

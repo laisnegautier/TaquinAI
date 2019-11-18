@@ -151,11 +151,13 @@ namespace TaquinUI
             if (_solver.GetType() == typeof(Segments)) ButtonUnsetFocus(segmentButton);
             else if (_solver.GetType() == typeof(AstarUni)) ButtonUnsetFocus(AstarUniButton);
             else if (_solver.GetType() == typeof(IDAstar)) ButtonUnsetFocus(IDAStarButton);
+            else ButtonUnsetFocus(AstarBiButton);
             // Action & Focus
             Button button = (Button)sender;
             if (button == segmentButton) _solver = new Segments(_selectedHeuristic);
             else if (button == AstarUniButton) _solver = new AstarUni(_selectedHeuristic);
             else if (button == IDAStarButton) _solver = new IDAstar(_selectedHeuristic);
+            else _solver = new AstarBi();
             ButtonSetFocus(button);
         }
 
@@ -181,6 +183,7 @@ namespace TaquinUI
                    || (button == heuristicTwoButton && _selectedHeuristic.GetType() == typeof(PLCC))
                    || (button == heuristicThreeButton && _selectedHeuristic.GetType() == typeof(Manhattan))) ; // Test Heuristic Selected
             else if ((button == AstarUniButton && _solver.GetType() == typeof(AstarUni))
+                  || (button == AstarBiButton && _solver.GetType() == typeof(AstarBi))
                   || (button == segmentButton && _solver.GetType() == typeof(Segments))
                   || (button == IDAStarButton && _solver.GetType() == typeof(IDAstar))) ; // Test Solver Selected
             else ButtonUnsetFocus(button);
