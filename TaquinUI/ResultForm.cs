@@ -129,7 +129,11 @@ namespace TaquinUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Hide();
+            if (_solverThread.IsBusy)
+            {
+                _solverThread.CancelAsync();
+            }
+            Close();
         }
 
         private void minimizeButton_Click(object sender, EventArgs e)
