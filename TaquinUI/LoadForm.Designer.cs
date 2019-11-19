@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             this.headerBar = new System.Windows.Forms.Panel();
+            this.closeLoadButton = new System.Windows.Forms.Button();
             this.nameLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
-            this.closeLoadButton = new System.Windows.Forms.Button();
             this.loadLabel = new System.Windows.Forms.Label();
             this.filePanel = new System.Windows.Forms.Panel();
             this.loadButton = new System.Windows.Forms.Button();
+            this.minimizeButton = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // headerBar
             // 
             this.headerBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(148)))), ((int)(((byte)(79)))));
+            this.headerBar.Controls.Add(this.minimizeButton);
             this.headerBar.Controls.Add(this.closeLoadButton);
             this.headerBar.Controls.Add(this.nameLabel);
             this.headerBar.Controls.Add(this.closeButton);
@@ -49,6 +51,23 @@
             this.headerBar.Name = "headerBar";
             this.headerBar.Size = new System.Drawing.Size(287, 29);
             this.headerBar.TabIndex = 2;
+            this.headerBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseDown);
+            this.headerBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseMove);
+            this.headerBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseUp);
+            // 
+            // closeLoadButton
+            // 
+            this.closeLoadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.closeLoadButton.FlatAppearance.BorderSize = 0;
+            this.closeLoadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeLoadButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
+            this.closeLoadButton.Location = new System.Drawing.Point(259, 2);
+            this.closeLoadButton.Name = "closeLoadButton";
+            this.closeLoadButton.Size = new System.Drawing.Size(25, 24);
+            this.closeLoadButton.TabIndex = 2;
+            this.closeLoadButton.Text = "X";
+            this.closeLoadButton.UseVisualStyleBackColor = false;
+            this.closeLoadButton.Click += new System.EventHandler(this.CloseLoadButton_Click);
             // 
             // nameLabel
             // 
@@ -73,20 +92,6 @@
             this.closeButton.TabIndex = 0;
             this.closeButton.Text = "X";
             this.closeButton.UseVisualStyleBackColor = false;
-            // 
-            // closeLoadButton
-            // 
-            this.closeLoadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
-            this.closeLoadButton.FlatAppearance.BorderSize = 0;
-            this.closeLoadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeLoadButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.closeLoadButton.Location = new System.Drawing.Point(259, 2);
-            this.closeLoadButton.Name = "closeLoadButton";
-            this.closeLoadButton.Size = new System.Drawing.Size(25, 24);
-            this.closeLoadButton.TabIndex = 2;
-            this.closeLoadButton.Text = "X";
-            this.closeLoadButton.UseVisualStyleBackColor = false;
-            this.closeLoadButton.Click += new System.EventHandler(this.CloseLoadButton_Click);
             // 
             // loadLabel
             // 
@@ -122,6 +127,20 @@
             this.loadButton.UseVisualStyleBackColor = false;
             this.loadButton.Click += new System.EventHandler(this.LoadButton_Click);
             // 
+            // minimizeButton
+            // 
+            this.minimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.minimizeButton.FlatAppearance.BorderSize = 0;
+            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
+            this.minimizeButton.Location = new System.Drawing.Point(229, 2);
+            this.minimizeButton.Name = "minimizeButton";
+            this.minimizeButton.Size = new System.Drawing.Size(25, 24);
+            this.minimizeButton.TabIndex = 4;
+            this.minimizeButton.Text = "_";
+            this.minimizeButton.UseVisualStyleBackColor = false;
+            this.minimizeButton.Click += new System.EventHandler(this.minimizeButton_Click);
+            // 
             // LoadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,5 +169,6 @@
         private System.Windows.Forms.Label loadLabel;
         private System.Windows.Forms.Panel filePanel;
         private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.Button minimizeButton;
     }
 }
