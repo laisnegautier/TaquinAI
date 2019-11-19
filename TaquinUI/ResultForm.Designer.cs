@@ -52,6 +52,9 @@
             this.HeaderBar.Name = "HeaderBar";
             this.HeaderBar.Size = new System.Drawing.Size(586, 29);
             this.HeaderBar.TabIndex = 0;
+            this.HeaderBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseDown);
+            this.HeaderBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseMove);
+            this.HeaderBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseUp);
             // 
             // minimizeButton
             // 

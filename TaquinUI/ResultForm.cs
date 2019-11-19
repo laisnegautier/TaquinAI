@@ -23,6 +23,9 @@ namespace TaquinUI
         int _index = 0;
         int _size;
 
+        private bool mouseDown;
+        private Point lastLocation;
+
         public ResultForm()
         {
             InitializeComponent();
@@ -139,6 +142,28 @@ namespace TaquinUI
         private void minimizeButton_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+        
+        private void dragBorder_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void dragBorder_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void dragBorder_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
     }
 }
