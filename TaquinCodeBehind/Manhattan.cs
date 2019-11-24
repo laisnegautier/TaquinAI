@@ -17,7 +17,8 @@ namespace TaquinCodeBehind
                 int destI, destJ;
                 currBoard.FindCellByValue(out currentI, out currentJ, cell.Value);
                 destBoard.FindCellByValue(out destI, out destJ, cell.Value);
-                value += Dist(currentI, currentJ, destI, destJ);
+                if (destBoard.Structure[destI, destJ].Value != "-1")
+                    value += Dist(currentI, currentJ, destI, destJ);
             }
             return value;
         }

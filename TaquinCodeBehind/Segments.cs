@@ -8,9 +8,7 @@ namespace TaquinCodeBehind
 {
     public class Segments : AstarUni
     {
-        int Step { get; set; }
         int Size { get; set; }
-        List<Board> Targets { get; set; }
 
         public Segments(IHeuristic heuristic): base(heuristic){}
 
@@ -18,25 +16,19 @@ namespace TaquinCodeBehind
         {
             // Innitialisation Step
             Size = board.Board.Structure.GetLength(0);
-            Targets = CreateTargets(Size);
-            CreateTarget(Size);
-            Targets.Add(_destination.Board);
-            Step = Targets.Count();
             _openSet.Add(board);
-            int iteration = 0;
             // Solve loop
-            foreach (Board target in Targets)
+            for(int rank = 0; rank <= Size*Size-2; rank++)
             {
-                iteration++;
-                _destination = new EvaluableBoard(target);
+                _destination = new EvaluableBoard(CreateStep(Size, rank));
                 while(_openSet.Count > 0)
                 {
                     _currentBoard = _openSet[0];
                     if (_currentBoard.Equals(_destination))
                     {
-                        Console.WriteLine("===============Step {0}==============", iteration);
+                        Console.WriteLine("===============Step {0}==============", rank);
                         Console.WriteLine(_currentBoard.Board);
-                        if (iteration == Step)
+                        if (rank == 22)
                         {
                             return Unpile(_currentBoard);
                         }
@@ -57,6 +49,8 @@ namespace TaquinCodeBehind
                         else
                         {
                             testBoard.Cost += 1;
+                            // Evaluation d'une heuristique humaine
+                            int thisHumanHeuri = Eval(testBoard, rank);
                             testBoard.Score = testBoard.Cost + Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
                             _openSet.Add(testBoard);
                         }
@@ -70,32 +64,35 @@ namespace TaquinCodeBehind
             return Unpile(board);
         }
 
-        private List<Board> CreateTargets(int size)
+        private int Eval(EvaluableBoard board, int step)
         {
-            List<Board> targets = new List<Board>();
+            int score = 0;
+            int optI, optJ, currI, currJ;
+            Functions.pos2coord(out optI, out optJ, step, Size);
+            board.Board.FindCellByValue(out currI, out currJ, Convert.ToString(step));
+        }
+
+        private Board CreateStep(int size, int rank)
+        {
+            Board board;
             List<Cell> structure = new List<Cell>();
-            for (int i = 0; i < size * size - 2; i++)
+            for (int i = 0; i <= rank; i++)
             {
                 Cell cell = new Cell(i);
                 structure.Add(cell);
             }
-            for (int step = 0; step < size - 2; step++)
-            {
-                List<Cell> cells = structure.GetRange(0, (size * (step + 1)));
-                for (int i = 0; i < (size * size - 2) - (size * (step + 1)); i++)
-                {
-                    Cell empty = new Cell(-1);
-                    cells.Add(empty);
-                }
-                for (int i = 0; i < 2; i++)
-                {
-                    Cell hole = new Cell("-");
-                    cells.Add(hole);
-                }
-                Board board = new Board(cells.ToArray());
-                targets.Add(board);
+            for (int i = rank; i < (size * size - 2); i++)
+            { 
+                Cell empty = new Cell(-1);
+                structure.Add(empty);
             }
-            return targets;
+            for (int i = 0; i < 2; i++)
+            {
+                Cell hole = new Cell("-");
+                structure.Add(hole);
+            }
+            board = new Board(structure.ToArray());
+            return board;
         }
     }
 }
