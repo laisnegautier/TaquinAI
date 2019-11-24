@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AstarUni.cs" />
     <Compile Include="CornerConflict.cs" />
+    <Compile Include="HolesInfos.cs" />
     <Compile Include="PLCC.cs" />
     <Compile Include="PLC.cs" />
     <Compile Include="Board.cs" />

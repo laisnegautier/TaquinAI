@@ -26,7 +26,9 @@ namespace TaquinCodeBehind
                     _currentBoard = _openSet[0];
                     if (_currentBoard.Equals(_destination))
                     {
-                        Console.WriteLine("===============Step {0}==============", rank);
+                        Console.WriteLine("=============== Step {0} ==============", rank);
+                        Console.WriteLine(_destination.Board);
+                        Console.WriteLine("======================================", rank);
                         Console.WriteLine(_currentBoard.Board);
                         if (rank == 22)
                         {
@@ -51,7 +53,7 @@ namespace TaquinCodeBehind
                             testBoard.Cost += 1;
                             // Evaluation d'une heuristique humaine
                             int thisHumanHeuri = Eval(testBoard, rank);
-                            testBoard.Score = testBoard.Cost + Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
+                            testBoard.Score = testBoard.Cost + thisHumanHeuri;//Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
                             _openSet.Add(testBoard);
                         }
                     }
@@ -68,8 +70,24 @@ namespace TaquinCodeBehind
         {
             int score = 0;
             int optI, optJ, currI, currJ;
+            // Recherche de la position optimale
             Functions.pos2coord(out optI, out optJ, step, Size);
+            // Recherche de la position courante
             board.Board.FindCellByValue(out currI, out currJ, Convert.ToString(step));
+            // Prise ne compte de la distance case destination
+            score += 3 * (Math.Abs(optI - currI) + Math.Abs(optJ - currJ));
+            int hole1I, hole1J, hole2I, hole2J;
+            board.Board.FindEmptyOne(out hole1I, out hole1J);
+            board.Board.FindEmptyTwo(out hole2I, out hole2J);
+            // Prise en compte de la distance trou case à placer
+            score += 2 * ( Math.Abs(hole1I - currI) + Math.Abs(hole1J - currJ));
+            score += 2 * ( Math.Abs(hole2I - currI) + Math.Abs(hole2J - currJ));
+            // Prise en compte de la distance trou destination
+            int distH1 = Math.Abs(optI - hole1I) + Math.Abs(optJ - hole1J);
+            int distH2 = Math.Abs(optI - hole2I) + Math.Abs(optJ - hole2J);
+
+            score += Math.Min(distH1, distH2);
+            return score;
         }
 
         private Board CreateStep(int size, int rank)
@@ -81,7 +99,7 @@ namespace TaquinCodeBehind
                 Cell cell = new Cell(i);
                 structure.Add(cell);
             }
-            for (int i = rank; i < (size * size - 2); i++)
+            for (int i = rank; i < (size * size - 2)-1; i++)
             { 
                 Cell empty = new Cell(-1);
                 structure.Add(empty);

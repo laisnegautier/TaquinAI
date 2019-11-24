@@ -31,7 +31,8 @@ namespace TaquinCodeBehind
             Previous = null;
             Score = score;
         }
-
+        #endregion
+        
         public override bool Equals(object obj)
         {
             bool equal = true;
@@ -42,15 +43,15 @@ namespace TaquinCodeBehind
                 {
                     int posI, posJ;
                     board.Board.FindCellByValue(out posI, out posJ, cell.Value);
-                    if(Board.Structure[posI,posJ].Value != "-1" && board.Board.Structure[posI,posJ].Value != "-1")
-                        if (Board.Structure[posI, posJ].Value != cell.Value)
-                            equal = false;
+                    if(cell.Value != "-")
+                        if(Board.Structure[posI,posJ].Value != "-1" && board.Board.Structure[posI,posJ].Value != "-1")
+                            if (Board.Structure[posI, posJ].Value != cell.Value)
+                                equal = false;
                 }
             }
             else equal = false;
             return equal;
         }
-        #endregion
 
         #region IEnumerable
         public IEnumerator<Cell> GetEnumerator()

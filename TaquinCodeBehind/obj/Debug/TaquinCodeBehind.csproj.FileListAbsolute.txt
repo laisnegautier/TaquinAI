@@ -10,3 +10,9 @@ C:\Users\simon\Desktop\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.cspr
 C:\Users\simon\Desktop\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.csproj.CoreCompileInputs.cache
 C:\Users\simon\Desktop\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.dll
 C:\Users\simon\Desktop\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.pdb
+C:\Users\simon\Documents\Cours 1A\TaquinAI\TaquinCodeBehind\bin\Debug\TaquinCodeBehind.dll
+C:\Users\simon\Documents\Cours 1A\TaquinAI\TaquinCodeBehind\bin\Debug\TaquinCodeBehind.pdb
+C:\Users\simon\Documents\Cours 1A\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.csprojAssemblyReference.cache
+C:\Users\simon\Documents\Cours 1A\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.csproj.CoreCompileInputs.cache
+C:\Users\simon\Documents\Cours 1A\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.dll
+C:\Users\simon\Documents\Cours 1A\TaquinAI\TaquinCodeBehind\obj\Debug\TaquinCodeBehind.pdb
