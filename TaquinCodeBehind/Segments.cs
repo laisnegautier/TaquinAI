@@ -35,7 +35,7 @@ namespace TaquinCodeBehind
                         Console.WriteLine(_destination.Board);
                         Console.WriteLine("======================================", rank);
                         Console.WriteLine(_currentBoard.Board);
-                        if (rank == 22)
+                        if (rank == Size * Size - 3)
                         {
                             return Unpile(_currentBoard);
                         }
