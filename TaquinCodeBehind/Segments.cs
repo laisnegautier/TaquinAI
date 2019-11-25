@@ -20,10 +20,15 @@ namespace TaquinCodeBehind
             // Solve loop
             for(int rank = 0; rank <= Size*Size-2; rank++)
             {
+                
                 _destination = new EvaluableBoard(CreateStep(Size, rank));
                 while(_openSet.Count > 0)
                 {
                     _currentBoard = _openSet[0];
+                    //Console.WriteLine("=============== Best One Chosen ==============", rank);
+                    //Console.WriteLine(_currentBoard.Board);
+                    //Console.WriteLine("Cost = " + _currentBoard.Score);
+                    //Console.WriteLine("======================================", rank);
                     if (_currentBoard.Equals(_destination))
                     {
                         Console.WriteLine("=============== Step {0} ==============", rank);
@@ -70,23 +75,32 @@ namespace TaquinCodeBehind
         {
             int score = 0;
             int optI, optJ, currI, currJ;
-            // Recherche de la position optimale
+            for(int i = 0; i < step; i++)
+            {
+                // Recherche de la position optimale
+                Functions.pos2coord(out optI, out optJ, i, Size);
+                // Recherche de la position courante
+                board.Board.FindCellByValue(out currI, out currJ, Convert.ToString(i));
+                // Prise ne compte de la distance case destination
+                score += Math.Abs(i-step) * (Math.Abs(optI - currI) + Math.Abs(optJ - currJ));
+            }
             Functions.pos2coord(out optI, out optJ, step, Size);
-            // Recherche de la position courante
             board.Board.FindCellByValue(out currI, out currJ, Convert.ToString(step));
-            // Prise ne compte de la distance case destination
-            score += 3 * (Math.Abs(optI - currI) + Math.Abs(optJ - currJ));
+            score += 5 * (Math.Abs(optI - currI) + Math.Abs(optJ - currJ));
+
             int hole1I, hole1J, hole2I, hole2J;
             board.Board.FindEmptyOne(out hole1I, out hole1J);
             board.Board.FindEmptyTwo(out hole2I, out hole2J);
             // Prise en compte de la distance trou case à placer
-            score += 2 * ( Math.Abs(hole1I - currI) + Math.Abs(hole1J - currJ));
-            score += 2 * ( Math.Abs(hole2I - currI) + Math.Abs(hole2J - currJ));
+            score += 6 * ( Math.Abs(hole1I - currI) + Math.Abs(hole1J - currJ));
+            score += 6 * ( Math.Abs(hole2I - currI) + Math.Abs(hole2J - currJ));
             // Prise en compte de la distance trou destination
             int distH1 = Math.Abs(optI - hole1I) + Math.Abs(optJ - hole1J);
             int distH2 = Math.Abs(optI - hole2I) + Math.Abs(optJ - hole2J);
 
-            score += Math.Min(distH1, distH2);
+            //score += 5 * distH1;
+            //score += 5 * distH2;
+            score += 9 * Math.Min(distH1, distH2);
             return score;
         }
 
