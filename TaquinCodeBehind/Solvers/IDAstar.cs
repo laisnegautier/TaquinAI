@@ -6,27 +6,40 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Implementation de l'algorithme IDA* de parcours de graph
+    /// </summary>
     public class IDAstar : Solver
     {
+        #region Attributes
         protected EvaluableBoard _destination;
-        int Size { get; set; }
+        #endregion
 
+        #region Properties
+        int Size { get; set; }
+        #endregion
+
+        #region Construct
         public IDAstar(IHeuristic heuristic)
         {
+            // Injection de dépendance de l'heuristique choisie par l'interface
             Heuristic = heuristic;
         }
-
+        #endregion
+        
+        #region Functions
         public override List<Board> Solve(EvaluableBoard board)
         {
-            //Setting the Freshold from the StartNOde Cost
+            // Mise en place du seuil à partir du noeud de départ
             Size = board.Board.Structure.GetLength(0);
-            CreateTarget(Size);
+            _destination = Functions.CreateTarget(Size);
             int threshold = Heuristic.EvaluateBoard(board.Board, _destination.Board);
 
             //Setting the StartNode for this iteration
             EvaluableBoard start = board;
             while (true)
             {
+                // Départ de la fonction récursive sur le premier noeud
                 EvaluableBoard temp = Search(start, 0, threshold);
                 int tempScore = temp.Score;
                 if (temp.Equals(_destination))
@@ -36,11 +49,19 @@ namespace TaquinCodeBehind
             }
         }
 
+        /// <summary>
+        /// Fonction récursive au coeur de l'algorithme IDA* 
+        /// permet d'évaluer les parcours potentiels vers la solution
+        /// </summary>
+        /// <param name="currEval"></param>
+        /// <param name="cost"></param>
+        /// <param name="threshold"></param>
+        /// <returns></returns>
         public EvaluableBoard Search(EvaluableBoard currEval, int cost, int threshold)
         {
-            //Console.WriteLine(currEval.Board);
-            //Console.WriteLine(threshold);
+            // Evaluation du cout récursif
             int f = cost + Heuristic.EvaluateBoard(currEval.Board, _destination.Board);
+            // Si le score dépasse le seuil on coupe la branche
             if(f > threshold)
             {
                 currEval.Score = f;
@@ -48,6 +69,7 @@ namespace TaquinCodeBehind
             }
             if (currEval.Equals(_destination)) return currEval;
             int min = int.MaxValue;
+            // Recherche et evaluaiton des voisins
             List<EvaluableBoard> holder = CreateChild(currEval);
             foreach(EvaluableBoard child in holder)
             {
@@ -56,6 +78,7 @@ namespace TaquinCodeBehind
             holder = holder.OrderBy(b => b.Score).ToList();
             foreach(EvaluableBoard child in holder)
             {
+                // Appel récrsif on évalue chaque enfant dans la fonction de recherche
                 EvaluableBoard temp = Search(child, cost + 1, threshold);
                 int tempScore = temp.Score;
                 if (temp.Equals(_destination))
@@ -65,22 +88,6 @@ namespace TaquinCodeBehind
             currEval.Score = min;
             return currEval;
         }
-
-        public void CreateTarget(int size)
-        {
-            Cell[] list = new Cell[size * size];
-            for (int i = 0; i < size * size - 2; i++)
-            {
-                Cell cell = new Cell(i);
-                list[i] = cell;
-            }
-            for (int j = 0; j < 2; j++)
-            {
-                Cell cell = new Cell("-");
-                list[list.Length - 1 - j] = cell;
-            }
-            Board board = new Board(list);
-            _destination = new EvaluableBoard(board);
-        }
+        #endregion
     }
 }
