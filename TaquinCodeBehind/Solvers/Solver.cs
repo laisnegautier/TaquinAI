@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Mother class pour les différents type d'algorithme de résolution (A*, IDA*,...)
+    /// </summary>
     public abstract class Solver
     {
         #region Attributes
