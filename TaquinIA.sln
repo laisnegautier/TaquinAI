@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaquinUI", "TaquinUI\Taquin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaquinCodeBehind", "TaquinCodeBehind\TaquinCodeBehind.csproj", "{583E1BF1-A270-4322-81DA-C28057136170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parametrizer", "Parametrizer\Parametrizer.csproj", "{F2D090A5-C489-41C0-9130-5247871FE334}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{583E1BF1-A270-4322-81DA-C28057136170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{583E1BF1-A270-4322-81DA-C28057136170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{583E1BF1-A270-4322-81DA-C28057136170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D090A5-C489-41C0-9130-5247871FE334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D090A5-C489-41C0-9130-5247871FE334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D090A5-C489-41C0-9130-5247871FE334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D090A5-C489-41C0-9130-5247871FE334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

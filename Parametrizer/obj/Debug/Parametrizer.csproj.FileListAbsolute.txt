@@ -1,0 +1,10 @@
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\bin\Debug\Parametrizer.exe.config
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\bin\Debug\Parametrizer.exe
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\bin\Debug\Parametrizer.pdb
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\obj\Debug\Parametrizer.csprojAssemblyReference.cache
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\obj\Debug\Parametrizer.csproj.CoreCompileInputs.cache
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\obj\Debug\Parametrizer.exe
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\obj\Debug\Parametrizer.pdb
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\bin\Debug\TaquinCodeBehind.dll
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\bin\Debug\TaquinCodeBehind.pdb
+C:\Users\simon\Documents\Cours 1A\TaquinAI\Parametrizer\obj\Debug\Parametrizer.csproj.CopyComplete
