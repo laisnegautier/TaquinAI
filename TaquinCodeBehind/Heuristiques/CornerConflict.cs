@@ -8,23 +8,33 @@ namespace TaquinCodeBehind
 {
     public class CornerConflict : IHeuristic
     {
+        /// <summary>
+        /// Fonction principale qui evalue le cout de l'heuristique C 
+        /// entre deux tableau quelconques
+        /// </summary>
+        /// <param name="currBoard"> Le tableau à évaluer </param>
+        /// <param name="destBoard"> Le tableau avec lequel on compare </param>
+        /// <returns></returns>
         public int EvaluateBoard(Board currBoard, Board destBoard)
         {
             int size = currBoard.Structure.GetLength(0);
             int cost = 0;
+            // Liste des valeurs que l'on peut rencontrer dans les coins
             List<int> cornerValues;
-            // Evaluating Corners Conflicts
+            // Evaluation de l'heuristique pour un board de taille 3x3
             if (size == 3)
             {
                 cornerValues = new List<int> { 0, 2, 6 };
+                // Liste des valeurs déja impliquées dans un conflit
                 List<int> usedPile = new List<int>();
                 foreach (int value in cornerValues)
                 {
                     int optI, optJ, currI, currJ;
                     Functions.pos2coord(out optI, out optJ, value, size);
                     currBoard.FindCellByValue(out currI, out currJ, value.ToString());
-                    if (optI != currI || optJ != currJ)
+                    if (optI != currI || optJ != currJ) // Si le coin est mal placé
                     {
+                        // On cherche si une case sur le bord est à la bonne place
                         if (value == 0)
                         {
                             if (currBoard.Structure[optI, optJ + 1].Value == "1")
@@ -58,16 +68,19 @@ namespace TaquinCodeBehind
                     }
                 }
             }
-            if (size == 5)
+            // Evaluation de l'heuristique pour un board de taille 5x5
+            else if (size == 5)
             {
                 cornerValues = new List<int> { 0, 4, 20 };
+                // Pour chaque coin, on évalue son implication dans l'heuristique C
                 foreach (int value in cornerValues)
                 {
                     int optI, optJ, currI, currJ;
                     Functions.pos2coord(out optI, out optJ, value, size);
                     currBoard.FindCellByValue(out currI, out currJ, value.ToString());
-                    if (optI != currI || optJ != currJ)
+                    if (optI != currI || optJ != currJ) // Si le coin est mal placé
                     {
+                        // On évalue si ses voisins sont en palce ou non
                         if (value == 0)
                         {
                             if (currBoard.Structure[optI, optJ + 1].Value == "1") cost += 2;
