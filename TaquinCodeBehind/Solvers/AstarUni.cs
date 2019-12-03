@@ -6,44 +6,36 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Implementation de l'algorithme A* unidirectionelle de parcours de graph
+    /// </summary>
     public class AstarUni : Solver
     {
+        #region Attributes
         protected EvaluableBoard _currentBoard;
+        // represente l'état final objectif pour le taquin
         protected EvaluableBoard _destination;
+        #endregion
 
+        #region Construct
         public AstarUni(IHeuristic heuristic)
-        {
+        { 
+            // Injection de dépendance de l'heuristique choisie par l'interface
             Heuristic = heuristic;
         }
+        #endregion
 
-        public void CreateTarget(int size)
-        {
-            Cell[] list = new Cell[size * size];
-            for (int i = 0; i < size * size - 2; i++)
-            {
-                Cell cell = new Cell(i);
-                list[i] = cell;
-            }
-            for(int j = 0; j < 2; j++)
-            {
-                Cell cell = new Cell("-");
-                list[list.Length - 1 - j] = cell;
-            }
-            Board board = new Board(list);
-            _destination = new EvaluableBoard(board);
-        }
-        
+        #region Methods
         public override List<Board> Solve(EvaluableBoard board)
         {
             _openSet = new List<EvaluableBoard>();
             int size = board.Size;
-            CreateTarget(size);
+            _destination = Functions.CreateTarget(size);
             _openSet.Add(board);
             List<Board> result = new List<Board>();
             while (_openSet.Count > 0)
             {
                 _currentBoard = _openSet[0];
-                //Console.WriteLine(_currentBoard.Board + "\n");
                 // Si on est arrivé, on arrête
                 if (_currentBoard.Equals(_destination))
                 {
@@ -69,11 +61,9 @@ namespace TaquinCodeBehind
                 _closedSet.Add(_currentBoard);
                 _openSet.Remove(_currentBoard);
                 _openSet = _openSet.OrderBy(b => b.Score).ToList();
-                //_openSet = _openSet.OrderBy(b => b.Cost).ToList();
-                //_openSet = _openSet.OrderBy(b => (b.Score - b.Cost)).ToList();
-                //foreach (EvaluableBoard b in _openSet) Console.Write(b.Board + " ");
             }
             return result;
         }
+        #endregion
     }
 }

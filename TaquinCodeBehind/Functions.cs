@@ -18,5 +18,28 @@ namespace TaquinCodeBehind
             j = rank % size;
             i = rank / size;
         }
+
+        /// <summary>
+        /// Méthode qui créer l'étape finale d'un taquin résolu
+        /// </summary>
+        /// <param name="size"> Taille du taquin a résoude (3x3 ou 5x5)</param>
+        public static EvaluableBoard CreateTarget(int size)
+        {
+            // On ajoute toutes les valeurs en fonction de la taille
+            Cell[] list = new Cell[size * size];
+            for (int i = 0; i < size * size - 2; i++)
+            {
+                Cell cell = new Cell(i);
+                list[i] = cell;
+            }
+            // On ajoute ensuite les trous
+            for (int j = 0; j < 2; j++)
+            {
+                Cell cell = new Cell("-");
+                list[list.Length - 1 - j] = cell;
+            }
+            Board board = new Board(list);
+            return new EvaluableBoard(board);
+        }
     }
 }
