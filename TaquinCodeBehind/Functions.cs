@@ -8,11 +8,13 @@ namespace TaquinCodeBehind
 {
     public class Functions
     {
+        // Permet de transformer des coordonées 2D en 1D
         public static int coord2pos(int i, int j, int size)
         {
             return (i * size + j);
         }
 
+        // Permet de transformer une position en coordonées
         public static void pos2coord(out int i, out int j, int rank, int size)
         {
             j = rank % size;
