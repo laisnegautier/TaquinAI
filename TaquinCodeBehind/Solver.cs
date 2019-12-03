@@ -9,19 +9,29 @@ namespace TaquinCodeBehind
     public abstract class Solver
     {
         #region Attributes
+        // Liste des ouverts 
         protected List<EvaluableBoard> _openSet = new List<EvaluableBoard>();
+        // Liste des fermés contient les noeuds déjà évalués
         protected List<EvaluableBoard> _closedSet = new List<EvaluableBoard>();
+        public int openCount;
+        public int closedCount;
         #endregion
 
         #region Properties
-        public IHeuristic Heuristic { get; set; }
+        public IHeuristic Heuristic { get; set; } // L'algorithme de résolution à besoin d'une estimation du coup
         #endregion
 
         #region AbstractsToOverride
+        /// <summary>
+        /// La fonction ou s'implémente l'algorithme de résolution choisi
+        /// </summary>
+        /// <param name="board"> tableau cible à résoudre </param>
+        /// <returns></returns>
         public abstract List<Board> Solve(EvaluableBoard board);
         #endregion
 
         #region Methods
+        // Methode permettant de récupérer le chemin de résolution
         public List<Board> Unpile(EvaluableBoard board)
         {
             List<Board> result = new List<Board>();
@@ -34,10 +44,13 @@ namespace TaquinCodeBehind
             return result;
         }
 
+        // Méthode permettant de dupliquer un board en rompant 
+        // les effet de bord dus au type référence des tableaux
         public static EvaluableBoard CopyBoard(EvaluableBoard board)
         {
             EvaluableBoard result = new EvaluableBoard(board.Score);
             Cell[,] structure = new Cell[board.Size,board.Size];
+            // On replace au bon endroit toute les cellules
             foreach(Cell cell in board)
             {
                 Cell newCell = new Cell(cell.Value);
@@ -45,7 +58,7 @@ namespace TaquinCodeBehind
                 board.Board.FindCellByValue(out posI,out posJ, cell.Value);
                 structure[posI, posJ] = newCell;
             }
-            // Might me proper
+            // On s'occupe de replaer les trous
             Cell emptyOne = new Cell("-");
             Cell emptyTwo = new Cell("-");
             int e1i, e1j, e2i, e2j;
@@ -53,23 +66,26 @@ namespace TaquinCodeBehind
             board.Board.FindEmptyTwo(out e2i, out e2j);
             structure[e1i, e1j] = emptyOne;
             structure[e2i, e2j] = emptyTwo;
-            // Till there is not really needed
+            // On créer le duplicata
             result.Board = new Board(structure);
             result.Size = result.Board.Structure.GetLength(0);
             return result;
         }
 
-        // Might be transform as static
+        /// <summary>
+        /// Méthode retournant les voisins d'un état spécifique
+        /// </summary>
         public static List<EvaluableBoard> CreateChild(EvaluableBoard board)
         {
             List<EvaluableBoard> neighbours = new List<EvaluableBoard>();
-            
+            // On regarde si les cellules peuvent bouger
             foreach(Cell cell in board)
             {
                 int i, j;
                 board.Board.FindCellByValue(out i, out j, cell.Value);
                 if (cell.IsMovable())
                 {
+                    // Pour chaque mouvement possible, on crée un tableau ou on effectue le mouvement
                     foreach(Cell.Moves move in cell.AvailableMoves)
                     {
                         EvaluableBoard neighbour = CopyBoard(board);
@@ -82,6 +98,7 @@ namespace TaquinCodeBehind
             }
             return neighbours;
         }
+
 
         public bool FindPast(EvaluableBoard board)
         {
