@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Class implémentant l'heuristique PLCC combinant Manhattan, Linear Conflict et CornerConflicts
+    /// </summary>
     public class PLCC : IHeuristic
     {
         IHeuristic _h1;
@@ -14,6 +17,7 @@ namespace TaquinCodeBehind
 
         public PLCC()
         {
+            // On utilise nos heuristiques P, LC et C prédéfini
             _h1 = new Manhattan();
             _h2 = new LinearConflict();
             _h3 = new CornerConflict();
