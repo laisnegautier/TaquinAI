@@ -8,29 +8,30 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Class permettant d'encapsuler un tableau pour l'interface graphique
+    /// </summary>
     public class Taquin : IEnumerable<Cell>
     {
-        #region Attributes
-        private Board _board;
-        private readonly int _size;
+        #region Properties
+        public int Size { get; }
+        public Board Board { get; private set; }
         #endregion
 
-        public int Size { get { return _size; } }
-        public Board Board { get { return _board; } }
         #region Construct
-        public Taquin(int size)
+        public Taquin(int size) // Le taquin se construit en fonction de sa taille et se rempli automatiquement
         {
-            _size = size;
-            Populate(size);
-            Shuffle();
+            Size = size;
+            Populate(size); // Remplissage
+            SetMoves(); // Calcul de l'état actuel
         }
 
-        public Taquin(string fileName)
+        public Taquin(string fileName) // Permet de créer un Taquin depuis un fichier .tqn correctement formatté
         {
-            
+            // Lecture du fichier
             string[] lines = File.ReadAllLines(fileName);
-            _size = lines[0].Length < 6 ? 3 : 5;
-            Cell[,] finalBoard = new Cell[_size, _size];
+            Size = lines[0].Length < 6 ? 3 : 5;
+            Cell[,] finalBoard = new Cell[Size, Size];
             int currentLineCount = 0;
             foreach(string l in lines)
             {
@@ -39,14 +40,15 @@ namespace TaquinCodeBehind
                 foreach(string value in values)
                 {
                     Cell cell = new Cell(values[currentColumn]);
-                    finalBoard[currentLineCount, currentColumn % _size] = cell;
+                    finalBoard[currentLineCount, currentColumn % Size] = cell;
                     currentColumn++;
                 }
                 currentLineCount++;
             }
-            _board = new Board(finalBoard);
-            Console.WriteLine(_board);
-            _board.CalculatePossibleMoves();
+            // On renvoie le tableau 
+            Board = new Board(finalBoard);
+            Console.WriteLine(Board);
+            Board.CalculatePossibleMoves();
         }
         #endregion
 
@@ -62,31 +64,35 @@ namespace TaquinCodeBehind
             }
             cells[cells.Length - 2] = new Cell();
             cells[cells.Length - 1] = new Cell();
-            _board = new Board(cells);
+            Board = new Board(cells);
         }
 
-        public void Shuffle()
+        // Calcule tous les mouvements pour chaque cellule du tableau
+        public void SetMoves()
         {
-            if(_board != null)
+            if(Board != null)
             {
-                _board.CalculatePossibleMoves();
+                Board.CalculatePossibleMoves();
             }
         }
 
+        // Renvoie la cell du Taquin en position i,j
         public Cell GetCell(int i, int j)
         {
-            return _board.Structure[i, j];
+            return Board.Structure[i, j];
         }
 
+        // Bouge une cellule du Taquin
         public void Move(Cell cell)
         {
             if(cell.IsMovable())
-            _board.Move(cell, cell.AvailableMoves[0]);
+            Board.Move(cell, cell.AvailableMoves[0]);
         }
 
+        // Permet de representer le tableau courrant du Taquin en console pour debuguer
         public override string ToString()
         {
-            return _board.ToString();
+            return Board.ToString();
         }
         #endregion
 
@@ -94,10 +100,10 @@ namespace TaquinCodeBehind
         public IEnumerator<Cell> GetEnumerator()
         {
             int line = -1;
-            for(int i = 0; i < _size*_size; i++)
+            for(int i = 0; i < Size*Size; i++)
             {
-                if (i % _size == 0) line++;
-                yield return _board.Structure[line,i % _size];
+                if (i % Size == 0) line++;
+                yield return Board.Structure[line,i % Size];
             }
         }
 
