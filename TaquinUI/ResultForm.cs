@@ -1,73 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaquinCodeBehind;
 using System.Diagnostics;
 
 namespace TaquinUI
 {
+    /// <summary>
+    /// Fenêtre permettatn d'afficher le résultat d'une résolution
+    /// </summary>
     public partial class ResultForm : Form
     {
-        private List<Board> States { get; set; }
-        private Solver Solver { get; }
+        #region Attributes
         private EvaluableBoard _board;
-        BackgroundWorker _solverThread;
-        Stopwatch _watch;
-
         int _index = 0;
         int _size;
-
+        // Gestion du temps et du parallele
+        BackgroundWorker _solverThread;
+        Stopwatch _watch;
+        // Gestion du Drag
         private bool mouseDown;
         private Point lastLocation;
+        #endregion
 
+        #region Properties
+        private List<Board> States { get; set; }
+        private Solver Solver { get; }
+        #endregion
+
+        #region Construct
         public ResultForm()
         {
             InitializeComponent();
         }
 
-        /*public ResultForm(List<Board> boards)
-        {
-            InitializeComponent();
-            States = boards;
-            nbMovesLabel.Text += " " + (boards.Count - 1) + " coups.";
-            SetBoard();
-        }*/
-
         public ResultForm(Solver solver, EvaluableBoard board)
         {
             InitializeComponent();
-            // Hiding stuff
+            // Cacher les fonctionnalitée en attendant les résultats
             leftButton.Hide();
             rightButton.Hide();
             nbMovesLabel.Hide();
-
+            // Attribution des utilitaires
             Solver = solver;
             _board = board;
             _solverThread = new BackgroundWorker();
-            // Assigning the DoWork Method
+            // Assignation des event du thread d'arrière plan
             _solverThread.DoWork += new DoWorkEventHandler(SolverThreadDoWork);
             _solverThread.RunWorkerCompleted += new RunWorkerCompletedEventHandler(SolverThreadWorkDone);
-
+            // Launch du backGroundWorker
             _solverThread.RunWorkerAsync();
-
             _solverThread.WorkerReportsProgress = true;
             _solverThread.WorkerSupportsCancellation = true;
         }
+        #endregion
 
+        #region BackGroundWorker
+        // Fonction principale du thread d'arrière plan
         private void SolverThreadDoWork(object sender, DoWorkEventArgs e)
         {
+            // Départ du compteur et lancement de la résolution du Taquin
             _watch = Stopwatch.StartNew();
             States = Solver.Solve(_board);
         }
 
+        // Fonction trigger lors de l'arrêt du Thread d'arrière plan
         private void SolverThreadWorkDone(object sender, RunWorkerCompletedEventArgs e)
         {
+            // On stop le décompte du temps
             _watch.Stop();
             States.Reverse();
             // Showing stuff back
@@ -90,46 +92,10 @@ namespace TaquinUI
             nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName + " en " + elapsedMs + " Ms";
             SetBoard();
         }
+        #endregion
 
-        private void SetSize()
-        {
-            _size = States[_index].Structure.GetLength(0);
-        }
-
-        public void SetBoard()
-        {
-            SetSize();
-            int line = -1;
-            int column = 0;
-            boardPanel.Controls.Clear();
-            //Debug.WriteLine(boardPanel.Left + " - " + boardPanel.Top);
-            foreach (Cell cell in States[_index])
-            {
-                if (column % _size == 0) line++;
-                int size = boardPanel.Width / _size;
-                CellButton currentCellButton = new CellButton(cell, size);
-
-                currentCellButton.Left = ((column % _size) * size);
-                //Console.Write(currentCellButton.Left + " - ");
-                currentCellButton.Top = (line * size);
-                //Console.WriteLine(currentCellButton.Top);
-                boardPanel.Controls.Add(currentCellButton);
-                column++;
-            }
-        }
-
-        private void RightButton_Click(object sender, EventArgs e)
-        {
-            _index = (_index + 1) % States.Count;
-            SetBoard();
-        }
-
-        private void LeftButton_Click(object sender, EventArgs e)
-        {
-            _index = ((_index - 1) + States.Count) % States.Count;
-            SetBoard();
-        }
-
+        #region UIMethod_Misceallanous
+        // Fonction permettant de fermer la fenêtre
         private void button1_Click(object sender, EventArgs e)
         {
             if (_solverThread.IsBusy)
@@ -139,11 +105,13 @@ namespace TaquinUI
             Close();
         }
 
+        // Fonction permettant de minimiser la fenêtre
         private void minimizeButton_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }
-        
+
+        // Fonctions permettant le Drag du Form
         private void dragBorder_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
@@ -165,5 +133,51 @@ namespace TaquinUI
         {
             mouseDown = false;
         }
+        #endregion
+
+        #region UIMethod_Fonctionnalies
+        // Fonction permettant d'établir la disposition du board dans la fenêtre
+        public void SetBoard()
+        {
+            // Calcul de la taille adaptée
+            SetSize();
+            int line = -1;
+            int column = 0;
+            boardPanel.Controls.Clear();
+            // Pour chacun des cellule de l'index actuel
+            foreach (Cell cell in States[_index])
+            {
+                if (column % _size == 0) line++;
+                int size = boardPanel.Width / _size;
+                // On crée des cellButton par practcité cependant on ne leur assigne pas de gestionnaire d'événement
+                CellButton currentCellButton = new CellButton(cell, size);
+                currentCellButton.Left = ((column % _size) * size);
+                currentCellButton.Top = (line * size);
+                boardPanel.Controls.Add(currentCellButton);
+                column++;
+            }
+        }
+
+        // Focntion gérant le taille du Taquin affiché
+        private void SetSize()
+        {
+            _size = States[_index].Structure.GetLength(0);
+        }
+        #endregion
+
+        #region UIMethod_Interactions
+        // Fonctions permettant de modifier l'index tu tableau à afficher
+        private void RightButton_Click(object sender, EventArgs e)
+        {
+            _index = (_index + 1) % States.Count;
+            SetBoard();
+        }
+
+        private void LeftButton_Click(object sender, EventArgs e)
+        {
+            _index = ((_index - 1) + States.Count) % States.Count;
+            SetBoard();
+        }
+        #endregion
     }
 }
