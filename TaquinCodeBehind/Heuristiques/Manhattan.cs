@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Implementation de l'heuristique de manattan ou 'taxicab distance'
+    /// </summary>
     public class Manhattan : IHeuristic
     {
+        // Implementation de la fonction d'évaluation
         public int EvaluateBoard(Board currBoard, Board destBoard)
         {
             int value = 0;
@@ -23,6 +27,7 @@ namespace TaquinCodeBehind
             return value;
         }
 
+        // Retourne la distance de manhattan entre deux points du plan
         public int Dist(int i1, int j1, int i2, int j2)
         {
             return Math.Abs(i1 - i2) + Math.Abs(j1 - j2);
