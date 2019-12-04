@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Class permettant d'encapsuler un tableau pour les algorithmes de résolution
+    /// </summary>
     public class EvaluableBoard : IEnumerable<Cell>
     {
         #region Properties
-        public int Size { get; set; }
-        public Board Board { get; set; }
-        public int Score { get; set; }
-        public int Cost { get; set; }
+        public int Size { get; set; } // Taille du tableau
+        public Board Board { get; set; } // Tableau encapsulé
+        public int Score { get; set; } // Distance entre le tableau et le noeud d'origine
+        public int Cost { get; set; } // Distance entre le tableau et le noeud d'arrivée
         public EvaluableBoard Previous { get; set; }
         #endregion
 
@@ -32,7 +35,9 @@ namespace TaquinCodeBehind
             Score = score;
         }
         #endregion
-        
+
+        #region Method
+        // Methode permettant de retourner si deux tableau sont égaux
         public override bool Equals(object obj)
         {
             bool equal = true;
@@ -52,8 +57,10 @@ namespace TaquinCodeBehind
             else equal = false;
             return equal;
         }
+        #endregion
 
         #region IEnumerable
+        // Implementation de l'interface IEnumerable permettant de rendre le tableau evaluable 
         public IEnumerator<Cell> GetEnumerator()
         {
             int line = -1;
