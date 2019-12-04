@@ -9,17 +9,17 @@ using TaquinCodeBehind;
 
 namespace TaquinUI
 {
+    /// <summary>
+    /// Le cell button permet d'encapsuler une cellule en conservant les propriétés d'un bouton
+    /// </summary>
     class CellButton : Button
     {
-        #region Attributes
-        
-        #endregion
-
         #region Properties
         public Cell Cell { get; set; }
         #endregion
 
         #region Construct
+        // Construit le bouton en fonction de la taille du taquin
         public CellButton(Cell cell, int size)
         {
             Cell = cell;
@@ -29,6 +29,7 @@ namespace TaquinUI
             SetStyle();
         }
         
+        // Assigne toutes les propriété de style au bouton
         public void SetStyle()
         {
             BackColor = Color.FromArgb(231, 217, 218);
