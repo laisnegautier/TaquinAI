@@ -8,19 +8,28 @@ namespace TaquinCodeBehind
 {
     public class LinearConflict : IHeuristic
     {
+        /// <summary>
+        /// Fonction principale qui evalue le cout de l'heuristique LC 
+        /// entre deux tableau quelconques
+        /// </summary>
+        /// <param name="currBoard"> Le tableau à évaluer </param>
+        /// <param name="destBoard"> Le tableau avec lequel on compare </param>
+        /// <returns></returns>
         public int EvaluateBoard(Board currBoard, Board destBoard)
         {
             int size = currBoard.Structure.GetLength(0);
             int cost = 0;
-            // Evaluating LC for lines
-            for(int value = 0; value < size*size-2-1; value ++) // --1 CAr on évalue les cases deux à deux
+            // Evaluation de LC pour les lignes
+            for(int value = 0; value < size*size-2-1; value ++) // --1 Car on évalue les cases deux à deux
             {
                 int succ = value + 1;
+                // Pour la valeur on regarde les conflits en lignes
                 cost += EvalLineConflict(value, succ, currBoard, size);
                 int I, J;
                 Functions.pos2coord(out I, out J, value, size);
                 succ = (I < size - 2) ? value + size : value - size;
                 if (I < size - 2) succ = value + size; else succ = value - size;
+                // Pour la valeur on regarde les conflits en colonnes
                 cost += EvalRowConflict(value, succ, currBoard, size);
             }
             return cost;

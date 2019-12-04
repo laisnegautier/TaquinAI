@@ -41,23 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AstarUni.cs" />
-    <Compile Include="CornerConflict.cs" />
-    <Compile Include="HolesInfos.cs" />
-    <Compile Include="PLCC.cs" />
-    <Compile Include="PLC.cs" />
+    <Compile Include="Solvers\AstarUni.cs" />
+    <Compile Include="Heuristiques\CornerConflict.cs" />
+    <Compile Include="Heuristiques\PLCC.cs" />
+    <Compile Include="Heuristiques\PLC.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="LinearConflict.cs" />
+    <Compile Include="Heuristiques\LinearConflict.cs" />
     <Compile Include="EvaluableBoard.cs" />
     <Compile Include="Functions.cs" />
-    <Compile Include="IDAstar.cs" />
-    <Compile Include="IHeuristic.cs" />
-    <Compile Include="Manhattan.cs" />
+    <Compile Include="Solvers\IDAstar.cs" />
+    <Compile Include="Heuristiques\IHeuristic.cs" />
+    <Compile Include="Heuristiques\Manhattan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Segments.cs" />
-    <Compile Include="SizeBlock.cs" />
-    <Compile Include="Solver.cs" />
+    <Compile Include="Solvers\HumanMethod.cs" />
+    <Compile Include="Solvers\Solver.cs" />
     <Compile Include="Taquin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
