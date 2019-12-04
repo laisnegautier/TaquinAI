@@ -35,6 +35,7 @@ namespace TaquinCodeBehind
             return cost;
         }
 
+        // Evaluation des conflits sur les lignes
         public int EvalRowConflict(int value, int succ, Board board, int size)
         {
             // Calcul des coordonées optimales des cases
@@ -53,6 +54,7 @@ namespace TaquinCodeBehind
             return 0;
         }
 
+        //Evaluation des conflits en colonnes
         public int EvalLineConflict(int value, int succ, Board board, int size)
         {
             // Calcul des coordonées optimales des cases
