@@ -4,12 +4,21 @@ using System.Linq;
 
 namespace TaquinCodeBehind
 {
+    /// <summary>
+    /// Class implémentant la méthode de résolution humaine
+    /// </summary>
     public class Segments : AstarUni
     {
+        #region Properties
         int Size { get; set; }
+        #endregion
 
+        #region Construct
         public Segments(IHeuristic heuristic): base(heuristic){}
+        #endregion
 
+        #region Methods
+        // Fonction de résolution intermédiaire qui applique A* entre deux états quelconques
         EvaluableBoard UnderStep(int rank)
         {
             _destination = new EvaluableBoard(CreateStep(Size, rank));
@@ -18,14 +27,12 @@ namespace TaquinCodeBehind
                 _currentBoard = _openSet[0];
                 if (_currentBoard.Equals(_destination))
                 {
-                    Console.WriteLine("=============== Step {0} ==============", rank);
-                    Console.WriteLine(_destination.Board);
-                    Console.WriteLine("======================================", rank);
-                    Console.WriteLine(_currentBoard.Board);
+                    // Si on est à la dernière étape, on renvoit le résultat
                     if (rank == Size * Size - 3)
                     {
                         return _currentBoard;
                     }
+                    // Sinon on nettoie le solver pour la prochaine étape 
                     else
                     {
                         _openSet = new List<EvaluableBoard>();
@@ -43,9 +50,9 @@ namespace TaquinCodeBehind
                     else
                     {
                         testBoard.Cost += 1;
-                        // Evaluation d'une heuristique humaine
+                        // Evaluation d'une heuristique humaine spécifique
                         int thisHumanHeuri = Eval(testBoard, rank);
-                        testBoard.Score = testBoard.Cost + thisHumanHeuri;//Heuristic.EvaluateBoard(testBoard.Board, _destination.Board);
+                        testBoard.Score = testBoard.Cost + thisHumanHeuri;
                         _openSet.Add(testBoard);
                     }
                 }
@@ -56,24 +63,25 @@ namespace TaquinCodeBehind
             return null;
         }
 
+        // Boucle de résoution
         public override List<Board> Solve(EvaluableBoard board)
         {
-            // Innitialisation Step
+            // Etape d'initialisation
             _openSet = new List<EvaluableBoard>();
             _closedSet = new List<EvaluableBoard>();
             Size = board.Board.Structure.GetLength(0);
             _openSet.Add(board);
             EvaluableBoard result;
-            // Solve loop
+            // Boucle de résolution en ligne
             for (int rank = 0; rank < (Size * Size) - Size * 2; rank++)
             {
                 _currentBoard = UnderStep(rank);
             }
             bool lineOne = true;
             int start = Size * Size - Size * 2;
+            // Ensuite on place les deux dernières ligne par colonnes
             for (int rank = start; rank < start + Size; rank++)
             {
-                // Première ou deuxième place dans la colonne ?
                 _currentBoard = UnderStep(rank);
                 int step = rank + Size;
                 if (step < Size * Size - 2)
@@ -84,6 +92,7 @@ namespace TaquinCodeBehind
             return Unpile(_currentBoard);
         }
 
+        // Evaluation de l'heuristique humaine
         private int Eval(EvaluableBoard board, int step)
         {
             int score = 0;
@@ -109,10 +118,12 @@ namespace TaquinCodeBehind
                     score += 20 * (Math.Abs(optI - currI) + Math.Abs(optJ - currJ));
                 }
             }
+            // Prise en compte de la case courante a placer
             Functions.pos2coord(out optI, out optJ, step, Size);
             board.Board.FindCellByValue(out currI, out currJ, Convert.ToString(step));
             score += 8 * (Math.Abs(optI - currI) + Math.Abs(optJ - currJ));
 
+            // Recherche des trous
             int hole1I, hole1J, hole2I, hole2J;
             board.Board.FindEmptyOne(out hole1I, out hole1J);
             board.Board.FindEmptyTwo(out hole2I, out hole2J);
@@ -132,14 +143,17 @@ namespace TaquinCodeBehind
             return score;
         }
 
+        // Fonction permettant de créer un tableau intermédiaire
         private Board CreateStep(int size, int rank)
         {
             Board board;
             List<Cell> structure = new List<Cell>();
+            // Création classique pour les premières lignes
             if (rank < size * size - size * 2)
             {
                 for (int i = 0; i <= rank; i++)
                 {
+
                     Cell cell = new Cell(i);
                     structure.Add(cell);
                 }
@@ -155,8 +169,10 @@ namespace TaquinCodeBehind
                 }
                 board = new Board(structure.ToArray());
             }
+            // Ensuite on créer en colonnes les tableaux
             else
             {
+                // On rempli les première lignes normalement
                 List<int> values;
                 for (int i = 0; i <= Size * Size - Size * 2; i++)
                 {
@@ -175,6 +191,7 @@ namespace TaquinCodeBehind
                 }
                 board = new Board(structure.ToArray());
                 int index = 0;
+                // Ensuite on diférencie 3x3
                 if (Size == 3)
                 {
                     values = new List<int>() { 3, 6, 4, 5 };
@@ -186,6 +203,7 @@ namespace TaquinCodeBehind
                         index++;
                     }
                 }
+                // des Taquin 5x5
                 else
                 {
                     values = new List<int>() { 15, 20, 16, 21, 17, 22, 18, 19 };
@@ -204,11 +222,13 @@ namespace TaquinCodeBehind
             return board;
         }
 
-        public static new List<EvaluableBoard> CreateChild(EvaluableBoard board, int step)
+        // Fonction de création des enfants spécifiques
+        public static List<EvaluableBoard> CreateChild(EvaluableBoard board, int step)
         {
             List<EvaluableBoard> neighbours = new List<EvaluableBoard>();
             int size = board.Board.Structure.GetLength(0);
             List<int> values;
+            // Valeurs possibles
             if (size == 3) values = new List<int>() {0, 1, 2, 3, 4, 7, 5, 6 };
             else values = new List<int>() {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 16, 21, 17, 22, 18, 19 };
             int maxIndex = values.IndexOf(step);
@@ -217,6 +237,7 @@ namespace TaquinCodeBehind
                 if(cell.Value != "-")
                 {
                     int index = values.IndexOf(Convert.ToInt32(cell.Value));
+                    // On interdit les mouvements au case déjà placées
                     if (index >= maxIndex)
                     {
                         int i, j;
@@ -237,5 +258,6 @@ namespace TaquinCodeBehind
             }
             return neighbours;
         }
+        #endregion
     }
 }
