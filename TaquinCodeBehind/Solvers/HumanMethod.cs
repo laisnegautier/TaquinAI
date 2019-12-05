@@ -27,6 +27,8 @@ namespace TaquinCodeBehind
                 _currentBoard = _openSet[0];
                 if (_currentBoard.Equals(_destination))
                 {
+                    closedCount += _closedSet.Count;
+                    openCount += _openSet.Count;
                     // Si on est à la dernière étape, on renvoit le résultat
                     if (rank == Size * Size - 3)
                     {

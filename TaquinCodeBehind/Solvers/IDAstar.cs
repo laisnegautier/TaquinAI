@@ -40,9 +40,14 @@ namespace TaquinCodeBehind
                 EvaluableBoard temp = Search(start, 0, threshold);
                 int tempScore = temp.Score;
                 if (temp.Equals(_destination))
+                {
+                    openCount = _openSet.Count;
+                    closedCount = _closedSet.Count;
                     return Unpile(temp);
-                // Rajouter un if d'arrêt en temps
+                }
                 threshold = tempScore;
+                _openSet = new List<EvaluableBoard>();
+                _closedSet = new List<EvaluableBoard>();
             }
         }
 
@@ -58,6 +63,7 @@ namespace TaquinCodeBehind
         {
             // Evaluation du cout récursif
             int f = cost + Heuristic.EvaluateBoard(currEval.Board, _destination.Board);
+            _openSet.Add(currEval);
             // Si le score dépasse le seuil on coupe la branche
             if(f > threshold)
             {
@@ -75,6 +81,8 @@ namespace TaquinCodeBehind
             holder = holder.OrderBy(b => b.Score).ToList();
             foreach(EvaluableBoard child in holder)
             {
+                _openSet.Remove(currEval);
+                _closedSet.Add(currEval);
                 // Appel récrsif on évalue chaque enfant dans la fonction de recherche
                 EvaluableBoard temp = Search(child, cost + 1, threshold);
                 int tempScore = temp.Score;

@@ -66,6 +66,8 @@ namespace TaquinCodeBehind
                 // On ordonne la liste pour garder les meilleurs en premier
                 _openSet = _openSet.OrderBy(b => b.Score).ToList();
             }
+            openCount = _openSet.Count;
+            closedCount = _closedSet.Count;
             return result;
         }
         #endregion
