@@ -8,15 +8,18 @@ using System.Diagnostics;
 
 namespace Parametrizer
 {
-
+    /// <summary>
+    /// Algorithme génétique permettant de trouver les paramètres optimaux pour le solver
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
+            // Initialisations
             Setup();
-            int nbGen = 10;
-            int nbIndiv = 100;
-            int nbCible = 20;//20;
+            int nbGen = 10; // Nombre de génération
+            int nbIndiv = 100; // Nombre d'individus de la population
+            int nbCible = 20; // Nombre d'exemple a résoudre
 
             Random r = new Random();
 
@@ -40,7 +43,6 @@ namespace Parametrizer
             {
                 Board b = new Board(5);
                 Fill(b);
-                //b = Shuffle(b, r);
                 EvaluableBoard target = new EvaluableBoard(b);
                 _targets.Add(target);
             }
@@ -77,22 +79,17 @@ namespace Parametrizer
 
                     foreach (EvaluableBoard board in _targets)
                     {
-                        //Console.SetCursorPosition(0, top + 1);
-                        //int inProgress = ((_targets.IndexOf(board)));
-                        //string inProgressStr = new String('=', inProgress);
-                        //Console.Write("\rSolver {0} at [" + inProgressStr + new String(' ', (nbCible - inProgress)) + "]\n", (_targets.IndexOf(board)));
-
                         Stopwatch chrono = solver.Solve(board);
                         TimeSpan perf = chrono.Elapsed;
                         _performances.Add(perf);
                     }
-                    
+                    // Informations d'avancement
                     Console.SetCursorPosition(0, top);
                     Console.Write("\rProgress [" + progressStr + new String(' ', (nbIndiv - progress)) + "] - ");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write(progress + "% \n");
                     Console.ForegroundColor = ConsoleColor.Black;
-
+                    // Calcul du temps moyen
                     var averageTimespan = new TimeSpan(Convert.ToInt64(_performances.Average(ts => ts.Ticks)));
                     solver.performance = averageTimespan;
                 }
@@ -111,10 +108,10 @@ namespace Parametrizer
                 // Dealing with generation decendance...
 
                 _population = _population.GetRange(0, nbIndiv / 2);
-                // Faire muter les anciens vecteur peut aider ?
-
+                // Evolution pour la génération suivante 
                 while(_population.Count < nbIndiv - nbIndiv/4)
                 {
+                    // Choix de parents
                     ParametrizeSolver father = _population[r.Next(0, _population.Count)]; // /2 Pour favoriser les meilleurs pas forcément
                     ParametrizeSolver mother = _population[r.Next(0, _population.Count)];// La meilleure solution
                     int param1, param2, param3;//, param4, param5;
@@ -129,10 +126,12 @@ namespace Parametrizer
                     param3 = gene3 == 0 ? father.Params[2] : mother.Params[2];
                     //param4 = gene4 == 0 ? father.Params[3] : mother.Params[3];
                     //param5 = gene5 == 0 ? father.Params[4] : mother.Params[4];
+                    // Création et mutation d'un enfant
                     ParametrizeSolver child = new ParametrizeSolver(param1, param2, param3);//, param4, param5);
                     Mutate(child, r);
                     _population.Add(child);
                 }
+                // Ajout d'objets aléatoire pour agrandir la diversité
                 while(_population.Count < nbIndiv)
                 {
                     int max = 10;
@@ -145,6 +144,8 @@ namespace Parametrizer
             Console.Read();
         }
 
+        #region Methods_Utilitaries
+        // Permet de melanger les exemples à un niveau de difficulté choisies
         static Board Shuffle(Board b, Random r, int diff)
         {
             int size = b.Structure.GetLength(0);
@@ -165,6 +166,7 @@ namespace Parametrizer
             return t.Board;
         }
 
+        // Permet de remplir les exemple à résoudre 
         static void Fill(Board b)
         {
             int size = b.Structure.GetLength(0);
@@ -181,13 +183,15 @@ namespace Parametrizer
                 b.Structure[4, 3 + _] = c;
             }
         }
+
+        // Fonction permettant de faire muter un solver
         static void Mutate(ParametrizeSolver solver, Random  r)
         {
             int luck;
-
+            // Probabilité de mutation et degré de mutation
             int probMut = 2;
             int mutRate = 1;
-
+            // Pour chaque paramètre on regarde 
             for (int i = 0; i < 3; i++)
             {
                 luck = r.Next(10);
@@ -200,6 +204,7 @@ namespace Parametrizer
             }
         }
 
+        // Fonciton d'initialisation de la console
         static void Setup()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -208,5 +213,6 @@ namespace Parametrizer
             Console.WindowWidth = 266 - 40;
             Console.Clear();
         }
+        #endregion
     }
 }
