@@ -25,6 +25,9 @@ namespace TaquinUI
         // Panel movement
         private bool mouseDown;
         private Point lastLocation;
+        // locking
+        private bool heuriLock = false;
+        private bool solverLock = false;
         #endregion
 
         #region Construct
@@ -166,6 +169,51 @@ namespace TaquinUI
             button.BackColor = Color.FromArgb(231, 217, 218);
             button.ForeColor = Color.FromArgb(66, 94, 41);
         }
+        
+        // Fonction permettant de locker un bouton
+        private void ButtonLockView(Button button)
+        {
+            button.BackColor = Color.FromArgb(179, 167, 168);
+            button.ForeColor = Color.FromArgb(179, 167, 168);
+            button.MouseEnter -= Button_MouseEnter;
+            button.MouseLeave -= Button_MouseLeave;
+            if (button == heuristicOneButton ||
+                button == heuristicTwoButton ||
+                button == heuristicThreeButton)
+            {
+                heuriLock = true;
+                button.Click -= HeuristicButton_Click;
+            }
+            if (button == AstarUniButton ||
+                     button == IDAStarButton ||
+                     button == segmentButton)
+            {
+                solverLock = true;
+                button.Click -= SolverButton_CLick;
+            }
+        }
+
+        private void UnlockButtonView(Button button)
+        {
+            button.BackColor = Color.FromArgb(231, 217, 218);
+            button.ForeColor = Color.FromArgb(66, 94, 41);
+            button.MouseEnter += Button_MouseEnter;
+            button.MouseLeave += Button_MouseLeave;
+            if (button == heuristicOneButton ||
+                button == heuristicTwoButton ||
+                button == heuristicThreeButton)
+            {
+                heuriLock = false;
+                button.Click += HeuristicButton_Click;
+            }
+            if (button == AstarUniButton ||
+                 button == IDAStarButton ||
+                 button == segmentButton)
+            {
+                solverLock = false;
+                button.Click += SolverButton_CLick;
+            }
+        }
         #endregion
 
         #region UIMethod_Interactions
@@ -174,11 +222,26 @@ namespace TaquinUI
         {
             if(_selectedSize != 3) // On effectue rien si l'on avait déjà un Taquin 3x3 présent
             {
+                // Gestion du 3x3
                 ButtonSetFocus(sizeButton3);
                 _selectedSize = 3;
                 taquin = new Taquin(3);
                 SetBoard();
                 ButtonUnsetFocus(sizeButton5);
+                // Conséquences
+                if(heuriLock == true && _solver.GetType() != typeof(Segments))
+                {
+                    UnlockButtonView(heuristicOneButton);
+                    UnlockButtonView(heuristicTwoButton);
+                    UnlockButtonView(heuristicThreeButton);
+                    heuriLock = false;
+                }
+                if(solverLock == true)
+                {
+                    UnlockButtonView(AstarUniButton);
+                    UnlockButtonView(IDAStarButton);
+                    solverLock = false;
+                }
             }
         }
 
@@ -187,11 +250,28 @@ namespace TaquinUI
         {
             if (_selectedSize != 5) // On effectue rien si l'on avait déjà un Taquin 5x5 présent
             {
+                // Gestion du 5x5
                 ButtonSetFocus(sizeButton5);
                 _selectedSize = 5;
                 taquin = new Taquin(5);
                 SetBoard();
                 ButtonUnsetFocus(sizeButton3);
+                // Conséquences
+                if(heuriLock == false)
+                {
+                    ButtonLockView(heuristicOneButton);
+                    ButtonLockView(heuristicTwoButton);
+                    ButtonLockView(heuristicThreeButton);
+                    heuriLock = true;
+                }
+                if(solverLock == false)
+                {
+                    ButtonLockView(AstarUniButton);
+                    ButtonLockView(IDAStarButton);
+                    _solver = new Segments(_selectedHeuristic);
+                    ButtonSetFocus(segmentButton);
+                    solverLock = true;
+                }
             }
         }
 
@@ -219,9 +299,36 @@ namespace TaquinUI
             else if (_solver.GetType() == typeof(IDAstar)) ButtonUnsetFocus(IDAStarButton);
             // Ajoute le solver choisi comme courant et met le bouton en Focus
             Button button = (Button)sender;
-            if (button == segmentButton) _solver = new Segments(_selectedHeuristic);
-            else if (button == AstarUniButton) _solver = new AstarUni(_selectedHeuristic);
-            else if (button == IDAStarButton) _solver = new IDAstar(_selectedHeuristic);
+            if (button == segmentButton)
+            {
+                ButtonLockView(heuristicOneButton);
+                ButtonLockView(heuristicTwoButton);
+                ButtonLockView(heuristicThreeButton);
+                _solver = new Segments(_selectedHeuristic);
+                heuriLock = true;
+            }
+            else if (button == AstarUniButton)
+            {
+                if (heuriLock == true)
+                {
+                    UnlockButtonView(heuristicOneButton);
+                    UnlockButtonView(heuristicTwoButton);
+                    UnlockButtonView(heuristicThreeButton);
+                    heuriLock = false;
+                }
+                _solver = new AstarUni(_selectedHeuristic);
+            }
+            else if (button == IDAStarButton)
+            {
+                if (heuriLock == true)
+                {
+                    UnlockButtonView(heuristicOneButton);
+                    UnlockButtonView(heuristicTwoButton);
+                    UnlockButtonView(heuristicThreeButton);
+                    heuriLock = false;
+                }
+                _solver = new IDAstar(_selectedHeuristic);
+            }
             ButtonSetFocus(button);
         }
         
@@ -263,8 +370,45 @@ namespace TaquinUI
             _selectedSize = taquin.Size;
             // On paramètre l'interface en conséquence
             SetBoard(); 
-            if (_selectedSize == 3) { ButtonSetFocus(sizeButton3); ButtonUnsetFocus(sizeButton5); }
-            else if (_selectedSize == 5) { ButtonSetFocus(sizeButton5); ButtonUnsetFocus(sizeButton3); }
+            if (_selectedSize == 3)
+            {
+                ButtonSetFocus(sizeButton3);
+                ButtonUnsetFocus(sizeButton5);
+                if (solverLock == true)
+                {
+                    UnlockButtonView(AstarUniButton);
+                    UnlockButtonView(IDAStarButton);
+                    solverLock = false;
+                }
+                if (heuriLock == true && _solver.GetType() != typeof(Segments))
+                {
+                    UnlockButtonView(heuristicOneButton);
+                    UnlockButtonView(heuristicTwoButton);
+                    UnlockButtonView(heuristicThreeButton);
+                    heuriLock = false;
+                }
+            }
+            else if (_selectedSize == 5)
+            {
+                ButtonSetFocus(sizeButton5);
+                ButtonUnsetFocus(sizeButton3);
+                if(solverLock == false)
+                {
+                    ButtonLockView(AstarUniButton);
+                    ButtonLockView(IDAStarButton);
+                    solverLock = true;
+                    _solver = new Segments(_selectedHeuristic);
+                    ButtonSetFocus(segmentButton);
+                }
+                if(heuriLock == false)
+                {
+                    ButtonLockView(heuristicOneButton);
+                    ButtonLockView(heuristicTwoButton);
+                    ButtonLockView(heuristicThreeButton);
+                    heuriLock = true;
+                }
+
+            }
         }
 
         // Fonction permettant de mélanger le Taquin
