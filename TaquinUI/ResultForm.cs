@@ -103,8 +103,8 @@ namespace TaquinUI
             var elapsedMs = _watch.ElapsedMilliseconds;
             nbMovesLabel.Text += " en " + elapsedMs + " Ms";
             // Affichage du nombre de noeuds
-            openLabel.Text += Solver.openCount;
-            label2.Text += Solver.closedCount;
+            openLabel.Text += " " + Solver.openCount;
+            label2.Text += " " + Solver.closedCount;
             SetBoard();
         }
         #endregion

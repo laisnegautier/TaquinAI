@@ -163,7 +163,7 @@
             this.openLabel.Name = "openLabel";
             this.openLabel.Size = new System.Drawing.Size(273, 44);
             this.openLabel.TabIndex = 10;
-            this.openLabel.Text = "ouverts :";
+            this.openLabel.Text = "ouverts : ";
             this.openLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -174,7 +174,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(253, 44);
             this.label2.TabIndex = 11;
-            this.label2.Text = "fermés :";
+            this.label2.Text = "fermés : ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ResultForm
