@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.headerBar = new System.Windows.Forms.Panel();
+            this.minimizeButton = new System.Windows.Forms.Button();
             this.closeLoadButton = new System.Windows.Forms.Button();
             this.nameLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.loadLabel = new System.Windows.Forms.Label();
             this.filePanel = new System.Windows.Forms.Panel();
             this.loadButton = new System.Windows.Forms.Button();
-            this.minimizeButton = new System.Windows.Forms.Button();
             this.headerBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,20 @@
             this.headerBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseDown);
             this.headerBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseMove);
             this.headerBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragBorder_MouseUp);
+            // 
+            // minimizeButton
+            // 
+            this.minimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.minimizeButton.FlatAppearance.BorderSize = 0;
+            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
+            this.minimizeButton.Location = new System.Drawing.Point(229, 2);
+            this.minimizeButton.Name = "minimizeButton";
+            this.minimizeButton.Size = new System.Drawing.Size(25, 24);
+            this.minimizeButton.TabIndex = 4;
+            this.minimizeButton.Text = "_";
+            this.minimizeButton.UseVisualStyleBackColor = false;
+            this.minimizeButton.Click += new System.EventHandler(this.minimizeButton_Click);
             // 
             // closeLoadButton
             // 
@@ -76,9 +90,9 @@
             this.nameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
             this.nameLabel.Location = new System.Drawing.Point(12, 4);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(180, 21);
+            this.nameLabel.Size = new System.Drawing.Size(135, 21);
             this.nameLabel.TabIndex = 1;
-            this.nameLabel.Text = "TAQUIN - Homo Sapiens 0.3.2";
+            this.nameLabel.Text = "TAQUIN - Release 4.7.1";
             // 
             // closeButton
             // 
@@ -126,20 +140,6 @@
             this.loadButton.Text = "L O A D";
             this.loadButton.UseVisualStyleBackColor = false;
             this.loadButton.Click += new System.EventHandler(this.LoadButton_Click);
-            // 
-            // minimizeButton
-            // 
-            this.minimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
-            this.minimizeButton.FlatAppearance.BorderSize = 0;
-            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
-            this.minimizeButton.Location = new System.Drawing.Point(229, 2);
-            this.minimizeButton.Name = "minimizeButton";
-            this.minimizeButton.Size = new System.Drawing.Size(25, 24);
-            this.minimizeButton.TabIndex = 4;
-            this.minimizeButton.Text = "_";
-            this.minimizeButton.UseVisualStyleBackColor = false;
-            this.minimizeButton.Click += new System.EventHandler(this.minimizeButton_Click);
             // 
             // LoadForm
             // 

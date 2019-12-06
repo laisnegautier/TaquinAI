@@ -79,9 +79,9 @@
             this.nameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
             this.nameLabel.Location = new System.Drawing.Point(12, 4);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(180, 21);
+            this.nameLabel.Size = new System.Drawing.Size(135, 21);
             this.nameLabel.TabIndex = 2;
-            this.nameLabel.Text = "TAQUIN - Homo Sapiens 0.3.2";
+            this.nameLabel.Text = "TAQUIN - Release 4.7.1";
             // 
             // button1
             // 
