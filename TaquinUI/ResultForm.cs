@@ -43,6 +43,8 @@ namespace TaquinUI
             leftButton.Hide();
             rightButton.Hide();
             nbMovesLabel.Hide();
+            openLabel.Hide();
+            closeLabel.Hide();
             // Attribution des utilitaires
             Solver = solver;
             _board = board;
@@ -77,19 +79,29 @@ namespace TaquinUI
             rightButton.Show();
             nbMovesLabel.Show();
             statusLabel.Hide();
+            closeLabel.Show();
+            openLabel.Show();
             string solverName = "";
             string heuriName = "";
-            // Finding Solver Name
-            if (typeof(AstarUni) == Solver.GetType()) solverName = "A* Unidirectionel";
-            else if (Solver.GetType() == typeof(Segments)) solverName = "la méthode humaine";
-            else solverName = "IDA*";
-            // Finding Heuristic Used
-            if (Solver.Heuristic.GetType() == typeof(PLC)) heuriName = "P&LC";
-            else if (Solver.Heuristic.GetType() == typeof(PLCC)) heuriName = "P&LC&C";
-            else heuriName = "de Manhattan";
+            if(Solver.GetType() == typeof(AstarUni) ||Solver.GetType() == typeof(IDAstar))
+            {
+                // Finding Solver Name
+                if (typeof(AstarUni) == Solver.GetType()) solverName = "A* Unidirectionel";
+                else solverName = "IDA*";
+                // Finding Heuristic Used
+                if (Solver.Heuristic.GetType() == typeof(PLC)) heuriName = "P&LC";
+                else if (Solver.Heuristic.GetType() == typeof(PLCC)) heuriName = "P&LC&C";
+                else heuriName = "de Manhattan";
+
+                nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName + " et à l'heuristique " + heuriName;
+            }
+            else
+            {
+                nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à la  méthode humaine et à une heuristique spécifique";
+            }
             // Finding out time
             var elapsedMs = _watch.ElapsedMilliseconds;
-            nbMovesLabel.Text += " " + (States.Count - 1) + " coups grace à " + solverName +" et à l'heuristique " + heuriName + " en " + elapsedMs + " Ms";
+            nbMovesLabel.Text += " en " + elapsedMs + " Ms";
             SetBoard();
         }
         #endregion

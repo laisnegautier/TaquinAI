@@ -38,6 +38,8 @@
             this.rightButton = new System.Windows.Forms.Button();
             this.nbMovesLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.openLabel = new System.Windows.Forms.Label();
+            this.closeLabel = new System.Windows.Forms.Label();
             this.HeaderBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +100,7 @@
             // boardPanel
             // 
             this.boardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.boardPanel.Location = new System.Drawing.Point(49, 35);
+            this.boardPanel.Location = new System.Drawing.Point(49, 93);
             this.boardPanel.Name = "boardPanel";
             this.boardPanel.Size = new System.Drawing.Size(489, 489);
             this.boardPanel.TabIndex = 5;
@@ -110,7 +112,7 @@
             this.leftButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.leftButton.FlatAppearance.BorderSize = 0;
             this.leftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftButton.Location = new System.Drawing.Point(16, 562);
+            this.leftButton.Location = new System.Drawing.Point(16, 620);
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(82, 81);
             this.leftButton.TabIndex = 6;
@@ -124,7 +126,7 @@
             this.rightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.rightButton.FlatAppearance.BorderSize = 0;
             this.rightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rightButton.Location = new System.Drawing.Point(492, 562);
+            this.rightButton.Location = new System.Drawing.Point(492, 620);
             this.rightButton.Name = "rightButton";
             this.rightButton.Size = new System.Drawing.Size(82, 81);
             this.rightButton.TabIndex = 7;
@@ -135,7 +137,7 @@
             // 
             this.nbMovesLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nbMovesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.nbMovesLabel.Location = new System.Drawing.Point(104, 527);
+            this.nbMovesLabel.Location = new System.Drawing.Point(104, 585);
             this.nbMovesLabel.Name = "nbMovesLabel";
             this.nbMovesLabel.Size = new System.Drawing.Size(382, 163);
             this.nbMovesLabel.TabIndex = 8;
@@ -146,19 +148,43 @@
             // 
             this.statusLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.statusLabel.Location = new System.Drawing.Point(102, 160);
+            this.statusLabel.Location = new System.Drawing.Point(102, 198);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(382, 113);
             this.statusLabel.TabIndex = 9;
             this.statusLabel.Text = "Votre Taquin est en cours de résolution";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // openLabel
+            // 
+            this.openLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.openLabel.Location = new System.Drawing.Point(43, 32);
+            this.openLabel.Name = "openLabel";
+            this.openLabel.Size = new System.Drawing.Size(131, 44);
+            this.openLabel.TabIndex = 10;
+            this.openLabel.Text = "ouverts :";
+            this.openLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // closeLabel
+            // 
+            this.closeLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.closeLabel.Location = new System.Drawing.Point(285, 32);
+            this.closeLabel.Name = "closeLabel";
+            this.closeLabel.Size = new System.Drawing.Size(131, 44);
+            this.closeLabel.TabIndex = 11;
+            this.closeLabel.Text = "fermés :";
+            this.closeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(586, 699);
+            this.ClientSize = new System.Drawing.Size(586, 762);
+            this.Controls.Add(this.closeLabel);
+            this.Controls.Add(this.openLabel);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.nbMovesLabel);
             this.Controls.Add(this.rightButton);
@@ -185,5 +211,7 @@
         private System.Windows.Forms.Label nbMovesLabel;
         private System.Windows.Forms.Button minimizeButton;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Label openLabel;
+        private System.Windows.Forms.Label closeLabel;
     }
 }
