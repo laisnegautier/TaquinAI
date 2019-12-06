@@ -231,7 +231,7 @@ namespace TaquinCodeBehind
             int size = board.Board.Structure.GetLength(0);
             List<int> values;
             // Valeurs possibles
-            if (size == 3) values = new List<int>() {0, 1, 2, 3, 4, 7, 5, 6 };
+            if (size == 3) values = new List<int>() {0, 1, 2, 3, 6, 4, 5};
             else values = new List<int>() {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 16, 21, 17, 22, 18, 19 };
             int maxIndex = values.IndexOf(step);
             foreach (Cell cell in board)

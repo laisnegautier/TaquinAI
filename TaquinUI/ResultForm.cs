@@ -44,7 +44,7 @@ namespace TaquinUI
             rightButton.Hide();
             nbMovesLabel.Hide();
             openLabel.Hide();
-            closeLabel.Hide();
+            label2.Hide();
             // Attribution des utilitaires
             Solver = solver;
             _board = board;
@@ -79,7 +79,7 @@ namespace TaquinUI
             rightButton.Show();
             nbMovesLabel.Show();
             statusLabel.Hide();
-            closeLabel.Show();
+            label2.Show();
             openLabel.Show();
             string solverName = "";
             string heuriName = "";
@@ -102,6 +102,9 @@ namespace TaquinUI
             // Finding out time
             var elapsedMs = _watch.ElapsedMilliseconds;
             nbMovesLabel.Text += " en " + elapsedMs + " Ms";
+            // Affichage du nombre de noeuds
+            openLabel.Text += Solver.openCount;
+            label2.Text += Solver.closedCount;
             SetBoard();
         }
         #endregion

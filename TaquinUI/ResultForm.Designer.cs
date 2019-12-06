@@ -39,7 +39,7 @@
             this.nbMovesLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.openLabel = new System.Windows.Forms.Label();
-            this.closeLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.HeaderBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,21 +161,21 @@
             this.openLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
             this.openLabel.Location = new System.Drawing.Point(43, 32);
             this.openLabel.Name = "openLabel";
-            this.openLabel.Size = new System.Drawing.Size(131, 44);
+            this.openLabel.Size = new System.Drawing.Size(273, 44);
             this.openLabel.TabIndex = 10;
             this.openLabel.Text = "ouverts :";
-            this.openLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.openLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // closeLabel
+            // label2
             // 
-            this.closeLabel.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
-            this.closeLabel.Location = new System.Drawing.Point(285, 32);
-            this.closeLabel.Name = "closeLabel";
-            this.closeLabel.Size = new System.Drawing.Size(131, 44);
-            this.closeLabel.TabIndex = 11;
-            this.closeLabel.Text = "fermés :";
-            this.closeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(94)))), ((int)(((byte)(41)))));
+            this.label2.Location = new System.Drawing.Point(299, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(253, 44);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "fermés :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ResultForm
             // 
@@ -183,7 +183,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(586, 762);
-            this.Controls.Add(this.closeLabel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.openLabel);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.nbMovesLabel);
@@ -212,6 +212,6 @@
         private System.Windows.Forms.Button minimizeButton;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label openLabel;
-        private System.Windows.Forms.Label closeLabel;
+        private System.Windows.Forms.Label label2;
     }
 }
