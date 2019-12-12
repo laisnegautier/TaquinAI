@@ -87,7 +87,7 @@ namespace TaquinCodeBehind
                 EvaluableBoard temp = Search(child, cost + 1, threshold);
                 int tempScore = temp.Score;
                 if (temp.Equals(_destination))
-                    return temp;
+                    return temp;    
                 if (tempScore < min) min = tempScore;
             }
             currEval.Score = min;

@@ -348,8 +348,8 @@ namespace TaquinUI
             // On crée un EvaluableBoard a partir de l'état courant du Taquin
             EvaluableBoard board = new EvaluableBoard(taquin.Board);
             // On envoie le board et le solver courant a un resultForm que l'on affiche
-            if (_solver is AstarUni) _solver = new AstarUni(_selectedHeuristic);
-            else if (_solver is IDAstar) _solver = new IDAstar(_selectedHeuristic);
+            if (_solver.GetType() == typeof(AstarUni)) _solver = new AstarUni(_selectedHeuristic);
+            else if (_solver.GetType() == typeof(IDAstar)) _solver = new IDAstar(_selectedHeuristic);
             else _solver = new Segments(_selectedHeuristic);
             _resultForm = new ResultForm(_solver, board);
             _resultForm.Show();
